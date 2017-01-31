@@ -6,7 +6,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/nova-framework/cms.svg)](https://github.com/nova-framework/cms/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/nova-framework/cms.svg)](https://github.com/nova-framework/cms/network)
 
-Nova CMS is built on top of Nova Framework.
+NovaCMS is built on top of Nova Framework.
 
 ## Requirements
 
@@ -24,6 +24,8 @@ Nova CMS is built on top of Nova Framework.
 
 ## Installation
 
+composer create-project nova-framework/novacms -s dev
+
 This framework was designed and is **strongly recommended** to be installed above the document root directory, with it pointing to the `public` folder.
 
 Additionally, installing in a sub-directory, on a production server, will introduce severe security issues. If there is no choice still place the framework files above the document root and have only index.php and .htacess from the public folder in the sub folder and adjust the paths accordingly.
@@ -37,6 +39,18 @@ At this point the CMS should be up and running to login to the admin go to /admi
 
 username: admin
 password: admin
+
+
+#### Recommended
+NovaCMS is located on [Packagist](https://packagist.org/packages/nova-framework/novacms).
+
+You can install the framework from a terminal by using:
+
+```
+composer create-project nova-framework/novacms foldername -s dev
+```
+
+The foldername is the desired folder to be created.
 
 ## License
 
