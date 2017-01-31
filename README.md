@@ -6,7 +6,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/nova-framework/cms.svg)](https://github.com/nova-framework/cms/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/nova-framework/cms.svg)](https://github.com/nova-framework/cms/network)
 
-Nova CMS is built on top of Nova Framework, as an example of building a complex application. This is the end result from our video course [https://novaframework.com/screencasts/building-a-cms/getting-started](https://novaframework.com/screencasts/building-a-cms/getting-started)
+Nova CMS is built on top of Nova Framework.
 
 ## Requirements
 
