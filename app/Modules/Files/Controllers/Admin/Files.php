@@ -10,6 +10,7 @@ use Nova\Routing\Route;
 use App;
 use Auth;
 use Response;
+use Redirect;
 use View;
 
 
