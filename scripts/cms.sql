@@ -159,7 +159,7 @@ DROP TABLE IF EXISTS `nova_password_reminders`;
 CREATE TABLE `nova_password_reminders` (
   `email` varchar(100) NOT NULL,
   `token` varchar(100) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_at` timestamp NULL DEFAULT NULL,
   KEY `email` (`email`),
   KEY `token` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -175,9 +175,10 @@ CREATE TABLE `nova_roles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(40) CHARACTER SET utf8 NOT NULL,
   `slug` varchar(40) CHARACTER SET utf8 NOT NULL,
-  `description` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `description` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -231,8 +232,9 @@ CREATE TABLE `nova_users` (
   `active` tinyint(4) unsigned NOT NULL DEFAULT '0',
   `activation_code` varchar(255) DEFAULT NULL,
   `remember_token` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
