@@ -6,10 +6,8 @@
  * @version 3.0
  */
 
-use Nova\Config\Config;
 
-
-Config::set('session', array(
+return array(
     'driver' => 'file', // The Session Driver used for storing Session data; supported: 'file', 'database' or 'cookie'.
 
     // The Database Session Driver configuration.
@@ -21,7 +19,7 @@ Config::set('session', array(
     'expireOnClose' => false, // If you want them to immediately expire on the browser closing, set that.
 
     // The File Session Driver configuration.
-    'files'    => STORAGE_PATH .'Sessions',   // File Session Handler - where the Session files may be stored.
+    'files'    => STORAGE_PATH .'sessions',   // File Session Handler - where the Session files may be stored.
     'lottery'  => array(2, 100), // Option used by the Garbage Collector, to remove the stalled Session files.
 
     // Cookie configuration.
@@ -29,4 +27,4 @@ Config::set('session', array(
     'path'     => '/',
     'domain'   => null,
     'secure'   => false,
-));
+);

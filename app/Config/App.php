@@ -7,13 +7,8 @@
  * @version 3.0
  */
 
-use Nova\Config\Config;
 
-
-/**
- * The Application configuration.
- */
-Config::set('app', array(
+return array(
     /**
      * Debug Mode
      */
@@ -22,7 +17,7 @@ Config::set('app', array(
     /**
      * The Website URL.
      */
-    'url' => 'http://novacms.dev/',
+    'url' => 'http://novacms.dev',
 
     /**
     * The Administrator's E-mail Address.
@@ -64,7 +59,7 @@ Config::set('app', array(
      * The Encryption Key.
      * This page can be used to generate key - http://novaframework.com/token-generator
      */
-    'key' => 'd9HX26CfX4x8MkW2GOBPRrZgLHdCx0LR',
+    'key' => 'SomeRandomStringThere_1234567890',
 
     /**
      *  Prevents the website from CSRF attacks.
@@ -96,12 +91,17 @@ Config::set('app', array(
         'Nova\View\ViewServiceProvider',
         'Nova\Layout\LayoutServiceProvider',
         'Nova\Cron\CronServiceProvider',
+
+        // The Application Providers.
+        'App\Providers\AppServiceProvider',
+        'App\Providers\EventServiceProvider',
+        'App\Providers\RouteServiceProvider',
     ),
 
     /**
      * The Service Providers Manifest path.
      */
-    'manifest' => APPDIR .'Boot' .DS .'Cache',
+    'manifest' => ROOTDIR .'storage',
 
     /**
      * The registered Class Aliases.
@@ -165,4 +165,4 @@ Config::set('app', array(
         'Cron'          => 'Nova\Support\Facades\Cron',
         'Module'        => 'Nova\Support\Facades\Module',
     ),
-));
+);

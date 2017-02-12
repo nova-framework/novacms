@@ -6,11 +6,6 @@
  * @version 3.0
  */
 
-use Nova\Config\Config;
-
-/**
- * Configuration constants and options.
- */
 
 Config::set('elFinder', array(
     'locale' => 'en_US.UTF-8',
@@ -20,12 +15,12 @@ Config::set('elFinder', array(
         array(
             'alias'         => 'Site Assets',
             'driver'        => 'LocalFileSystem',
-            'path'          => ROOTDIR .'assets/',
-            'URL'           => site_url('assets/'),
+            'path'          => ROOTDIR .'assets' .DS,
+            'URL'           => site_url('assets'),
             'mimeDetect'    => 'internal',
-            'tmbPath'       => APPDIR .'Storage/Files/thumbnails',
-            'quarantine'    => APPDIR .'Storage/Files/quarantine',
-            'tmbURL'        => site_url('admin/files/thumbnails/'),
+            'tmbPath'       => STORAGE_PATH .'files/thumbnails',
+            'quarantine'    => STORAGE_PATH .'files/quarantine',
+            'tmbURL'        => site_url('admin/files/thumbnails'),
             'utf8fix'       => true,
             'tmbCrop'       => false,
             'tmbSize'       => 48,
@@ -33,17 +28,17 @@ Config::set('elFinder', array(
             'accessControl' => 'access',
             'dateFormat'    => 'j M Y H:i',
             'defaults'      => array('read' => true, 'write' => true),
-            'icon'          => site_url('modules/files/assets/img/volume_icon_local.png'),
+            'icon'          => resource_url('img/volume_icon_local.png', 'Files'),
         ),
         array(
             'alias'         => 'Site Root',
             'driver'        => 'LocalFileSystem',
             'path'          => ROOTDIR,
-            'URL'           => site_url('admin/files/preview/'),
+            'URL'           => site_url('admin/files/preview'),
             'mimeDetect'    => 'internal',
-            'tmbPath'       => APPDIR .'Storage/Files/thumbnails',
-            'quarantine'    => APPDIR .'Storage/Files/quarantine',
-            'tmbURL'        => site_url('admin/files/thumbnails/'),
+            'tmbPath'       => STORAGE_PATH .'files/thumbnails',
+            'quarantine'    => STORAGE_PATH .'files/quarantine',
+            'tmbURL'        => site_url('admin/files/thumbnails'),
             'utf8fix'       => true,
             'tmbCrop'       => false,
             'tmbSize'       => 48,
@@ -51,7 +46,7 @@ Config::set('elFinder', array(
             'accessControl' => 'access',
             'dateFormat'    => 'j M Y H:i',
             'defaults'      => array('read' => true, 'write' => false),
-            'icon'          => site_url('modules/files/assets/img/volume_icon_local.png'),
+            'icon'          => resource_url('img/volume_icon_local.png', 'Files'),
         )
     )
 ));

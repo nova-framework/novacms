@@ -6,10 +6,8 @@
  * @version 3.0
  */
 
-use Nova\Config\Config;
 
-
-Config::set('cache', array(
+return array(
     /*
     |--------------------------------------------------------------------------
     | Default Cache Driver
@@ -34,7 +32,7 @@ Config::set('cache', array(
     | are free to change it to any other place on disk that you desire.
     */
 
-    'path' => storage_path() .DS .'Cache',
+    'path' => STORAGE_PATH .'cache',
 
     /*
     |--------------------------------------------------------------------------
@@ -86,4 +84,4 @@ Config::set('cache', array(
 
     'prefix' => 'nova',
 
-));
+);

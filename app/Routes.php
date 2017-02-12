@@ -7,46 +7,50 @@
  * @version 3.0
  */
 
+
+/** Define static routes. */
+
+// The default Routing
 // The default Auth Routes.
 Route::get('login',  array(
     'before' => 'guest',
-    'uses' => 'App\Controllers\Admin\Authorize@login'
+    'uses' => 'Admin\Authorize@login'
 ));
 
 Route::post('login', array(
     'before' => 'guest|csrf',
-    'uses' => 'App\Controllers\Admin\Authorize@postLogin'
+    'uses' => 'Admin\Authorize@postLogin'
 ));
 
 Route::get('logout', array(
     'before' => 'auth',
-    'uses' => 'App\Controllers\Admin\Authorize@logout'
+    'uses' => 'Admin\Authorize@logout'
 ));
 
 // The Password Remind.
 Route::get('password/remind', array(
     'before' => 'guest',
-    'uses' => 'App\Controllers\Admin\Authorize@remind'
+    'uses' => 'Admin\Authorize@remind'
 ));
 
 Route::post('password/remind', array(
     'before' => 'guest|csrf',
-    'uses' => 'App\Controllers\Admin\Authorize@postRemind'
+    'uses' => 'Admin\Authorize@postRemind'
 ));
 
 // The Password Reset.
 Route::get('password/reset/{token}', array(
     'before' => 'guest',
-    'uses' => 'App\Controllers\Admin\Authorize@reset'
+    'uses' => 'Admin\Authorize@reset'
 ));
 
 Route::post('password/reset', array(
     'before' => 'guest|csrf',
-    'uses' => 'App\Controllers\Admin\Authorize@postReset'
+    'uses' => 'Admin\Authorize@postReset'
 ));
 
 // The Adminstration Routes.
-Route::group(array('prefix' => 'admin', 'namespace' => 'App\Controllers\Admin'), function() {
+Route::group(array('prefix' => 'admin', 'namespace' => 'Admin'), function() {
     //admin
     Route::get('/',         array('before' => 'auth', 'uses' => 'Dashboard@index'));
     Route::get('dashboard', array('before' => 'auth', 'uses' => 'Dashboard@index'));
@@ -117,5 +121,6 @@ Route::group(array('prefix' => 'admin', 'namespace' => 'App\Controllers\Admin'),
     Route::get( 'editor',                array('before' => 'auth',      'uses' => 'Editor@index'));
 });
 
-// Route::catchAll('App\Controllers\Pages@fetch');
-Route::any('{slug}', 'App\Controllers\Pages@fetch')->where('slug', '(.*)');
+Route::any('{slug}', 'Pages@fetch')->where('slug', '(.*)');
+
+/** End default Routes */

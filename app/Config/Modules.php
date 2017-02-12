@@ -7,10 +7,8 @@
  * @version 3.0
  */
 
-use Nova\Config\Config;
 
-
-Config::set('modules', array(
+return array(
     //--------------------------------------------------------------------------
     // Path to Modules
     //--------------------------------------------------------------------------
@@ -32,6 +30,6 @@ Config::set('modules', array(
             'namespace' => 'Files',
             'enabled'   => true,
             'order'     => 9001,
-        )
+        ),
     ),
-));
+);

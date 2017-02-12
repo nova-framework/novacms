@@ -6,14 +6,6 @@
  * @version 3.0
  */
 
-//--------------------------------------------------------------------------
-// Load The Composer Autoloader
-//--------------------------------------------------------------------------
-
-require ROOTDIR .'vendor/autoload.php';
-
-// The used Classes.
-use Nova\Config\Config;
 use Nova\Config\Repository as ConfigRepository;
 use Nova\Foundation\AliasLoader;
 use Nova\Foundation\Application;
@@ -58,7 +50,7 @@ define('SYSTEMDIR', ROOTDIR .str_replace('/', DS, 'vendor/nova-framework/system/
 // Set The Storage Path
 //--------------------------------------------------------------------------
 
-define('STORAGE_PATH', APPDIR .'Storage' .DS);
+define('STORAGE_PATH', ROOTDIR .'storage' .DS);
 
 //--------------------------------------------------------------------------
 // Set The Framework Version
@@ -126,19 +118,11 @@ $app->startExceptionHandling();
 if ($env != 'testing') ini_set('display_errors', 'Off');
 
 //--------------------------------------------------------------------------
-// Load The Configuration
-//--------------------------------------------------------------------------
-
-foreach (glob($app['path'] .DS .'Config' .DS .'*.php') as $path) {
-    if (is_readable($path)) require $path;
-}
-
-//--------------------------------------------------------------------------
 // Register The Config Manager
 //--------------------------------------------------------------------------
 
 $app->instance('config', $config = new ConfigRepository(
-    $app->getConfigLoader()
+    $app->getConfigLoader(), $env
 ));
 
 //--------------------------------------------------------------------------
@@ -205,38 +189,6 @@ if (is_readable($path)) require $path;
 //--------------------------------------------------------------------------
 
 $path = $app['path'] .DS .'Boot' .DS .'Environment' .DS .ucfirst($env) .'.php';
-
-if (is_readable($path)) require $path;
-
-//--------------------------------------------------------------------------
-// Load The Application Events
-//--------------------------------------------------------------------------
-
-$path = $app['path'] .DS .'Events.php';
-
-if (is_readable($path)) require $path;
-
-//--------------------------------------------------------------------------
-// Load The Application's Route Filters
-//--------------------------------------------------------------------------
-
-$path = $app['path'] .DS .'Filters.php';
-
-if (is_readable($path)) require $path;
-
-//--------------------------------------------------------------------------
-// Load The Application Routes
-//--------------------------------------------------------------------------
-
-$path = $app['path'] .DS .'Routes.php';
-
-if (is_readable($path)) require $path;
-
-//--------------------------------------------------------------------------
-// Load The Application Bootstrap
-//--------------------------------------------------------------------------
-
-$path = $app['path'] .DS .'Bootstrap.php';
 
 if (is_readable($path)) require $path;
 

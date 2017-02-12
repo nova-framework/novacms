@@ -6,16 +6,14 @@
  * @version 3.0
  */
 
-use Nova\Config\Config;
 
-
-Config::set('mail', array(
-    'driver' => 'mail',
+return array(
+    'driver' => 'smtp',
     'host'   => '',
     'port'   => 587,
     'from'   => array(
-        'address' => Config::get('app.email'),
-        'name'    => Config::get('app.name'),
+        'address' => 'admin@novaframework.dev',
+        'name'    => 'The Nova Staff',
     ),
     'encryption' => 'tls',
     'username'   => '',
@@ -23,5 +21,5 @@ Config::set('mail', array(
     'sendmail'   => '/usr/sbin/sendmail -bs',
 
     // Whether or not the Mailer will pretend to send the messages.
-    'pretend' => false,
-));
+    'pretend' => true,
+);
