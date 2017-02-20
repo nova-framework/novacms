@@ -54,9 +54,13 @@ You can install the framework from a terminal by using:
 composer create-project nova-framework/novacms foldername -s dev
 ```
 
-Once downloaded setup the database connection in **app/Config/Database.php** then import **scripts/cms.sql**
-
 The foldername is the desired folder to be created.
+
+Once downloaded setup the database connection in **app/Config/Database.php** then import **scripts/cms.sql**
+To access the backend go to /cp then login with:
+
+username: admin
+password: admin
 
 ## Contributing
 
