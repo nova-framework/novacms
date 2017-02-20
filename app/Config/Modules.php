@@ -31,5 +31,30 @@ return array(
             'enabled'   => true,
             'order'     => 9001,
         ),
+        'sidebars' => array(
+            'namespace' => 'Sidebars',
+            'enabled'   => true,
+            'order'     => 1,
+        ),
+        'globalblocks' => array(
+            'namespace' => 'Globalblocks',
+            'enabled'   => true,
+            'order'     => 1,
+        ),
+        'menus' => array(
+            'namespace' => 'Menus',
+            'enabled'   => true,
+            'order'     => 1,
+        ),
+        'system' => array(
+            'namespace' => 'System',
+            'enabled'   => true,
+            'order'     => 9001,
+        ),
+        'pages' => array(
+            'namespace' => 'Pages',
+            'enabled'   => true,
+            'order'     => 9002,
+        ),
     ),
 );

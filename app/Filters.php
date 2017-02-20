@@ -69,7 +69,7 @@ Route::filter('auth', function($route, $request) {
 
     // User is not authenticated.
     else if (! $request->ajax()) {
-        return Redirect::guest('login');
+        return Redirect::guest('cp/login');
     } else {
         return Response::make('Unauthorized Access', 403);
     }
@@ -87,7 +87,7 @@ Route::filter('guest', function($route, $request) {
 
     // User is authenticated.
     else if (! $request->ajax()) {
-        return Redirect::to('admin/dashboard');
+        return Redirect::to('cp/dashboard');
     } else {
         return Response::make('Unauthorized Access', 403);
     }

@@ -1,7 +1,7 @@
 <?php
 namespace App\Helpers;
 
-use App\Models\Menu;
+use App\Modules\Menus\Models\Menu;
 use App\Helpers\Menu as Nav;
 use DB;
 
@@ -23,7 +23,7 @@ class GlobalBlocks
 		foreach ($menus as $row) {
             $pos = strpos($block->content,$row->tag);
             if ($pos !== false) {
-				$navbar = new Nav($row->content, $row->type);
+                $navbar = new Nav($row->content, $row->type);
 				$block->content = str_replace($row->tag, $navbar->get(), $block->content);
             }
         }

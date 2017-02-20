@@ -17,7 +17,7 @@ return array(
     /**
      * The Website URL.
      */
-    'url' => 'http://novacms.dev',
+    'url' => 'http://novacms:8888/',
 
     /**
     * The Administrator's E-mail Address.
@@ -35,9 +35,9 @@ return array(
     'name' => 'Nova CMS',
 
     /**
-     * The default Template.
+     * The default Theme.
      */
-    'template' => 'Default',
+    'theme' => 'Bootstrap',
 
     /**
      * The Backend's Color Scheme.
@@ -59,7 +59,7 @@ return array(
      * The Encryption Key.
      * This page can be used to generate key - http://novaframework.com/token-generator
      */
-    'key' => 'SomeRandomStringThere_1234567890',
+    'key' => 'ciGCB4sAkSMPE8nfA45aqih9trm0auEq',
 
     /**
      *  Prevents the website from CSRF attacks.
@@ -89,7 +89,6 @@ return array(
         'Nova\Validation\ValidationServiceProvider',
         'Nova\Html\HtmlServiceProvider',
         'Nova\View\ViewServiceProvider',
-        'Nova\Layout\LayoutServiceProvider',
         'Nova\Cron\CronServiceProvider',
 
         // The Application Providers.
@@ -125,6 +124,7 @@ return array(
         'PageBlocks'    => 'App\Helpers\PageBlocks',
         'GlobalBlocks'  => 'App\Helpers\GlobalBlocks',
         'Menu'          => 'App\Helpers\Menu',
+        'Member'        => 'App\Helpers\Member',
 
         // The Forensics Console.
         'Console'       => 'Nova\Forensics\Console',

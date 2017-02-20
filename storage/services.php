@@ -22,11 +22,10 @@ return array (
     16 => 'Nova\\Validation\\ValidationServiceProvider',
     17 => 'Nova\\Html\\HtmlServiceProvider',
     18 => 'Nova\\View\\ViewServiceProvider',
-    19 => 'Nova\\Layout\\LayoutServiceProvider',
-    20 => 'Nova\\Cron\\CronServiceProvider',
-    21 => 'App\\Providers\\AppServiceProvider',
-    22 => 'App\\Providers\\EventServiceProvider',
-    23 => 'App\\Providers\\RouteServiceProvider',
+    19 => 'Nova\\Cron\\CronServiceProvider',
+    20 => 'App\\Providers\\AppServiceProvider',
+    21 => 'App\\Providers\\EventServiceProvider',
+    22 => 'App\\Providers\\RouteServiceProvider',
   ),
   'eager' => 
   array (
@@ -64,7 +63,8 @@ return array (
     'view' => 'Nova\\View\\ViewServiceProvider',
     'view.finder' => 'Nova\\View\\ViewServiceProvider',
     'view.engine.resolver' => 'Nova\\View\\ViewServiceProvider',
-    'layout' => 'Nova\\Layout\\LayoutServiceProvider',
+    'template' => 'Nova\\View\\ViewServiceProvider',
+    'template.compiler' => 'Nova\\View\\ViewServiceProvider',
     'cron' => 'Nova\\Cron\\CronServiceProvider',
   ),
   'when' => 
@@ -103,9 +103,6 @@ return array (
     array (
     ),
     'Nova\\View\\ViewServiceProvider' => 
-    array (
-    ),
-    'Nova\\Layout\\LayoutServiceProvider' => 
     array (
     ),
     'Nova\\Cron\\CronServiceProvider' => 

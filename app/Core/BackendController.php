@@ -21,26 +21,19 @@ use App\Core\Controller as BaseController;
 abstract class BackendController extends BaseController
 {
     /**
-     * The currently used Template.
+     * The currently used Theme.
      *
      * @var string
      */
-    protected $template = 'AdminLTE';
+    protected $theme = 'AdminLite';
 
     /**
      * The currently used Layout.
      *
      * @var mixed
      */
-    protected $layout = 'backend';
+    protected $layout = 'Backend';
 
-    /**
-     * Create a new BackendController instance.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * A Before Filter which permit the access to Administrators.

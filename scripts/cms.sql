@@ -1,3 +1,63 @@
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 4541
+#
+# http://www.sequelpro.com/
+# https://github.com/sequelpro/sequelpro
+#
+# Host: localhost (MySQL 5.5.42)
+# Database: novacms
+# Generation Time: 2017-02-20 10:46:35 +0000
+# ************************************************************
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table nova_cache
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `nova_cache`;
+
+CREATE TABLE `nova_cache` (
+  `id` varchar(255) NOT NULL,
+  `key` text NOT NULL,
+  `value` text NOT NULL,
+  `expiration` timestamp NULL DEFAULT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+# Dump of table nova_depts
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `nova_depts`;
+
+CREATE TABLE `nova_depts` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `nova_depts` WRITE;
+/*!40000 ALTER TABLE `nova_depts` DISABLE KEYS */;
+
+INSERT INTO `nova_depts` (`id`, `title`, `created_at`, `updated_at`)
+VALUES
+  (1,'Marketing','2017-02-14 19:45:45','2017-02-16 19:16:22');
+
+/*!40000 ALTER TABLE `nova_depts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 # Dump of table nova_global_blocks
 # ------------------------------------------------------------
 
@@ -17,8 +77,8 @@ LOCK TABLES `nova_global_blocks` WRITE;
 INSERT INTO `nova_global_blocks` (`id`, `title`, `type`, `content`)
 VALUES
   (1,'Phone Number','input','123456'),
-  (2,'Footer','input',''),
-  (3,'Header Nav','input','[main-menu]');
+  (3,'Header Nav','input','[main-menu]'),
+  (4,'Footer','textarea','<p>Some footer notice....</p>\r\n');
 
 /*!40000 ALTER TABLE `nova_global_blocks` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -46,10 +106,30 @@ LOCK TABLES `nova_menus` WRITE;
 
 INSERT INTO `nova_menus` (`id`, `title`, `tag`, `type`, `content`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-  (1,'Main Menu','[main-menu]','Bootstrap','[{\"pageid\":1,\"id\":1477730664984,\"slug\":\"/\",\"title\":\"Home\"},{\"pageid\":2,\"id\":1477730664987,\"slug\":\"/about\",\"title\":\"About\"},{\"pageid\":8,\"id\":1477730664991,\"slug\":\"/contact\",\"title\":\"Contact\"}]','2016-10-15 12:12:15','2016-10-29 09:44:25',NULL);
+  (1,'Main Menu','[main-menu]','Bootstrap','[{\"slug\":\"/\",\"title\":\"Home\",\"id\":1477730664984},{\"slug\":\"/about\",\"title\":\"About\",\"id\":1477730664987},{\"slug\":\"/contact\",\"title\":\"Contact\",\"id\":1477730664991}]','2016-10-15 12:12:15','2017-02-14 16:23:28',NULL);
 
 /*!40000 ALTER TABLE `nova_menus` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+# Dump of table nova_notifications
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `nova_notifications`;
+
+CREATE TABLE `nova_notifications` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `assignedTo` int(11) DEFAULT NULL,
+  `assignedFrom` int(11) DEFAULT NULL,
+  `link` varchar(255) DEFAULT NULL,
+  `seen` varchar(255) DEFAULT 'No',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 # Dump of table nova_options
@@ -79,7 +159,9 @@ VALUES
   (7,'mail','from.name','The Nova Staff'),
   (8,'mail','encryption','tls'),
   (9,'mail','username',''),
-  (10,'mail','password','');
+  (10,'mail','password',''),
+  (11,'app','ipAccessList','[]'),
+  (12,'app','devEmails','{\"d.carr@theonepoint.co.uk\":\"David Carr\"}');
 
 /*!40000 ALTER TABLE `nova_options` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -143,7 +225,7 @@ LOCK TABLES `nova_pages` WRITE;
 
 INSERT INTO `nova_pages` (`id`, `browserTitle`, `pageTitle`, `slug`, `active`, `content`, `publishedDate`, `layout`, `sidebars`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-  (1,'Home','Home',NULL,'Yes','<p>Hello Right OK!!</p>\r\n','2016-08-01 09:00:00','default',NULL,'2016-08-01 20:11:24','2016-10-15 15:33:04',NULL),
+  (1,'Home','Home',NULL,'Yes','<p>Hello Right OK!!</p>\r\n','2016-08-01 09:00:00',NULL,NULL,'2016-08-01 20:11:24','2017-02-20 10:26:24',NULL),
   (2,'About Page','About','about','Yes','<p>About</p>\r\n','2016-08-01 09:00:00','default','1','2016-08-01 20:11:24','2016-08-20 10:59:35',NULL),
   (8,'Contact','Contact','contact','Yes','content','2016-08-03 10:00:00','default',NULL,'2016-08-03 18:20:43','2016-08-03 18:38:45',NULL);
 
@@ -175,7 +257,7 @@ CREATE TABLE `nova_roles` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(40) CHARACTER SET utf8 NOT NULL,
   `slug` varchar(40) CHARACTER SET utf8 NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -185,16 +267,29 @@ CREATE TABLE `nova_roles` (
 LOCK TABLES `nova_roles` WRITE;
 /*!40000 ALTER TABLE `nova_roles` DISABLE KEYS */;
 
-INSERT INTO `nova_roles` (`id`, `name`, `slug`, `description`, `created_at`, `updated_at`)
+INSERT INTO `nova_roles` (`id`, `name`, `slug`, `description`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-  (1,'Root','root','Use this account with extreme caution. When using this account it is possible to cause irreversible damage to the system.','2016-06-05 01:48:00','2016-06-05 01:48:00'),
-  (2,'Administrator','administrator','Full access to create, edit, and update companies, and orders.','2016-06-05 01:48:00','2016-06-05 01:48:00'),
-  (3,'Manager','manager','Ability to create new companies and orders, or edit and update any existing ones.','2016-06-05 01:48:00','2016-06-05 01:48:00'),
-  (4,'Company Manager','company-manager','Able to manage the company that the user belongs to, including adding sites, creating new users and assigning licences.','2016-06-05 01:48:00','2016-06-05 01:48:00'),
-  (5,'User','user','A standard user that can have a licence assigned to them. No administrative features.','2016-06-05 01:48:00','2016-06-05 01:48:00');
+  (1,'Root','root','Use this account with extreme caution. When using this account it is possible to cause irreversible damage to the system.','2016-06-05 01:48:00','2016-06-05 01:48:00',NULL),
+  (2,'Administrator','administrator','Full access to create, edit, and update companies, and orders.','2016-06-05 01:48:00','2016-06-05 01:48:00',NULL),
+  (3,'Manager','manager','Ability to create new companies and orders, or edit and update any existing ones.','2016-06-05 01:48:00','2016-06-05 01:48:00',NULL),
+  (4,'Company Manager','company-manager','Able to manage the company that the user belongs to, including adding sites, creating new users and assigning licences.','2016-06-05 01:48:00','2016-06-05 01:48:00',NULL),
+  (5,'User','user','A standard user that can have a licence assigned to them. No administrative features.','2016-06-05 01:48:00','2016-06-05 01:48:00',NULL);
 
 /*!40000 ALTER TABLE `nova_roles` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+# Dump of table nova_sessions
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `nova_sessions`;
+
+CREATE TABLE `nova_sessions` (
+  `id` varchar(255) NOT NULL,
+  `payload` text NOT NULL,
+  `last_activity` int(11) unsigned NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 # Dump of table nova_sidebars
@@ -214,6 +309,35 @@ CREATE TABLE `nova_sidebars` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `nova_sidebars` WRITE;
+/*!40000 ALTER TABLE `nova_sidebars` DISABLE KEYS */;
+
+INSERT INTO `nova_sidebars` (`id`, `title`, `content`, `position`, `class`, `created_at`, `updated_at`, `deleted_at`)
+VALUES
+  (1,'test','<p>test</p>\r\n','Left','','2017-02-12 21:58:48','2017-02-12 21:58:48',NULL);
+
+/*!40000 ALTER TABLE `nova_sidebars` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table nova_user_logs
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `nova_user_logs`;
+
+CREATE TABLE `nova_user_logs` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `link` varchar(255) NOT NULL DEFAULT '',
+  `refID` int(11) DEFAULT NULL,
+  `section` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT 'View',
+  `source` varchar(255) DEFAULT 'View',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 # Dump of table nova_users
@@ -226,14 +350,34 @@ CREATE TABLE `nova_users` (
   `role_id` int(11) unsigned NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `realname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `active` tinyint(4) unsigned NOT NULL DEFAULT '0',
+  `personalEmail` varchar(255) DEFAULT NULL,
+  `imagePath` varchar(255) DEFAULT 'users/no-picture-available.jpg',
+  `tel` varchar(255) DEFAULT NULL,
+  `mobile` varchar(255) DEFAULT NULL,
+  `jobTitle` varchar(255) DEFAULT NULL,
+  `dept_id` int(11) DEFAULT NULL,
+  `company` varchar(255) DEFAULT NULL,
+  `tshirtSize` varchar(255) DEFAULT NULL,
+  `nextOfKinName` varchar(255) DEFAULT NULL,
+  `nextOfKinRelationship` varchar(255) DEFAULT NULL,
+  `nextOfKinNumber` varchar(255) DEFAULT NULL,
+  `office365Email` varchar(255) DEFAULT NULL,
+  `office365Password` varchar(255) DEFAULT NULL,
+  `backgroundColour` varchar(255) DEFAULT NULL,
+  `textColor` varchar(255) DEFAULT NULL,
+  `active` varchar(3) NOT NULL DEFAULT 'Yes',
+  `officeLoginOnly` varchar(3) DEFAULT 'Yes',
+  `isStaff` varchar(3) DEFAULT 'Yes',
+  `forceChangePassword` varchar(3) DEFAULT 'Yes',
+  `target` varchar(255) DEFAULT '0',
+  `magic_token` text,
+  `magic_token_created_at` timestamp NULL DEFAULT NULL,
   `activation_code` varchar(255) DEFAULT NULL,
   `remember_token` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `lastLoggedIn` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -241,9 +385,18 @@ CREATE TABLE `nova_users` (
 LOCK TABLES `nova_users` WRITE;
 /*!40000 ALTER TABLE `nova_users` DISABLE KEYS */;
 
-INSERT INTO `nova_users` (`id`, `role_id`, `username`, `password`, `realname`, `email`, `image`, `active`, `activation_code`, `remember_token`, `created_at`, `updated_at`)
+INSERT INTO `nova_users` (`id`, `role_id`, `username`, `password`, `email`, `personalEmail`, `imagePath`, `tel`, `mobile`, `jobTitle`, `dept_id`, `company`, `tshirtSize`, `nextOfKinName`, `nextOfKinRelationship`, `nextOfKinNumber`, `office365Email`, `office365Password`, `backgroundColour`, `textColor`, `active`, `officeLoginOnly`, `isStaff`, `forceChangePassword`, `target`, `magic_token`, `magic_token_created_at`, `activation_code`, `remember_token`, `lastLoggedIn`, `created_at`, `updated_at`, `deleted_at`)
 VALUES
-  (1,1,'admin','$2y$10$MZpxcVZpwTCCotIkkfPP5O1sDC7GiKzD9klh4MoM/aE44YaVm4Xga','Administrator','admin@novaframework.dev',NULL,1,NULL,'YR64tWZqacO7OsQI04IN0kYuLWvcJQfvE6270lxIWzX22JCYlcv7J40Tbhvm','2016-06-03 10:15:00','2016-10-29 09:36:05');
+  (9,1,'admin','$2y$10$MZpxcVZpwTCCotIkkfPP5O1sDC7GiKzD9klh4MoM/aE44YaVm4Xga','','admin@novaframework.dev','users/no-picture-available.jpg',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Yes','No','Yes','Yes','0',NULL,NULL,NULL,'qcVyjryQGy773vjIsxwhLXrOBTrw2xdczjsepvtVOcPxIK8GYGX5KByeDo3d','2017-02-20 10:44:31','2016-06-03 10:15:00','2017-02-20 10:44:31',NULL);
 
 /*!40000 ALTER TABLE `nova_users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

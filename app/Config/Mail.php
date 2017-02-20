@@ -6,14 +6,13 @@
  * @version 3.0
  */
 
-
 return array(
-    'driver' => 'smtp',
+    'driver' => 'mail',
     'host'   => '',
     'port'   => 587,
     'from'   => array(
-        'address' => 'admin@novaframework.dev',
-        'name'    => 'The Nova Staff',
+        'address' => Config::get('app.email'),
+        'name'    => Config::get('app.name'),
     ),
     'encryption' => 'tls',
     'username'   => '',
@@ -21,5 +20,5 @@ return array(
     'sendmail'   => '/usr/sbin/sendmail -bs',
 
     // Whether or not the Mailer will pretend to send the messages.
-    'pretend' => true,
+    'pretend' => false,
 );

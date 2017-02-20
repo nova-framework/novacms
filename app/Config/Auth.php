@@ -12,7 +12,7 @@ return array(
     'driver' => 'extended',               // Supported: "database", "extended"
 
     // The Authentication Model, for the Extended Driver.
-    'model' => 'App\Models\User',
+    'model' => 'App\Modules\System\Models\User',
 
     // The Authentication Table, for the Database Driver.
     'table' => 'users',

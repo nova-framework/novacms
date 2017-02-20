@@ -19,7 +19,7 @@ return array(
         'dispatcher' => 'Shared\Routing\Assets\CustomDispatcher',
 
         // Wheter or not the CSS and JS files are automatically compressed.
-        'compress' => false,
+        'compress' => true,
 
         // The browser Cache Control options.
         'cache' => array(
