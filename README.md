@@ -13,9 +13,6 @@
 - [What is the Nova Framework?](#what-is-the-nova-framework)
 - [Requirements](#requirements)
 - [Installation](#installation)
-    - [Recommended](#recommended)
-    - [Manual](#manual)
-- [Documentation](#documentation)
 - [Contributing](#contributing)
     - [Issue Tracker](#issue-tracker)
     - [Pull Requests](#pull-requests)
@@ -26,11 +23,9 @@
 
 Nova Framework is a PHP 5.6 MVC system. It's designed to be lightweight and modular, allowing developers to build better and easy to maintain code with PHP.
 
-The base framework comes with a range of [helper classes](https://github.com/nova-framework/framework/tree/master/system/Helpers).
-
 ## Requirements
 
-**The framework requirements are limited.**
+**The CMS requirements are limited.**
 
 - PHP 5.6 or greater.
 - Apache Web Server or equivalent with mod rewrite support.
@@ -46,39 +41,37 @@ The base framework comes with a range of [helper classes](https://github.com/nov
 
 ## Installation
 
-This framework was designed and is **strongly recommended** to be installed above the document root directory, with it pointing to the `webroot` folder.
+NovaCMS was designed and is **strongly recommended** to be installed above the document root directory, with it pointing to the `webroot` folder.
 
 Additionally, installing in a sub-directory, on a production server, will introduce severe security issues. If there is no choice still place the framework files above the document root and have only index.php and .htacess from the webroot folder in the sub folder and adjust the paths accordingly.
 
 #### Recommended
-The framework is located on [Packagist](https://packagist.org/packages/nova-framework/framework).
+The framework is located on [Packagist](https://packagist.org/packages/nova-framework/novacms).
 
 You can install the framework from a terminal by using:
 
 ```
-composer create-project nova-framework/framework foldername 3.* -s dev
+composer create-project nova-framework/novacms foldername -s dev
 ```
 
 The foldername is the desired folder to be created.
 
-> **Note:** For additional installation instructions, for example; setting up a Virtualhost (Recommended for Local Development), Nginx or IIS with URL Rewrite, [please visit the install docs](http://novaframework.com/documentation/v3/install).
+Once downloaded setup the database connection in **app/Config/Database.php** then import **scripts/cms.sql**
+To access the backend go to /cp then login with:
 
-## Documentation
-
-Full docs & tutorials are available on [novaframework.com](http://novaframework.com/documentation/v3).
-
-Screencasts are available on [https://novaframework.com/screencasts](https://novaframework.com/screencasts).
+username: admin
+password: admin
 
 ## Contributing
 
 #### Issue Tracker
 
-You can find outstanding issues on the [GitHub Issue Tracker](https://github.com/nova-framework/framework/issues).
+You can find outstanding issues on the [GitHub Issue Tracker](https://github.com/nova-framework/novacms/issues).
 
 #### Pull Requests
 
 * Each pull request should contain only one new feature or improvement.
-* Pull requests should be submitted to the correct version branch ie [3.0/master](https://github.com/nova-framework/framework/tree/master)
+* Pull requests should be submitted to the correct version branch ie [master](https://github.com/nova-framework/novacms/tree/master)
 
 #### Code Style
 
@@ -97,4 +90,4 @@ All pull requests must use the PSR-2 code style.
 
 ## License
 
-The Nova Framework is under the MIT License, you can view the license [here](https://github.com/nova-framework/framework/blob/master/LICENSE.txt).
+The Nova Framework is under the MIT License
