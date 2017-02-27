@@ -1,3 +1,5 @@
+![Nova Framework](https://novaframework.com/templates/nova4/assets/img/nova.png)
+
 # Nova Framework
 
 [![Total Downloads](https://img.shields.io/packagist/dt/nova-framework/framework.svg)](https://packagist.org/packages/nova-framework/framework)
