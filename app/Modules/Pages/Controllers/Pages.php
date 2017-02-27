@@ -30,7 +30,7 @@ class Pages extends Controller
 		}
 
 		if (!file_exists(APPDIR.'Themes/'.$this->theme.'/'.$page->layout.'.php')){
-			$page->layout = 'default';
+			$page->layout = 'Default';
 		}
 
 		$this->layout = $page->layout;
