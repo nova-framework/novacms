@@ -206,12 +206,12 @@ class Admin extends BackendController
 	protected function getLayoutFiles()
 	{
 		$layoutFiles = [];
-		$template = Config::get('app.template');
-		$path = APPDIR.'Templates'.DS.$template.DS;
+		$template = Config::get('app.theme');
+		$path = APPDIR.'Themes'.DS.$template.DS.'Layouts'.DS;
 
 		$ignore = ['message'];
 
-		foreach(glob($path.'*.php') as $file) {
+		foreach(glob($path.'*.tpl') as $file) {
 			$file = str_replace($path, '', $file);
 			$file = Document::removeExtension($file);
 
