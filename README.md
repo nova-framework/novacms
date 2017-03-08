@@ -57,9 +57,10 @@ composer create-project nova-framework/novacms foldername -s dev
 The foldername is the desired folder to be created.
 
 Once downloaded setup the database connection in **app/Config/Database.php** then import **scripts/cms.sql**
-To access the backend go to /cp then login with:
+To access the backend go to /admin then login with:
 
 username: admin
+
 password: admin
 
 ## Contributing
