@@ -1,4 +1,4 @@
-<div class="middle-box text-center loginscreen animated fadeInDown">
+<div class="col-md-offset-3 col-md-6 mt20">
     <div>
         <?= Session::getMessages(); ?>
 

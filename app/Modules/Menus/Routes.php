@@ -1,5 +1,5 @@
 <?php
-Route::group(array('prefix' => 'cp'), function() {
+Route::group(array('prefix' => 'admin'), function() {
     Route::get( 'menus',                array('before' => 'auth',      'uses' => 'Admin@index'));
     Route::get( 'menus/create',         array('before' => 'auth',      'uses' => 'Admin@create'));
     Route::post('menus',                array('before' => 'auth|csrf', 'uses' => 'Admin@store'));

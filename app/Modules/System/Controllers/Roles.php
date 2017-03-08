@@ -67,12 +67,6 @@ class Roles extends BackendController
 
     public function create()
     {
-        $log          = new UserLog();
-        $log->user_id = Auth::user()->id;
-        $log->title   = "Viewed create roles page.";
-        $log->section = "roles";
-        $log->link    = "cp/roles/create";
-        $log->save();
         return $this->getView()->shares('title', 'Create Role');
     }
 
@@ -94,12 +88,12 @@ class Roles extends BackendController
             $log->user_id = Auth::user()->id;
             $log->title   = "Created role: {$role->name}.";
             $log->section = "roles";
-            $log->link    = "cp/roles/{$role->id}/edit";
+            $log->link    = "admin/roles/{$role->id}/edit";
             $log->refID   = $role->id;
             $log->type    = 'Create';
             $log->save();
 
-            return Redirect::to('cp/roles')->withStatus('Role created.');
+            return Redirect::to('admin/roles')->withStatus('Role created.');
         }
 
         return Redirect::back()->withInput()->withStatus($validator->errors(), 'danger');
@@ -110,16 +104,8 @@ class Roles extends BackendController
         $role = Role::find($id);
 
         if ($role === null) {
-            return Redirect::to('cp/roles')->withStatus('Role not found', 'danger');
+            return Redirect::to('admin/roles')->withStatus('Role not found', 'danger');
         }
-
-        $log          = new UserLog();
-        $log->user_id = Auth::user()->id;
-        $log->title   = "Viewed roles edit page: {$role->name}.";
-        $log->section = "roles";
-        $log->link    = "cp/roles/{$role->id}/edit";
-        $log->refID   = $role->id;
-        $log->save();
 
         return $this->getView()
             ->shares('title', 'Edit Role')
@@ -131,7 +117,7 @@ class Roles extends BackendController
         $role = Role::find($id);
 
         if($role === null) {
-            return Redirect::to('cp/roles')->withStatus('Role not found', 'danger');
+            return Redirect::to('admin/roles')->withStatus('Role not found', 'danger');
         }
 
         // Validate the Input data.
@@ -150,12 +136,12 @@ class Roles extends BackendController
             $log->user_id = Auth::user()->id;
             $log->title   = "Updated role: {$role->name}.";
             $log->section = "roles";
-            $log->link    = "cp/roles/{$role->id}/edit";
+            $log->link    = "admin/roles/{$role->id}/edit";
             $log->refID   = $role->id;
             $log->type    = 'Update';
             $log->save();
 
-            return Redirect::to('cp/roles')->withStatus('Role Updated.');
+            return Redirect::to('admin/roles')->withStatus('Role Updated.');
         }
 
         return Redirect::back()->withInput()->withStatus($validator->errors(), 'danger');
@@ -166,20 +152,20 @@ class Roles extends BackendController
         $role = Role::find($id);
 
         if($role === null) {
-            return Redirect::to('cp/roles')->withStatus('Role not found', 'danger');
+            return Redirect::to('admin/roles')->withStatus('Role not found', 'danger');
         }
 
         $log          = new UserLog();
         $log->user_id = Auth::user()->id;
         $log->title   = "Deleted role: {$role->name}.";
-        $log->section = "cp/roles";
+        $log->section = "admin/roles";
         $log->refID   = $role->id;
         $log->type    = 'Delete';
         $log->save();
 
         $role->delete();
 
-        return Redirect::to('cp/roles')->withStatus("Role deleted.");
+        return Redirect::to('admin/roles')->withStatus("Role deleted.");
     }
 
     protected function validate(array $data, $id = null)

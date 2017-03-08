@@ -55,21 +55,7 @@
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                <?php if (Auth::check()) { ?>
-                <li <?php if($currentUri == 'profile') echo 'class="active"'; ?>>
-                    <a href='<?= admin_url('profile'); ?>'><i class='fa fa-user'></i> <?= __d('adminlite', 'Profile'); ?></a>
-                </li>
-                <li>
-                    <a href='<?= admin_url('logout'); ?>'><i class='fa fa-sign-out'></i> <?= __d('adminlite', 'Logout'); ?></a>
-                </li>
-                <?php } else { ?>
-                <li <?php if($currentUri == 'login') echo 'class="active"'; ?>>
-                    <a href='<?= admin_url('login'); ?>'><i class='fa fa-sign-out'></i> <?= __d('adminlite', 'Sign In'); ?></a>
-                </li>
-                <li <?php if($currentUri == 'password/remind') echo 'class="active"'; ?>>
-                    <a href='<?= admin_url('password/remind'); ?>'><i class='fa fa-user'></i> <?= __d('adminlite', 'Forgot Password?'); ?></a>
-                </li>
-                <?php } ?>
+
             </ul>
         </div>
         <!-- /.navbar-custom-menu -->
@@ -88,17 +74,6 @@
         </div>
     </div>
 
-  <!-- Main Footer -->
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="pull-right hidden-xs">
-      <?php if(Config::get('app.debug')) { ?>
-      <small><!-- DO NOT DELETE! - Profiler --></small>
-      <?php } ?>
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; <?php echo date('Y'); ?> <a href="http://www.novaframework.com/" target="_blank"><b>Nova Framework <?= $version; ?> / Kernel <?= $version; ?></b></a> - </strong> All rights reserved.
-  </footer>
 </div>
 <!-- ./wrapper -->
 
@@ -109,26 +84,12 @@ Assets::js(array(
     vendor_url('bootstrap/js/bootstrap.min.js', 'almasaeed2010/adminlite'),
     // AdminLite App
     vendor_url('dist/js/app.min.js', 'almasaeed2010/adminlite'),
-    // iCheck
-    vendor_url('plugins/iCheck/icheck.min.js', 'almasaeed2010/adminlite'),
+
 ));
 
 echo isset($js) ? $js : ''; // Place to pass data / plugable hook zone
 
-echo isset($footer) ? $footer : ''; // Place to pass data / plugable hook zone
 ?>
-
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>
-
-<!-- DO NOT DELETE! - Forensics Profiler -->
 
 </body>
 </html>

@@ -8,7 +8,7 @@
 
 
 return array(
-    'driver' => 'file', // The Session Driver used for storing Session data; supported: 'file', 'database' or 'cookie'.
+    'driver' => 'database', // The Session Driver used for storing Session data; supported: 'file', 'database' or 'cookie'.
 
     // The Database Session Driver configuration.
     'table'      => 'sessions', // The Database Table hosting the Session data.

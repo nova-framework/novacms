@@ -34,6 +34,6 @@ return array(
     'reminder' => array(
         'email'  => 'Emails/Auth/Reminder',
         'table'  => 'password_reminders',
-        'expire' => 60,
+        'expire' => 15,
     )
 );

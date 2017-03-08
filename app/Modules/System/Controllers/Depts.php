@@ -65,12 +65,6 @@ class Depts extends BackendController
 
     public function create()
     {
-        $log          = new UserLog();
-        $log->user_id = Auth::user()->id;
-        $log->title   = "Viewed create dept page.";
-        $log->section = "depts";
-        $log->link    = "cp/depts/create";
-        $log->save();
         return $this->getView()->shares('title', 'Create Dept');
     }
 
@@ -90,12 +84,12 @@ class Depts extends BackendController
             $log->user_id = Auth::user()->id;
             $log->title   = "Created dept: {$dept->title}.";
             $log->section = "depts";
-            $log->link    = "cp/depts/{$dept->id}/edit";
+            $log->link    = "admin/depts/{$dept->id}/edit";
             $log->refID   = $dept->id;
             $log->type    = 'Create';
             $log->save();
 
-            return Redirect::to('cp/depts')->withStatus('Dept created.');
+            return Redirect::to('admin/depts')->withStatus('Dept created.');
         }
 
         return Redirect::back()->withInput()->withStatus($validator->errors(), 'danger');
@@ -106,16 +100,8 @@ class Depts extends BackendController
         $dept = Dept::find($id);
 
         if ($dept === null) {
-            return Redirect::to('cp/depts')->withStatus('Dept not found', 'danger');
+            return Redirect::to('admin/depts')->withStatus('Dept not found', 'danger');
         }
-
-        $log          = new UserLog();
-        $log->user_id = Auth::user()->id;
-        $log->title   = "Viewed edit dept page: {$dept->title}.";
-        $log->section = "depts";
-        $log->link    = "cp/depts/{$dept->id}/edit";
-        $log->refID   = $dept->id;
-        $log->save();
 
         return $this->getView()
             ->shares('title', 'Edit Dept')
@@ -127,7 +113,7 @@ class Depts extends BackendController
         $dept = Dept::find($id);
 
         if($dept === null) {
-            return Redirect::to('cp/depts')->withStatus('Dept not found', 'danger');
+            return Redirect::to('admin/depts')->withStatus('Dept not found', 'danger');
         }
 
         // Validate the Input data.
@@ -144,12 +130,12 @@ class Depts extends BackendController
             $log->user_id = Auth::user()->id;
             $log->title   = "Updated dept: {$dept->title}.";
             $log->section = "depts";
-            $log->link    = "cp/depts/{$dept->id}/edit";
+            $log->link    = "admin/depts/{$dept->id}/edit";
             $log->refID   = $dept->id;
             $log->type    = 'Update';
             $log->save();
 
-            return Redirect::to('cp/depts')->withStatus('Dept Updated.');
+            return Redirect::to('admin/depts')->withStatus('Dept Updated.');
         }
 
         return Redirect::back()->withInput()->withStatus($validator->errors(), 'danger');
@@ -160,7 +146,7 @@ class Depts extends BackendController
         $dept = Dept::find($id);
 
         if($dept === null) {
-            return Redirect::to('cp/depts')->withStatus('Dept not found', 'danger');
+            return Redirect::to('admin/depts')->withStatus('Dept not found', 'danger');
         }
 
         $log          = new UserLog();
@@ -173,7 +159,7 @@ class Depts extends BackendController
 
         $dept->delete();
 
-        return Redirect::to('cp/depts')->withStatus("Dept deleted.");
+        return Redirect::to('admin/depts')->withStatus("Dept deleted.");
     }
 
     protected function validate(array $data, $id = null)

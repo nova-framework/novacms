@@ -2,6 +2,7 @@
 namespace App\Modules\Globalblocks\Controllers;
 
 use App\Core\BackendController;
+use App\Modules\System\Models\UserLog;
 
 use DB;
 use Input;

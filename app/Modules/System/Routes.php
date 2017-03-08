@@ -1,5 +1,5 @@
 <?php
-Route::group(array('prefix' => 'cp'), function() {
+Route::group(array('prefix' => 'admin'), function() {
     Route::get('login',                    array('before' => 'guest',           'uses' => 'Authorise@login'));
 
     Route::get('login/magiclink',          array('before' => 'guest',           'uses' => 'Authorise@magicLink'));

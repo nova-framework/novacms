@@ -71,8 +71,14 @@
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label" for='dept'>Dept:</label>
-                        <div class="controls"><input class="form-control" id='dept' type="text" name="dept" value="<?=Input::old('dept', $user->dept);?>" /></div>
+                        <label class="control-label" for='dept'> User Level <span class="text-danger">*</span></label>
+
+                        <select name="dept" id="dept" class="form-control select2">
+                            <?php foreach ($depts as $dept) { ?>
+                            <option value="<?= $dept->id ?>" <?php if (Input::old('dept', $user->dept_id) == $dept->id) echo 'selected'; ?>><?= $dept->title; ?></option>
+                            <?php } ?>
+                        </select>
+
                     </div>
 
                     <div class="control-group">

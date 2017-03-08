@@ -47,19 +47,19 @@ class Authorise extends BackendController
 
             $email = $input['email'];
             $token = Crypt::encrypt(Str::random(50));
-            $content = "<a href='".admin_url("login/magiclink/$token")."'>Click to login</a>";
+            $content = "<p><a href='".admin_url("login/magiclink/$token")."'>Click to login</a></p>";
 
             $user = User::where('email', $email)->first();
             $user->magic_token = $token;
             $user->magic_token_created_at = Carbon::now();
             $user->save();
 
-            Mailer::send('Emails/Plain', ['content' => $content], function($message) use($email)
+            Mailer::send('Emails/Default', ['content' => $content], function($message) use($email)
             {
                 $message->to($email)->subject('Click the magic link to login');
             });
 
-            return Redirect::to('cp/login/magiclink')->withStatus('Link has been emailed.');
+            return Redirect::to(admin_url('login/magiclink'))->withStatus('Link has been emailed.');
         }
 
         return Redirect::back()->withStatus($validator->errors(), 'danger');
@@ -70,7 +70,7 @@ class Authorise extends BackendController
         $user = User::where('magic_token', $token)->first();
 
         if($user == null) {
-           return Redirect::to('cp/login/magiclink')->withStatus('Link has already been used, please request a new link.', 'danger');
+           return Redirect::to(admin_url('login/magiclink'))->withStatus('Link has already been used, please request a new link.', 'danger');
         }
 
         $timestamp = Carbon::parse($user->magic_token_created_at);
@@ -78,7 +78,7 @@ class Authorise extends BackendController
 
         //expire links after 15 minutes.
         if ($timestamp->diffInMinutes($now) > 15) {
-            return Redirect::to('cp/login/magiclink')->withStatus('Link has passed the 15 minute window, please request a new link.', 'danger');
+            return Redirect::to(admin_url('login/magiclink'))->withStatus('Link has passed the 15 minute window, please request a new link.', 'danger');
         }
 
         $user->magic_token = null;
@@ -89,7 +89,7 @@ class Authorise extends BackendController
         $this->runLoginProcess($user);
 
         //redirect to dashboard if no intended url exists in a session.
-        return Redirect::intended('cp/dashboard');
+        return Redirect::intended(admin_url('dashboard'));
 
     }
 
@@ -131,7 +131,7 @@ class Authorise extends BackendController
         $this->runLoginProcess($user);
 
         //redirect to dashboard if no intended url exists in a session.
-        return Redirect::intended('cp/dashboard');
+        return Redirect::intended(admin_url('dashboard'));
     }
 
     protected function runLoginProcess($user)
@@ -183,7 +183,7 @@ class Authorise extends BackendController
 
         if ($user->forceChangePassword == 'Yes') {
             Session::set('changelogin', true);
-            Redirect::to('cp/users/'.$user->id.'/edit');
+            Redirect::to(admin_url('users/'.$user->id.'/edit'));
         }
     }
 
@@ -204,7 +204,7 @@ class Authorise extends BackendController
 
         Auth::logout();
 
-        return Redirect::to('cp/login')->withStatus('You have successfully logged out.');
+        return Redirect::to(admin_url('login'))->withStatus('You have successfully logged out.');
     }
 
     /**
@@ -289,7 +289,7 @@ class Authorise extends BackendController
             case Password::PASSWORD_RESET:
                 $status = __d('users', 'You have successfully reset your Password.');
 
-                return Redirect::to('cp/login')->withStatus($status);
+                return Redirect::to(admin_url('login'))->withStatus($status);
         }
 
         return Redirect::back()->withStatus($status, 'danger');

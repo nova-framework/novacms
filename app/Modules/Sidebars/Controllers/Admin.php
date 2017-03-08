@@ -3,6 +3,7 @@ namespace App\Modules\Sidebars\Controllers;
 
 use App\Core\BackendController;
 use App\Modules\Sidebars\Models\Sidebar;
+use App\Modules\System\Models\UserLog;
 
 use Config;
 use Input;
@@ -48,7 +49,16 @@ class Admin extends BackendController
             $sidebar->class = $input['class'];
             $sidebar->save();
 
-            return Redirect::to('cp/sidebars')->withStatus('Sidebar Created');
+            $log          = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->title   = "Created Sidebar: {$sidebar->title}.";
+            $log->section = "sidebars";
+            $log->link    = "admin/sidebars/{$sidebar->id}/edit";
+            $log->refID   = $sidebar->id;
+            $log->type    = 'Create';
+            $log->save();
+
+            return Redirect::to('admin/sidebars')->withStatus('Sidebar Created');
         }
 
         return Redirect::back()->withStatus($validate->errors(), 'danger')->withInput();
@@ -60,7 +70,7 @@ class Admin extends BackendController
         $sidebar = Sidebar::find($id);
 
         if ($sidebar === null) {
-            return Redirect::to('cp/sidebars')->withStatus('Sidebar not found', 'danger');
+            return Redirect::to('admin/sidebars')->withStatus('Sidebar not found', 'danger');
         }
 
         return $this->getView()->shares('title', 'Edit Sidebae')->withSidebar($sidebar);
@@ -71,7 +81,7 @@ class Admin extends BackendController
         $sidebar = Sidebar::find($id);
 
         if ($sidebar === null) {
-            return Redirect::to('cp/sidebars')->withStatus('sidebar not found', 'danger');
+            return Redirect::to('admin/sidebars')->withStatus('sidebar not found', 'danger');
         }
 
         $input = Input::only('title', 'content', 'position', 'class');
@@ -90,7 +100,16 @@ class Admin extends BackendController
             $sidebar->class = $input['class'];
             $sidebar->save();
 
-            return Redirect::to('cp/sidebars')->withStatus('Sidebar Updated');
+            $log          = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->title   = "Updated Sidebar: {$sidebar->title}.";
+            $log->section = "sidebars";
+            $log->link    = "admin/sidebars/{$sidebar->id}/edit";
+            $log->refID   = $sidebar->id;
+            $log->type    = 'Update';
+            $log->save();
+
+            return Redirect::to('admin/sidebars')->withStatus('Sidebar Updated');
         }
 
         return Redirect::back()->withStatus($validate->errors(), 'danger')->withInput();
@@ -101,12 +120,20 @@ class Admin extends BackendController
         $sidebar = Sidebar::find($id);
 
         if ($sidebar === null) {
-            return Redirect::to('cp/sidebars')->withStatus('sidebar not found', 'danger');
+            return Redirect::to('admin/sidebars')->withStatus('sidebar not found', 'danger');
         }
+
+        $log          = new UserLog();
+        $log->user_id = Auth::user()->id;
+        $log->title   = "Deleted Sidebar: {$sidebar->title}.";
+        $log->section = "sidebars";
+        $log->refID   = $sidebar->id;
+        $log->type    = 'Delete';
+        $log->save();
 
         $sidebar->delete();
 
-        return Redirect::to('cp/sidebars')->withStatus('Sidebar Deleted');
+        return Redirect::to('admin/sidebars')->withStatus('Sidebar Deleted');
     }
 
     protected function validate($data)

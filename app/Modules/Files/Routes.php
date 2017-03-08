@@ -10,7 +10,7 @@
 /** Define static routes. */
 
 // The Adminstration Routes.
-Route::group(array('prefix' => 'cp', 'namespace' => 'Admin'), function()
+Route::group(array('prefix' => 'admin', 'namespace' => 'Admin'), function()
 {
     Route::get('files',           array('before' => 'auth', 'uses' => 'Files@index'));
     Route::get('files/plain',     array('before' => 'auth', 'uses' => 'Files@plain'));

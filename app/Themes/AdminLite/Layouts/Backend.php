@@ -152,21 +152,6 @@ $user = Auth::user();
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
 
-            <li class="header"><?= __d('adminlite', 'Navigation'); ?></li>
-
-            <?php
-            if (isset($menuNavItems)) {
-                foreach ($menuNavItems as $item) {
-                    if ($baseUri == $item['uri']) {
-                        $sel = "class='active'";
-                    } else {
-                        $sel = '';
-                    }
-                    echo "<li $sel><a href='".admin_url($item['uri'])."''><i class='fa fa-".$item['icon']."'></i> <span>".$item['title']."</span></a></li>";
-                }
-            }
-            ?>
-
             <li class="header"><?= __d('adminlite', 'Administration'); ?></li>
 
             <?php

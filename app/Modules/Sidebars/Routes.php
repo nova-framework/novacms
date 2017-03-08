@@ -1,5 +1,5 @@
 <?php
-Route::group(array('prefix' => 'cp'), function() {
+Route::group(array('prefix' => 'admin'), function() {
     Route::get( 'sidebars',                         array('before' => 'auth',      'uses' => 'Admin@index'));
     Route::get( 'sidebars/create',                  array('before' => 'auth',      'uses' => 'Admin@create'));
     Route::post('sidebars',                         array('before' => 'auth|csrf', 'uses' => 'Admin@store'));

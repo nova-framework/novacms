@@ -21,8 +21,8 @@ if (! function_exists('admin_url'))
      * @param null|string $language
      * @return string
      */
-    function admin_url($path = '/cp/')
+    function admin_url($path = '')
     {
-        return url('/cp/'.$path);
+        return url('/admin/'.$path);
     }
 }

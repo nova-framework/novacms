@@ -20,7 +20,7 @@ return array(
     | Supported: "file", "database", "apc", "memcached", "redis", "array"
     */
 
-    'driver' => 'file',
+    'driver' => 'database',
 
     /*
     |--------------------------------------------------------------------------

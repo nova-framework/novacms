@@ -4,6 +4,7 @@ namespace App\Modules\Menus\Controllers;
 use App\Core\BackendController;
 use App\Modules\Menus\Models\Menu;
 use App\Modules\Pages\Models\Page;
+use App\Modules\System\Models\UserLog;
 
 use Input;
 use Redirect;
@@ -40,7 +41,16 @@ class Admin extends BackendController
             $menu->tag   = "[$tag]";
             $menu->save();
 
-            return Redirect::to('cp/menus')->withStatus('Menu Created');
+            $log          = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->title   = "Created Menu: {$menu->title}.";
+            $log->section = "menus";
+            $log->link    = "admin/menus/{$menu->id}/edit";
+            $log->refID   = $menu->id;
+            $log->type    = 'Create';
+            $log->save();
+
+            return Redirect::to('admin/menus')->withStatus('Menu Created');
         }
 
         return Redirect::back()->withStatus($validate->errors(), 'danger')->withInput();
@@ -52,7 +62,7 @@ class Admin extends BackendController
         $menu = Menu::find($id);
 
         if ($menu === null) {
-            return Redirect::to('cp/menus')->withStatus('Menu not found', 'danger');
+            return Redirect::to('admin/menus')->withStatus('Menu not found', 'danger');
         }
 
         return $this->getView()->shares('title', 'Edit Menu')->withMenu($menu);
@@ -63,7 +73,7 @@ class Admin extends BackendController
         $menu = Menu::find($id);
 
         if ($menu === null) {
-            return Redirect::to('cp/menus')->withStatus('Menu not found', 'danger');
+            return Redirect::to('admin/menus')->withStatus('Menu not found', 'danger');
         }
 
         $input = Input::only('title', 'type');
@@ -80,7 +90,16 @@ class Admin extends BackendController
             $menu->tag   = "[$tag]";
             $menu->save();
 
-            return Redirect::to('cp/menus')->withStatus('Menu Updated');
+            $log          = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->title   = "Updated Menu: {$menu->title}.";
+            $log->section = "menus";
+            $log->link    = "admin/menus/{$menu->id}/edit";
+            $log->refID   = $menu->id;
+            $log->type    = 'Update';
+            $log->save();
+
+            return Redirect::to('admin/menus')->withStatus('Menu Updated');
         }
 
         return Redirect::back()->withStatus($validate->errors(), 'danger')->withInput();
@@ -91,12 +110,20 @@ class Admin extends BackendController
         $menu = Menu::find($id);
 
         if ($menu === null) {
-            return Redirect::to('cp/menus')->withStatus('Menu not found', 'danger');
+            return Redirect::to('admin/menus')->withStatus('Menu not found', 'danger');
         }
+
+        $log          = new UserLog();
+        $log->user_id = Auth::user()->id;
+        $log->title   = "Deleted Menu: {$menu->title}.";
+        $log->section = "menus";
+        $log->refID   = $menu->id;
+        $log->type    = 'Delete';
+        $log->save();
 
         $menu->delete();
 
-        return Redirect::to('cp/menus')->withStatus('Menu Deleted');
+        return Redirect::to('admin/menus')->withStatus('Menu Deleted');
     }
 
     public function manage($id)
@@ -104,7 +131,7 @@ class Admin extends BackendController
         $menu = Menu::find($id);
 
         if ($menu === null) {
-            return Redirect::to('cp/menus')->withStatus('Menu not found', 'danger');
+            return Redirect::to('admin/menus')->withStatus('Menu not found', 'danger');
         }
 
         ob_start();
@@ -175,7 +202,7 @@ class Admin extends BackendController
             jsonobject = window.JSON.stringify(items);
 
             $.ajax({
-              url: '/cp/menus/<?=$id;?>/manage',
+              url: '/admin/menus/<?=$id;?>/manage',
               type: 'POST',
               data: { content: jsonobject}
             });

@@ -4,6 +4,7 @@ namespace App\Modules\Pages\Controllers;
 use App\Core\BackendController;
 use App\Modules\Pages\Models\Page;
 use App\Modules\Sidebars\Models\Sidebar;
+use App\Modules\System\Models\UserLog;
 
 use Auth;
 use Config;
@@ -27,6 +28,7 @@ class Admin extends BackendController
 		$layoutfiles = $this->getLayoutFiles();
 		$leftSidebars = Sidebar::where('position', 'LIKE', '%Left%')->get();
 		$rightSidebars = Sidebar::where('position', 'LIKE', '%Right%')->get();
+
 	 	return $this->getView()
 	 	->shares('title', 'Create Page')
 	 	->withLayouts($layoutfiles)
@@ -60,7 +62,16 @@ class Admin extends BackendController
 	    	$page->layout = $input['layout'];
 	    	$page->save();
 
-	    	return Redirect::to('cp/pages')->withStatus('Page Created');
+	    	$log          = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->title   = "Created page: {$page->pageTitle}.";
+            $log->section = "pages";
+            $log->link    = "admin/pages/{$page->id}/edit";
+            $log->refID   = $page->id;
+            $log->type    = 'Create';
+            $log->save();
+
+	    	return Redirect::to('admin/pages')->withStatus('Page Created');
 	    }
 
 	    return Redirect::back()->withStatus($validate->errors(), 'danger')->withInput();
@@ -74,7 +85,7 @@ class Admin extends BackendController
 		$pageblocks = DB::table('page_blocks')->where('pageID', $id)->get();
 
 		if ($page === null) {
-			return Redirect::to('cp/pages')->withStatus('Page not found', 'danger');
+			return Redirect::to('admin/pages')->withStatus('Page not found', 'danger');
 		}
 
 	    $layoutfiles = $this->getLayoutFiles();
@@ -95,7 +106,7 @@ class Admin extends BackendController
 		$page = Page::find($id);
 
 		if ($page === null) {
-			return Redirect::to('cp/pages')->withStatus('Page not found', 'danger');
+			return Redirect::to('admin/pages')->withStatus('Page not found', 'danger');
 		}
 
 	    $input = Input::only('browserTitle', 'pageTitle', 'active', 'publishedDate', 'content', 'layout', 'sidebars');
@@ -138,7 +149,16 @@ class Admin extends BackendController
 	    	$page->layout = $input['layout'];
 	    	$page->save();
 
-	    	return Redirect::to('cp/pages')->withStatus('Page Updated');
+	    	$log          = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->title   = "Updated page: {$page->pageTitle}.";
+            $log->section = "pages";
+            $log->link    = "admin/pages/{$page->id}/edit";
+            $log->refID   = $page->id;
+            $log->type    = 'Create';
+            $log->save();
+
+	    	return Redirect::to('admin/pages')->withStatus('Page Updated');
 	    }
 
 	    return Redirect::back()->withStatus($validate->errors(), 'danger')->withInput();
@@ -167,12 +187,20 @@ class Admin extends BackendController
 	    $page = Page::find($id);
 
 		if ($page === null) {
-			return Redirect::to('cp/pages')->withStatus('Page not found', 'danger');
+			return Redirect::to('admin/pages')->withStatus('Page not found', 'danger');
 		}
+
+		$log          = new UserLog();
+        $log->user_id = Auth::user()->id;
+        $log->title   = "Deleted page: {$page->pageTitle}.";
+        $log->section = "pages";
+        $log->refID   = $page->id;
+        $log->type    = 'Delete';
+        $log->save();
 
 		$page->delete();
 
-		return Redirect::to('cp/pages')->withStatus('Page Deleted');
+		return Redirect::to('admin/pages')->withStatus('Page Deleted');
 	}
 
 	public function destroyPageBlock($id)

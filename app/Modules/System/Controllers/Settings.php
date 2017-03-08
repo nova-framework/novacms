@@ -138,11 +138,11 @@ class Settings extends BackendController
             $log->user_id = Auth::user()->id;
             $log->title   = "Updated settings";
             $log->section = "settings";
-            $log->link    = "cp/settings";
+            $log->link    = "admin/settings";
             $log->type    = 'Update';
             $log->save();
 
-            return Redirect::to('cp/settings')->withStatus('The Settings was successfully updated.');
+            return Redirect::to('admin/settings')->withStatus('The Settings was successfully updated.');
         }
 
         return Redirect::back()->withInput()->withStatus($validator->errors(), 'danger');

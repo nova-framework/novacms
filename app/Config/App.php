@@ -12,12 +12,12 @@ return array(
     /**
      * Debug Mode
      */
-    'debug' => (ENVIRONMENT == 'development'), // When enabled the actual PHP errors will be shown.
+    'debug' => true, // When enabled the actual PHP errors will be shown.
 
     /**
      * The Website URL.
      */
-    'url' => 'http://www.novaframework.dev/',
+    'url' => 'http://novaframework.dev',
 
     /**
     * The Administrator's E-mail Address.
@@ -59,7 +59,7 @@ return array(
      * The Encryption Key.
      * This page can be used to generate key - http://novaframework.com/token-generator
      */
-    'key' => '9yT0MGNNC2wUawOBJqEldIbc1PfU2a89',
+    'key' => '8sL7oLBibFfM2uQg9nVK17zKWKod13dd',
 
     /**
      *  Prevents the website from CSRF attacks.

@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User;
+use App\Modules\System\Models\User;
 
 ?>
 <section class="content-header">

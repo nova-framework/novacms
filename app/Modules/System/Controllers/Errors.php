@@ -11,7 +11,7 @@ class Errors extends BackendController
 {
     public function errorLog()
     {
-        $logs = file_get_contents(ROOTDIR.'Storage/Logs/error.log');
+        $logs = file_get_contents(ROOTDIR.'storage/logs/error.log');
 
         return $this->getView()
             ->shares('title', 'Error Log')
@@ -20,15 +20,7 @@ class Errors extends BackendController
 
     public function clear()
     {
-        file_put_contents(ROOTDIR.'Storage/Logs/error.log', '');
-
-        $log          = new UserLog();
-        $log->user_id = Auth::user()->id;
-        $log->title   = "Emptied the error log.";
-        $log->section = "errorlog";
-        $log->link    = "admin/errorlog";
-        $log->type    = 'Delete';
-        $log->save();
+        file_put_contents(ROOTDIR.'storage/logs/error.log', '');
 
         return Redirect::to('admin/errorlog')->withStatus('Errors have been cleared');
 

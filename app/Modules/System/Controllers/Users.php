@@ -10,6 +10,7 @@ namespace App\Modules\System\Controllers;
 
 use App\Core\BackendController;
 use App\Modules\System\Models\UserLog;
+use App\Modules\System\Models\Dept;
 use App\Modules\System\Models\Role;
 use App\Modules\System\Models\User;
 
@@ -31,6 +32,7 @@ class Users extends BackendController
     {
         $users = $this->getLogs()->paginate();
         $roles = Role::all();
+        $depts = Dept::all();
 
         $queryStrings = [
             'username' => Input::get('username'),
@@ -42,6 +44,7 @@ class Users extends BackendController
         return $this->getView()
             ->shares('title', 'Users')
             ->with('users', $users)
+            ->with('depts', $depts)
             ->with('roles', $roles)
             ->with('queryStrings', $queryStrings);
     }
@@ -102,17 +105,12 @@ class Users extends BackendController
     public function create()
     {
         $roles = Role::all();
-
-        $log          = new UserLog();
-        $log->user_id = Auth::user()->id;
-        $log->title   = "Viewed create user page.";
-        $log->section = "users";
-        $log->link    = "cp/users/create";
-        $log->save();
+        $depts = Dept::all();
 
         return $this->getView()
             ->shares('title', __d('users', 'Create User'))
-            ->with('roles', $roles);
+            ->with('roles', $roles)
+            ->with('depts', $depts);
     }
 
     public function store()
@@ -133,7 +131,7 @@ class Users extends BackendController
             $user->tel                       = $input['tel'];
             $user->mobile                    = $input['mobile'];
             $user->jobTitle                  = $input['jobTitle'];
-            $user->dept                      = $input['dept'];
+            $user->dept_id                   = $input['dept'];
             $user->company                   = $input['company'];
             $user->tshirtSize                = $input['tshirtSize'];
             $user->nextOfKinName             = $input['nextOfKinName'];
@@ -160,12 +158,12 @@ class Users extends BackendController
 
             if ($_FILES["imagePath"]["name"] !='') {
 
-                if (!file_exists(ROOTDIR."assets/users/".$id)) {
-                    mkdir(ROOTDIR."assets/users/".$id);
+                if (!file_exists(ROOTDIR."assets/images/users/".$id)) {
+                    mkdir(ROOTDIR."assets/images/users/".$id);
                 }
 
                 // location where initial upload will be moved to
-                $target = "users/".$id."/".$_FILES['imagePath']['name'];
+                $target = "images/users/".$id."/".$_FILES['imagePath']['name'];
                 move_uploaded_file($_FILES["imagePath"]["tmp_name"], ROOTDIR."assets/".$target);
 
                 $user->imagePath = $target;
@@ -177,12 +175,12 @@ class Users extends BackendController
             $log->user_id = Auth::user()->id;
             $log->title   = "Created new user: {$user->username}";
             $log->section = "users";
-            $log->link    = "cp/users/{$user->id}/edit";
+            $log->link    = "admin/users/{$user->id}/edit";
             $log->refID   = $user->id;
             $log->type    = 'Create';
             $log->save();
 
-            return Redirect::to('cp/users')->withStatus("The User <b>$user->username</b> was successfully created.");
+            return Redirect::to('admin/users')->withStatus("The User <b>$user->username</b> was successfully created.");
         }
 
         return Redirect::back()->withInput()->withStatus($validator->errors(), 'danger');
@@ -197,16 +195,8 @@ class Users extends BackendController
         $user = User::find($id);
 
         if($user === null) {
-            return Redirect::to('cp/users')->withStatus("User not found!", 'danger');
+            return Redirect::to('admin/users')->withStatus("User not found!", 'danger');
         }
-
-        $log          = new UserLog();
-        $log->user_id = Auth::user()->id;
-        $log->title   = "Viewed user profile: {$user->username}";
-        $log->section = "users";
-        $log->link    = "cp/users/{$user->id}/show";
-        $log->refID   = $user->id;
-        $log->save();
 
         return $this->getView()
             ->shares('title', __d('users', 'Show User'))
@@ -220,27 +210,21 @@ class Users extends BackendController
 
         //if user not found
         if($user === null) {
-            return Redirect::to('cp/users')->withStatus("User not found!", 'danger');
+            return Redirect::to('admin/users')->withStatus("User not found!", 'danger');
         }
 
         if (Member::get('id') != $user->id && Member::get('role_id') != 1) {
-            return Redirect::to('cp/users')->withStatus('You are not authorized to access this resource.', 'warning');
+            return Redirect::to('admin/users')->withStatus('You are not authorized to access this resource.', 'warning');
         }
 
         // Get all available User Roles.
         $roles = Role::all();
-
-        $log          = new UserLog();
-        $log->user_id = Auth::user()->id;
-        $log->title   = "Viewed users edit page for: {$user->username}";
-        $log->section = "users";
-        $log->link    = "cp/users/{$user->id}/edit";
-        $log->refID   = $user->id;
-        $log->save();
+        $depts = Dept::all();
 
         return $this->getView()
             ->shares('title', 'Edit User')
             ->with('roles', $roles)
+            ->with('depts', $depts)
             ->with('user', $user);
     }
 
@@ -249,11 +233,11 @@ class Users extends BackendController
         $user = User::find($id);
 
         if ($user === null) {
-            return Redirect::to('cp/users')->withStatus("User not found!", 'danger');
+            return Redirect::to('admin/users')->withStatus("User not found!", 'danger');
         }
 
         if (Member::get('id') != $user->id && Member::get('role_id') != 1) {
-            return Redirect::to('cp/users')->withStatus('You are not authorized to access this resource.', 'warning');
+            return Redirect::to('admin/users')->withStatus('You are not authorized to access this resource.', 'warning');
         }
 
         // Validate the Input data.
@@ -275,7 +259,7 @@ class Users extends BackendController
             $user->tel                       = $input['tel'];
             $user->mobile                    = $input['mobile'];
             $user->jobTitle                  = $input['jobTitle'];
-            $user->dept                      = $input['dept'];
+            $user->dept_id                   = $input['dept'];
             $user->company                   = $input['company'];
             $user->tshirtSize                = $input['tshirtSize'];
             $user->nextOfKinName             = $input['nextOfKinName'];
@@ -305,12 +289,12 @@ class Users extends BackendController
 
             if ($_FILES["imagePath"]["name"] !='') {
 
-                if (!file_exists(ROOTDIR."assets/users/".$id)) {
-                    mkdir(ROOTDIR."assets/users/".$id);
+                if (!file_exists(ROOTDIR."assets/images/users/".$id)) {
+                    mkdir(ROOTDIR."assets/images/users/".$id);
                 }
 
                 // location where initial upload will be moved to
-                $target = "users/".$id."/".$_FILES['imagePath']['name'];
+                $target = "images/users/".$id."/".$_FILES['imagePath']['name'];
                 move_uploaded_file($_FILES["imagePath"]["tmp_name"], ROOTDIR."assets/".$target);
 
                 $user->imagePath = $target;
@@ -323,12 +307,12 @@ class Users extends BackendController
             $log->user_id = Auth::user()->id;
             $log->title   = "Updated user: {$user->username}";
             $log->section = "users";
-            $log->link    = "cp/users/{$user->id}/edit";
+            $log->link    = "admin/users/{$user->id}/edit";
             $log->refID   = $user->id;
             $log->type    = 'Update';
             $log->save();
 
-            return Redirect::to('cp/users')->withStatus("The User <b>$user->username</b> was successfully updated.");
+            return Redirect::to('admin/users')->withStatus("The User <b>$user->username</b> was successfully updated.");
         }
 
         return Redirect::back()->withInput()->withStatus($validator->errors(), 'danger');
@@ -340,7 +324,7 @@ class Users extends BackendController
         $user = User::find($id);
 
         if($user === null) {
-            return Redirect::to('cp/users')->withStatus("User not found <b>$user->id</b>", 'danger');
+            return Redirect::to('admin/users')->withStatus("User not found <b>$user->id</b>", 'danger');
         }
 
         $log          = new UserLog();
@@ -374,7 +358,7 @@ class Users extends BackendController
         $rules = array(
             'username'              => 'required|alpha_dash|min:4|unique:users,username' .$ignore,
             'role_id'               => 'required|numeric|exists:roles,id',
-            'password'              => $required .'|confirmed|strong_password',
+            'password'              => $required .'|confirmed',
             'password_confirmation' => $required .'|same:password',
             'email'                 => 'required|min:5|email',
         );
