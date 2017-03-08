@@ -358,7 +358,7 @@ class Users extends BackendController
         $rules = array(
             'username'              => 'required|alpha_dash|min:4|unique:users,username' .$ignore,
             'role_id'               => 'required|numeric|exists:roles,id',
-            'password'              => $required .'|confirmed',
+            'password'              => $required .'|confirmed|strong_password',
             'password_confirmation' => $required .'|same:password',
             'email'                 => 'required|min:5|email',
         );
