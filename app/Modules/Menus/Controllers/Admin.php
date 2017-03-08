@@ -6,6 +6,7 @@ use App\Modules\Menus\Models\Menu;
 use App\Modules\Pages\Models\Page;
 use App\Modules\System\Models\UserLog;
 
+use Auth;
 use Input;
 use Redirect;
 use Validator;

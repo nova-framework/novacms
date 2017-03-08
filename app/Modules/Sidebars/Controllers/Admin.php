@@ -5,6 +5,7 @@ use App\Core\BackendController;
 use App\Modules\Sidebars\Models\Sidebar;
 use App\Modules\System\Models\UserLog;
 
+use Auth;
 use Config;
 use Input;
 use Redirect;

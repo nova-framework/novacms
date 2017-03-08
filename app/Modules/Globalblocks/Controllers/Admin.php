@@ -4,6 +4,7 @@ namespace App\Modules\Globalblocks\Controllers;
 use App\Core\BackendController;
 use App\Modules\System\Models\UserLog;
 
+use Auth;
 use DB;
 use Input;
 use Redirect;
