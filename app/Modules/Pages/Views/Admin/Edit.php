@@ -105,11 +105,15 @@ use App\Modules\System\Models\User;
 				    }
 
 				    foreach ($leftSidebars as $sidebar) {
-				    	if (in_array($sidebar->id, $sidebars)) {
-				    		$check = 'checked=checked';
-				    	} else {
-				    		$check = null;
+
+				    	$check = null;
+
+				    	if (is_array($sidebars)) {
+				    		if (in_array($sidebar->id, $sidebars)) {
+					    		$check = 'checked=checked';
+					    	}
 				    	}
+
 				    	echo "<input type='checkbox' name='sidebars[]' value='$sidebar->id' $check> $sidebar->title<br>";
 				    }
 				    ?>
@@ -129,11 +133,15 @@ use App\Modules\System\Models\User;
 				    }
 
 				    foreach ($rightSidebars as $sidebar) {
-				    	if (in_array($sidebar->id, $sidebars)) {
-				    		$check = 'checked=checked';
-				    	} else {
-				    		$check = null;
+
+				    	$check = null;
+
+				    	if (is_array($sidebars)) {
+				    		if (in_array($sidebar->id, $sidebars)) {
+					    		$check = 'checked=checked';
+					    	}
 				    	}
+
 				    	echo "<input type='checkbox' name='sidebars[]' value='$sidebar->id' $check> $sidebar->title<br>";
 				    }
 				    ?>
