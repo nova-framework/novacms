@@ -112,7 +112,6 @@
                         <th>Tel</th>
                         <th>Mobile</th>
                         <th>Role</th>
-                        <th>E-mail</th>
                         <th>Office Login Only</th>
                         <th>Last Logged In</th>
                         <th>Actions</th>
@@ -132,7 +131,6 @@
                             <td><a href='tel:$user->tel'>$user->tel</a></td>
                             <td><a href='tel:$user->mobile'>$user->mobile</a></td>
                             <td>".$user->role->name."</td>
-                            <td>$user->email</td>
                             <td>$user->officeLoginOnly</td>
                             <td>$lastLoggedIn</td>
                             <td>

@@ -59,7 +59,7 @@ return array(
      * The Encryption Key.
      * This page can be used to generate key - http://novaframework.com/token-generator
      */
-    'key' => '8sL7oLBibFfM2uQg9nVK17zKWKod13dd',
+    'key' => 'PfbZHyQaTlQbmJpME8gDAiUNudhBYnvp',
 
     /**
      *  Prevents the website from CSRF attacks.
@@ -175,4 +175,6 @@ return array(
         'Cron'          => 'Nova\Support\Facades\Cron',
         'Module'        => 'Nova\Support\Facades\Module',
     ),
+    'ipAccessList' => array(),
+    'devEmails' => array(),
 );

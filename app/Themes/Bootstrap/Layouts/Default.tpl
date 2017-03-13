@@ -100,7 +100,7 @@ Assets::css([
                 {{ GlobalBlocks::get('Footer', 'textarea') }}
             </div>
             <div class="col-lg-8">
-                <p class="text-muted pull-right">Copyright &copy; {{ date('Y') }} </p>
+                <p class="text-muted pull-right">Copyright &copy; {{ date('Y') }} {{ Config::get('app.name', SITETITLE) }} </p>
             </div>
         </div>
     </div>

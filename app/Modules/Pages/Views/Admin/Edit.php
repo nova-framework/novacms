@@ -100,14 +100,20 @@ use App\Modules\System\Models\User;
 
 				    <?php
 				    $sidebars = Input::old('sidebars', $page->sidebars);
-				    $sidebars = explode(',', $sidebars);
+				    if (is_string($sidebars)) {
+				    	$sidebars = explode(',', $sidebars);
+				    }
 
 				    foreach ($leftSidebars as $sidebar) {
-				    	if (in_array($sidebar->id, $sidebars)) {
-				    		$check = 'checked=checked';
-				    	} else {
-				    		$check = null;
+
+				    	$check = null;
+
+				    	if (is_array($sidebars)) {
+				    		if (in_array($sidebar->id, $sidebars)) {
+					    		$check = 'checked=checked';
+					    	}
 				    	}
+
 				    	echo "<input type='checkbox' name='sidebars[]' value='$sidebar->id' $check> $sidebar->title<br>";
 				    }
 				    ?>
@@ -122,14 +128,20 @@ use App\Modules\System\Models\User;
 
 				    <?php
 				    $sidebars = Input::old('sidebars', $page->sidebars);
-				    $sidebars = explode(',', $sidebars);
+				    if (is_string($sidebars)) {
+				    	$sidebars = explode(',', $sidebars);
+				    }
 
 				    foreach ($rightSidebars as $sidebar) {
-				    	if (in_array($sidebar->id, $sidebars)) {
-				    		$check = 'checked=checked';
-				    	} else {
-				    		$check = null;
+
+				    	$check = null;
+
+				    	if (is_array($sidebars)) {
+				    		if (in_array($sidebar->id, $sidebars)) {
+					    		$check = 'checked=checked';
+					    	}
 				    	}
+
 				    	echo "<input type='checkbox' name='sidebars[]' value='$sidebar->id' $check> $sidebar->title<br>";
 				    }
 				    ?>
@@ -184,9 +196,7 @@ use App\Modules\System\Models\User;
 			<div id='collapse$i' class='panel-collapse collapse'>
 			  <div class='panel-body'>
 
-
-
-				<p><a href='/pages/restorerevision/$revision->id' class='btn btn-sm btn-info'><i class='fa fa-refresh'></i> Restore this revision</a></p>
+				<p><a href='".site_url("admin/pages/restorerevision/$revision->id")."' class='btn btn-sm btn-info'><i class='fa fa-refresh'></i> Restore this revision</a></p>
 
 				<table class='table table-striped table-hover table-bordered'>
 				<tr>
@@ -198,7 +208,6 @@ use App\Modules\System\Models\User;
 					<td>$revision->content</th>
 				</tr>
 				</table>
-
 
 			  </div>
 			</div>

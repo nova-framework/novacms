@@ -22,29 +22,35 @@ class Mailer
     {
         // Retrieve the Config from Application.
         $config = $app['config']['mail.from'];
+        $devs = $app['config']['app.devEmails'];
 
-        // Prepare the instances for Swift Mailer and Message.
-        $swiftMailer = $app['mailer']->getSwiftMailer();
+        foreach ($devs as $key => $value) {
 
-        $swiftMessage = Swift_Message::newInstance('[Log] ERROR!')
-            ->setContentType('text/html')
-            ->setFrom($config['address'], $config['name'])
-            ->setTo(SITEEMAIL);
+            // Prepare the instances for Swift Mailer and Message.
+            $swiftMailer = $app['mailer']->getSwiftMailer();
 
-        // Create a SwiftMailerHandler instance.
-        $monologHandler = new SwiftMailerHandler(
-            $swiftMailer,
-            $swiftMessage,
-            $logLevel,     // Set the minimal Log Level for Mail
-            true           // Bubble to next handler?
-        );
+            $swiftMessage = Swift_Message::newInstance('[Log] ERROR!')
+                ->setContentType('text/html')
+                ->setFrom($config['address'], $config['name'])
+                ->setTo($key, $value);
 
-        // Setup a HTML Formatter to this handler.
-        $monologFormatter = new HtmlFormatter();
+            // Create a SwiftMailerHandler instance.
+            $monologHandler = new SwiftMailerHandler(
+                $swiftMailer,
+                $swiftMessage,
+                $logLevel,     // Set the minimal Log Level for Mail
+                true           // Bubble to next handler?
+            );
 
-        $monologHandler->setFormatter($monologFormatter);
+            // Setup a HTML Formatter to this handler.
+            $monologFormatter = new HtmlFormatter();
 
-        // Push the handler to Monolog instance.
-        $app['log']->getMonolog()->pushHandler($monologHandler);
+            $monologHandler->setFormatter($monologFormatter);
+
+            // Push the handler to Monolog instance.
+            $app['log']->getMonolog()->pushHandler($monologHandler);
+
+        }
+
     }
 }

@@ -123,8 +123,7 @@ define('SITEEMAIL', $app['config']['app.email']);
 /**
  * Send a E-Mail to administrator (defined on SITEEMAIL) when a Error is logged.
  */
-/*
+
 use Shared\Log\Mailer as LogMailer;
 
 LogMailer::initHandler($app);
-*/

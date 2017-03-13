@@ -10,6 +10,7 @@ namespace App\Modules\System\Controllers;
 
 use App\Core\BackendController;
 use App\Modules\System\Models\UserLog;
+use App\Models\Option;
 
 use Auth;
 use Config;
@@ -98,7 +99,7 @@ class Settings extends BackendController
         if($validator->passes()) {
 
             // The Application.
-            Config::set('app.name',          $input['siteName']);
+            Option::set('app.name',          $input['siteName']);
 
             //ip addresses
             $iparray = [];
@@ -110,7 +111,7 @@ class Settings extends BackendController
                     $i++;
                 }
             }
-            Config::set('app.ipAccessList', $iparray);
+            Option::set('app.ipAccessList', $iparray);
 
             //dev email addresses
             $devemailarray = [];
@@ -122,17 +123,17 @@ class Settings extends BackendController
                     $i++;
                 }
             }
-            Config::set('app.devEmails', $devemailarray);
+            Option::set('app.devEmails', $devemailarray);
 
             // The Mailer
-            Config::set('mail.driver',       $input['mailDriver']);
-            Config::set('mail.host',         $input['mailHost']);
-            Config::set('mail.port',         $input['mailPort']);
-            Config::set('mail.from.address', $input['mailFromAddress']);
-            Config::set('mail.from.name',    $input['mailFromName']);
-            Config::set('mail.encryption',   $input['mailEncryption']);
-            Config::set('mail.username',     $input['mailUsername']);
-            Config::set('mail.password',     $input['mailPassword']);
+            Option::set('mail.driver',       $input['mailDriver']);
+            Option::set('mail.host',         $input['mailHost']);
+            Option::set('mail.port',         $input['mailPort']);
+            Option::set('mail.from.address', $input['mailFromAddress']);
+            Option::set('mail.from.name',    $input['mailFromName']);
+            Option::set('mail.encryption',   $input['mailEncryption']);
+            Option::set('mail.username',     $input['mailUsername']);
+            Option::set('mail.password',     $input['mailPassword']);
 
             $log          = new UserLog();
             $log->user_id = Auth::user()->id;
@@ -153,17 +154,17 @@ class Settings extends BackendController
         // Validation rules
         $rules = array(
             // The Application.
-            'siteName'        => 'required|max:100|alpha_dash',
+            'siteName'        => 'required|max:100|string',
 
             // The Mailer
             'mailDriver'      => 'required|alpha',
-            'mailHost'        => 'required|alpha_dash',
+            'mailHost'        => 'required|string',
             'mailPort'        => 'numeric',
             'mailFromAddress' => 'required|email',
-            'mailFromName'    => 'required|alpha_dash',
+            'mailFromName'    => 'required|string',
             'mailEncryption'  => 'alpha',
-            'mailUsername'    => 'alpha_dash',
-            'mailPassword'    => 'alpha_dash',
+            'mailUsername'    => 'string',
+            'mailPassword'    => 'string',
         );
 
         $attributes = array(

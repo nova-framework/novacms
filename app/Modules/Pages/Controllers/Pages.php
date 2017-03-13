@@ -13,39 +13,47 @@ class Pages extends Controller
 {
 	public function fetch()
 	{
-       $request = Request::path();
+		//get request url
+       	$request = Request::path();
 
+       	//if request is / then load the first record (home page)
 		if ($request == '/') {
 			$page = Page::where('id', 1)->first();
 		} else {
-			$page = Page::
-			where('slug', $request)
+			//load page where it's active and has a published date less then now.
+			$page = Page::where('slug', $request)
 			->where('active', 'Yes')
 			->where('publishedDate', '<=', date('Y-m-d H:i:s'))
 			->first();
 		}
 
+		//if no record has been found, load a 404 page
 		if (empty($page)) {
 			return View::make('Error/404')->shares('title', 'Page not found!');
 		}
 
+		//if the layout files does not exists fallback to the Default layout file.
 		if (!file_exists(APPDIR.'Themes/'.$this->theme.'/Layouts/'.$page->layout.'.tpl')){
 			$page->layout = 'Default';
 		}
 
+		//set the page layout
 		$this->layout = $page->layout;
+
+		//get the ids of the sidebars
 		$ids = explode(',', $page->sidebars);
 
-		$leftSidebars = Sidebar::whereIn('id', $ids)->where('position', 'LIKE', '%Left%')->get();
+		$leftSidebars  = Sidebar::whereIn('id', $ids)->where('position', 'LIKE', '%Left%')->get();
 		$rightSidebars = Sidebar::whereIn('id', $ids)->where('position', 'LIKE', '%Right%')->get();
 
+		//load a view using the app/Views/Default file
 		return View::make('Default')
-		->shares('title', $page->pageTitle)
-		->shares('browserTitle', $page->browserTitle)
+		->shares('title', $page->browserTitle)
+		->shares('browserTitle', $page->pageTitle)
 		->shares('leftSidebars', $leftSidebars)
 		->shares('rightSidebars', $rightSidebars)
 		->shares('pageID', $page->id)
-		->withContent($page->content);
+		->with('content', $page->content);
 
 	}
 }
