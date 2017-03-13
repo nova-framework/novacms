@@ -100,7 +100,9 @@ use App\Modules\System\Models\User;
 
 				    <?php
 				    $sidebars = Input::old('sidebars', $page->sidebars);
-				    $sidebars = explode(',', $sidebars);
+				    if (is_string($sidebars)) {
+				    	$sidebars = explode(',', $sidebars);
+				    }
 
 				    foreach ($leftSidebars as $sidebar) {
 				    	if (in_array($sidebar->id, $sidebars)) {
@@ -122,7 +124,9 @@ use App\Modules\System\Models\User;
 
 				    <?php
 				    $sidebars = Input::old('sidebars', $page->sidebars);
-				    $sidebars = explode(',', $sidebars);
+				    if (is_string($sidebars)) {
+				    	$sidebars = explode(',', $sidebars);
+				    }
 
 				    foreach ($rightSidebars as $sidebar) {
 				    	if (in_array($sidebar->id, $sidebars)) {
