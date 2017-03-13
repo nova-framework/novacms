@@ -254,8 +254,8 @@ class Admin extends BackendController
 	protected function validate($data)
 	{
 		$rules = [
-			'browserTitle' => 'required|min:3|alpha_dash',
-			'pageTitle' => 'required|min:3|alpha_dash',
+			'browserTitle' => 'required|min:3|string',
+			'pageTitle' => 'required|min:3|string',
 			'publishedDate' => 'required|min:3|date'
 		];
 
