@@ -10,9 +10,9 @@ class PageBlocks
 	    $result = DB::table('page_blocks')->where('pageID', $pageID)->where('title', $title)->where('type', $type)->count();
 	    if ($result == 0) {
 	    	DB::table('page_blocks')->insert([
-	    		'pageID' => escape($pageID),
-	    		'title' => escape($title),
-	    		'type' => escape($type)
+	    		'pageID' => $pageID,
+	    		'title' => $title,
+	    		'type' => $type
 	    	]);
 	    }
 
