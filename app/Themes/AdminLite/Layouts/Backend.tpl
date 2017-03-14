@@ -1,7 +1,7 @@
 @php
 // Prepare the current User Info.
 $user = Auth::user();
-$sinceDate = $user->created_at->formatLocalized(__d('adminlite', '%d %b %Y, %R'));
+$sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'));
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -72,14 +72,14 @@ $sinceDate = $user->created_at->formatLocalized(__d('adminlite', '%d %b %Y, %R')
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">CP</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">{{ __d('adminlite', 'Control Panel') }}</span>
+      <span class="logo-lg">{{ __d('admin_lite', 'Control Panel') }}</span>
     </a>
 
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-        <span class="sr-only">{{ __d('adminlite', 'Toggle navigation') }}</span>
+        <span class="sr-only">{{ __d('admin_lite', 'Toggle navigation') }}</span>
       </a>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
@@ -90,31 +90,31 @@ $sinceDate = $user->created_at->formatLocalized(__d('adminlite', '%d %b %Y, %R')
                 <a href="#" id="notificationLink"><i class="fa fa-bullhorn"></i></a>
 
                 <div id="notificationContainer">
-                    <div id="notificationTitle">{{ __d('adminlite', 'Notifications') }}</div>
+                    <div id="notificationTitle">{{ __d('admin_lite', 'Notifications') }}</div>
                     <div id="notificationsBody" class="notifications"></div>
-                    <div id="notificationFooter"><a href="{{ admin_url('notifications') }}">{{ __d('adminlite', 'See All') }}</a></div>
+                    <div id="notificationFooter"><a href="{{ admin_url('notifications') }}">{{ __d('admin_lite', 'See All') }}</a></div>
                 </div>
             </li>
 
-            <li><a href='{{ site_url() }}'>{{ __d('adminlite', 'View Site') }}</a></li>
+            <li><a href='{{ site_url() }}'>{{ __d('admin_lite', 'View Site') }}</a></li>
 
           <!-- User Account Menu -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
-              <img src="{{ resource_url($user->imagePath) }}" class="user-image" alt="{{ __d('adminlite', 'User Image') }}">
+              <img src="{{ resource_url($user->imagePath) }}" class="user-image" alt="{{ __d('admin_lite', 'User Image') }}">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">{{ $user->username }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
                 <li class="user-header">
-                    <img src="{{ resource_url($user->imagePath) }}" class="img-circle" alt="{{ __d('adminlite', 'User Image') }}">
+                    <img src="{{ resource_url($user->imagePath) }}" class="img-circle" alt="{{ __d('admin_lite', 'User Image') }}">
 
                     <p>
                         {{ $user->realname; }} - {{ $user->role->name; }}
-                        <small>{{ __d('adminlite', 'Member since {0}', $sinceDate); }}</small>
+                        <small>{{ __d('admin_lite', 'Member since {0}', $sinceDate); }}</small>
                     </p>
                 </li>
 
@@ -122,11 +122,11 @@ $sinceDate = $user->created_at->formatLocalized(__d('adminlite', '%d %b %Y, %R')
 
                     <div class="pull-left">
 
-                    <a href="{{ admin_url('users/profile') }}" class="btn btn-xs btn-default btn-flat"><i class="fa fa-user"></i> {{  __d('adminlite', 'Profile') }}</a>
+                    <a href="{{ admin_url('users/profile') }}" class="btn btn-xs btn-default btn-flat"><i class="fa fa-user"></i> {{  __d('admin_lite', 'Profile') }}</a>
 
-                    <a href="{{ admin_url('users/'.$user->id.'/edit') }}" class="btn btn-xs btn-default btn-flat"><i class="fa fa-cog"></i> {{  __d('adminlite', 'My Settings') }}</a>
+                    <a href="{{ admin_url('users/'.$user->id.'/edit') }}" class="btn btn-xs btn-default btn-flat"><i class="fa fa-cog"></i> {{  __d('admin_lite', 'My Settings') }}</a>
 
-                    <a class="btn btn-xs btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i> {{  __d('adminlite', 'Sign out') }}</a>
+                    <a class="btn btn-xs btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i> {{  __d('admin_lite', 'Sign out') }}</a>
                     <form id="logout-form" action="{{ admin_url('logout') }}" method="post"></form>
 
                     </div>
@@ -146,11 +146,11 @@ $sinceDate = $user->created_at->formatLocalized(__d('adminlite', '%d %b %Y, %R')
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
 
-            <li class="header">{{ __d('adminlite', 'Menu') }}</li>
+            <li class="header">{{ __d('admin_lite', 'Menu') }}</li>
 
             <li class="active treeview">
                 <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>{{ __d('adminlite', 'Core Administration') }}</span>
+                    <i class="fa fa-dashboard"></i> <span>{{ __d('admin_lite', 'Core Administration') }}</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -166,7 +166,7 @@ $sinceDate = $user->created_at->formatLocalized(__d('adminlite', '%d %b %Y, %R')
 
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>{{ __d('adminlite', 'Modules Administration') }}</span>
+                    <i class="fa fa-dashboard"></i> <span>{{ __d('admin_lite', 'Modules Administration') }}</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -185,7 +185,7 @@ $sinceDate = $user->created_at->formatLocalized(__d('adminlite', '%d %b %Y, %R')
 
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>{{ __d('adminlite', 'System Administration') }}</span>
+                    <i class="fa fa-dashboard"></i> <span>{{ __d('admin_lite', 'System Administration') }}</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
