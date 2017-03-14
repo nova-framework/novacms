@@ -35,7 +35,18 @@ Event::listen('backend.menu', function($user) {
                 'title'  => __d('system', 'Dashboard'),
                 'icon'   => 'dashboard',
                 'weight' => 0,
-            ),
+            )
+        );
+    } else {
+        $items = array();
+    }
+
+    return $items;
+});
+
+Event::listen('backend.menu.system', function($user) {
+    if ($user->hasRole('administrator')) {
+        $items = array(
             array(
                 'uri'    => 'settings',
                 'title'  => __d('system', 'Settings'),
