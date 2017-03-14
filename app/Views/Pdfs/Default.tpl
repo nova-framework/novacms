@@ -255,4 +255,4 @@ table td[class*="span"], table th[class*="span"], .row-fluid table td[class*="sp
 
 <body bgcolor="#f6f6f6">
 
-<?=$content;?>
+{{ $content }}

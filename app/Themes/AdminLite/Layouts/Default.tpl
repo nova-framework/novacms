@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?= $title; ?> | <?= Config::get('app.name', SITETITLE); ?></title>
-    <?= isset($meta) ? $meta : ''; // Place to pass data / plugable hook zone ?>
+    <title>{{ $title; }} | {{ Config::get('app.name', SITETITLE); }}</title>
+    {{ isset($meta) ? $meta : ''; }}
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <?php
+    {{
     Assets::css(array(
         // Bootstrap 3.3.5
         vendor_url('bootstrap/css/bootstrap.min.css', 'almasaeed2010/adminlte'),
@@ -25,7 +25,7 @@
         theme_url('css/style.css', 'AdminLite'),
     ));
 
-    echo isset($css) ? $css : ''; // Place to pass data / plugable hook zone
+    echo isset($css) ? $css : '';
 
     //Add Controller specific JS files.
     Assets::js(array(
@@ -33,7 +33,7 @@
         )
     );
 
-    ?>
+    }}
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -41,13 +41,13 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="hold-transition skin-<?= Config::get('app.color_scheme', 'blue'); ?> layout-top-nav">
+<body class="hold-transition skin-{{ Config::get('app.color_scheme', 'blue'); }} layout-top-nav">
 <div class="wrapper">
   <header class="main-header">
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="<?= site_url(); ?>" class="navbar-brand"><strong><?= Config::get('app.name', SITETITLE); ?></strong></a>
+          <a href="{{ site_url() }}" class="navbar-brand"><strong>{{ Config::get('app.name', SITETITLE) }}</strong></a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -69,7 +69,7 @@
         <div class="container">
             <!-- Main content -->
             <section class="content">
-                <?= $content; ?>
+                {{ $content }}
             </section>
         </div>
     </div>
@@ -78,7 +78,7 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-<?php
+{{
 Assets::js(array(
     // Bootstrap 3.3.5
     vendor_url('bootstrap/js/bootstrap.min.js', 'almasaeed2010/adminlite'),
@@ -89,7 +89,7 @@ Assets::js(array(
 
 echo isset($js) ? $js : ''; // Place to pass data / plugable hook zone
 
-?>
+}}
 
 </body>
 </html>

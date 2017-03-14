@@ -295,9 +295,9 @@ table td[class*="span"], table th[class*="span"], .row-fluid table td[class*="sp
             <table>
                 <tr>
                     <td>
-                        <p><img src="<?=theme_url('images/nova.png', 'Bootstrap');?>" alt="" class="img-responsive"></p>
+                        <p><img src="{{ theme_url('images/nova.png', 'Bootstrap') }}" alt="" class="img-responsive"></p>
 
-                        <?=$content;?>
+                        {{ $content }}
 
                     </td>
                 </tr>

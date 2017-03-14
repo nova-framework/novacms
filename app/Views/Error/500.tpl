@@ -6,8 +6,8 @@
 
             <hr />
 
-            <h3><?= __('Internal Server Error'); ?></h3>
-            <p><?= __('Something has gone wrong on the Web Server.'); ?></p>
+            <h3>{{ __('Internal Server Error') }}</h3>
+            <p>{{ __('Something has gone wrong on the Web Server.') }}</p>
 
         </div>
     </div>
