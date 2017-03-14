@@ -32,13 +32,13 @@
             <div class='panel panel-default'>
             <div class='panel-heading'>
               <h4 class='panel-title'>
-                <a data-toggle='collapse' data-parent='#accordion' href='#collapseblock$x'>{{{ $block->title }}}</a>
+                <a data-toggle='collapse' data-parent='#accordion' href='#collapseblock{{ $x }}'>{{{ $block->title }}}</a>
               </h4>
             </div>
-            <div id='collapseblock$x' class='panel-collapse collapse'>
+            <div id='collapseblock{{ $x }}' class='panel-collapse collapse'>
                 <div class='panel-body'>
 
-                    <input type='hidden' name='id[]' value='$block->id'>
+                    <input type='hidden' name='id[]' value='{{{ $block->id }}}'>
                     <a class='btn btn-xs btn-danger pull-right' href='#' data-toggle='modal' data-target='#confirm_{{{ $block->id }}}'><i class='fa fa-remove'></i> Delete</a>
 
                     @php
