@@ -18,10 +18,10 @@ class Menu
         if (empty($menuArray)) {
             return;
         }
-        
+
         if ($this->type == 'Bootstrap') {
 
-            $ul_attrs = $isSub ? 'class="dropdown-menu"' : 'class="nav navbar-nav"';
+            $ul_attrs = $isSub ? 'class="dropdown-menu"' : 'class="nav navbar-nav primary-nav"';
             $menu = "<ul $ul_attrs>";
 
             foreach ($menuArray as $id => $attrs) {
@@ -30,7 +30,7 @@ class Menu
               $a_attrs  = $sub ? 'class="dropdown-toggle" data-toggle="dropdown"' : null;
               $carat    = $sub ? '<span class="caret"></span>' : null;
               $menu .= "<li $li_attrs>";
-              $menu .= "<a href='${attrs['slug']}' $a_attrs>${attrs['title']}$carat</a>$sub";
+              $menu .= "<a href='".site_url($attrs['slug'])."' $a_attrs>${attrs['title']}$carat</a>$sub";
               $menu .= "</li>";
             }
 
@@ -41,7 +41,7 @@ class Menu
             foreach($menuArray as $id => $attrs) {
               $sub = isset($attrs['children']) ? $this->buildMenu($attrs['children'], true) : null;
               $menu .= "<li>";
-              $menu .= "<a href='${attrs['slug']}'>${attrs['title']}</a>$sub";
+              $menu .= "<a href='".site_url($attrs['slug'])."'>${attrs['title']}</a>$sub";
               $menu .= "</li>";
             }
             return $menu . "</ul>";
