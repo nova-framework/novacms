@@ -104,6 +104,7 @@ return array(
         'App\Providers\AppServiceProvider',
         'App\Providers\EventServiceProvider',
         'App\Providers\RouteServiceProvider',
+        'App\Providers\ConsoleServiceProvider',
     ),
 
     /**

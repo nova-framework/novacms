@@ -42,7 +42,7 @@ class Export {
         if ($outputType == 'P') {
             $mpdf->Output();
         } else {
-            $mpdf->Output($filename.'-'.$timestamp.'.pdf', $outputType);
+            $mpdf->Output($filename.'-'.$timestamp.'.pdf', 'D');
         }
     }
 }
