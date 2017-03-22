@@ -17,7 +17,7 @@ class Export {
         $filename = Str::slug($filename);
         $timestamp = date('Y-m-d-H-i-s');
         header("Content-Type: application/csv");
-        header("Content-Disposition: attachment; filename='{$filename}-{$timestamp}.csv'");
+        header("Content-Disposition: attachment; filename={$filename}-{$timestamp}.csv");
         echo $data;
     }
 
