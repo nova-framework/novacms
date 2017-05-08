@@ -75,7 +75,7 @@ class Admin extends BackendController
 	{
 	    $input = Input::all();
 
-	    $validate = $this->validate($input);
+	    $validate = $this->validator($input);
 
 	    if ($validate->passes()) {
 
@@ -123,7 +123,7 @@ class Admin extends BackendController
 
 	    $input = Input::all();
 
-	    $validate = $this->validate($input);
+	    $validate = $this->validator($input);
 
 	    if ($validate->passes()) {
 
@@ -167,7 +167,7 @@ class Admin extends BackendController
 		return Redirect::to('admin/BaseModuleSlug')->withStatus('Deleted');
 	}
 
-	protected function validate($data)
+	protected function validator($data)
 	{
 		$rules = [
 			'title' => 'required|min:3'
