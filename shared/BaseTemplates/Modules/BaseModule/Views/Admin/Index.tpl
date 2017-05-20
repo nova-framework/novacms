@@ -116,7 +116,7 @@
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" class="btn btn-primary pull-left col-md-3" type="button">Cancel</button>
-                        <form action="{{{ site_url('BaseModuleSlug/' .$row->id .'/destroy') }}}" method="POST">
+                        <form action="{{{ site_url('admin/BaseModuleSlug/' .$row->id .'/destroy') }}}" method="POST">
                             <input type="hidden" name="csrfToken" value="{{{ $csrfToken }}}" />
                             <input type="submit" name="button" class="btn btn btn-danger pull-right" value="Delete">
                         </form>
