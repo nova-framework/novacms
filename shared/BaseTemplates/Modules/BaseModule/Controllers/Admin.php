@@ -15,20 +15,20 @@ use View;
 
 class Admin extends BackendController
 {
-	public function index()
-	{
-		$records = $this->getRecords()->paginate();
+    public function index()
+    {
+        $records = $this->getRecords()->paginate();
 
-		$queryStrings = [
+        $queryStrings = [
             'title' => Input::get('title')
         ];
 
-		return $this->getView()
-			->shares('title', 'BaseModuleTitle')
-			->with(compact('records', 'queryStrings'));
-	}
+        return $this->getView()
+            ->shares('title', 'BaseModuleTitle')
+            ->with(compact('records', 'queryStrings'));
+    }
 
-	protected function getRecords()
+    protected function getRecords()
     {
         //init query
         $query = BaseModuleModal::orderBy('title');
@@ -66,95 +66,95 @@ class Admin extends BackendController
         }
     }
 
-	public function create()
-	{
-		return $this->getView()->shares('title', 'Create');
-	}
+    public function create()
+    {
+        return $this->getView()->shares('title', 'Create');
+    }
 
-	public function store()
-	{
-	    $input = Input::all();
+    public function store()
+    {
+        $input = Input::all();
 
-	    $validate = $this->validator($input);
+        $validate = $this->validator($input);
 
-	    if ($validate->passes()) {
+        if ($validate->passes()) {
 
-	    	//save
-	    	$record         = new BaseModuleModal();
-			$record->title  = $input['title'];
-	    	$record->save();
+            //save
+            $record         = new BaseModuleModal();
+            $record->title  = $input['title'];
+            $record->save();
 
-	    	$log          = new UserLog();
-	        $log->user_id = Auth::user()->id;
-	        $log->title   = "Created BaseModuleTitle";
-	        $log->section = 'BaseModuleTitle';
-	        $log->link    = "admin/BaseModuleSlug/{$record->id}/edit";
-	        $log->refID   = $record->id;
-	        $log->type    = "Create";
-	        $log->save();
+            $log          = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->title   = "Created BaseModuleTitle";
+            $log->section = 'BaseModuleTitle';
+            $log->link    = "admin/BaseModuleSlug/{$record->id}/edit";
+            $log->refID   = $record->id;
+            $log->type    = "Create";
+            $log->save();
 
-	    	return Redirect::to('admin/BaseModuleSlug')->withStatus('Created successfully.');
-	    }
+            return Redirect::to('admin/BaseModuleSlug')->withStatus('Created successfully.');
+        }
 
-	    return Redirect::back()->withStatus($validate->errors(), 'danger')->withInput();
+        return Redirect::back()->withStatus($validate->errors(), 'danger')->withInput();
 
-	}
+    }
 
-	public function edit($id)
-	{
+    public function edit($id)
+    {
         $record = BaseModuleModal::find($id);
 
-		if ($record === null) {
-			return Redirect::to('admin/BaseModuleSlug')->withStatus('Record not found', 'danger');
-		}
+        if ($record === null) {
+            return Redirect::to('admin/BaseModuleSlug')->withStatus('Record not found', 'danger');
+        }
 
-	    return $this->getView()
-	    	->shares('title', 'Edit')
-	    	->with('record', $record);
-	}
+        return $this->getView()
+            ->shares('title', 'Edit')
+            ->with('record', $record);
+    }
 
-	public function update($id)
-	{
+    public function update($id)
+    {
         $record = BaseModuleModal::find($id);
 
-		if ($record === null) {
-			return Redirect::to('admin/BaseModuleSlug')->withStatus('Record not found', 'danger');
-		}
+        if ($record === null) {
+            return Redirect::to('admin/BaseModuleSlug')->withStatus('Record not found', 'danger');
+        }
 
-	    $input = Input::all();
+        $input = Input::all();
 
-	    $validate = $this->validator($input);
+        $validate = $this->validator($input);
 
-	    if ($validate->passes()) {
+        if ($validate->passes()) {
 
-	    	//save
-			$record->title  = $input['title'];
-	    	$record->save();
+            //save
+            $record->title  = $input['title'];
+            $record->save();
 
-	    	$log          = new UserLog();
-	        $log->user_id = Auth::user()->id;
-	        $log->title   = "Updated BaseModuleController $record->title";
-	        $log->section = "BaseModuleTitle";
-	        $log->link    = "admin/BaseModuleSlug/{$record->id}/edit";
-	        $log->refID   = $record->id;
-	        $log->type    = "Update";
-	        $log->save();
+            $log          = new UserLog();
+            $log->user_id = Auth::user()->id;
+            $log->title   = "Updated BaseModuleController $record->title";
+            $log->section = "BaseModuleTitle";
+            $log->link    = "admin/BaseModuleSlug/{$record->id}/edit";
+            $log->refID   = $record->id;
+            $log->type    = "Update";
+            $log->save();
 
-	    	return Redirect::to('admin/BaseModuleSlug')->withStatus('Updated');
-	    }
+            return Redirect::to('admin/BaseModuleSlug')->withStatus('Updated');
+        }
 
-	    return Redirect::back()->withStatus($validate->errors(), 'danger')->withInput();
-	}
+        return Redirect::back()->withStatus($validate->errors(), 'danger')->withInput();
+    }
 
-	public function destroy($id)
-	{
+    public function destroy($id)
+    {
         $record = BaseModuleModal::find($id);
 
-		if ($record === null) {
-			return Redirect::to('admin/BaseModuleSlug')->withStatus('Record not found', 'danger');
-		}
+        if ($record === null) {
+            return Redirect::to('admin/BaseModuleSlug')->withStatus('Record not found', 'danger');
+        }
 
-		$log          = new UserLog();
+        $log          = new UserLog();
         $log->user_id = Auth::user()->id;
         $log->title   = "Deleted BaseModuleController: $record->title";
         $log->section = "BaseModuleTitle";
@@ -162,17 +162,17 @@ class Admin extends BackendController
         $log->type    = "Delete";
         $log->save();
 
-		$link->delete();
+        $record->delete();
 
-		return Redirect::to('admin/BaseModuleSlug')->withStatus('Deleted');
-	}
+        return Redirect::to('admin/BaseModuleSlug')->withStatus('Deleted');
+    }
 
-	protected function validator($data)
-	{
-		$rules = [
-			'title' => 'required|min:3'
-		];
+    protected function validator($data)
+    {
+        $rules = [
+            'title' => 'required|min:3'
+        ];
 
-		return Validator::make($data, $rules);
-	}
+        return Validator::make($data, $rules);
+    }
 }
