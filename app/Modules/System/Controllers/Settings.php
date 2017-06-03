@@ -110,6 +110,7 @@ class Settings extends BackendController
 
             // The Application.
             Option::set('app.name',          $input['siteName']);
+            Option::set('app.color_scheme',  $input['siteSkin']);
 
             //ip addresses
             $iparray = [];

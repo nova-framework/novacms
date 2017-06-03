@@ -28,19 +28,16 @@ Event::listen('eventModuleQuickCreateLinks', function($user) {
 });
 
 Event::listen('backend.menu', function($user) {
-    if ($user->hasRole('administrator')) {
-        $items = array(
-            array(
-                'uri'    => 'dashboard',
-                'title'  => __d('system', 'Dashboard'),
-                'icon'   => 'dashboard',
-                'weight' => 0,
-            )
-        );
-    } else {
-        $items = array();
-    }
 
+    $items = array(
+        array(
+            'uri'    => 'dashboard',
+            'title'  => __d('system', 'Dashboard'),
+            'icon'   => 'dashboard',
+            'weight' => 0,
+        )
+    );
+    
     return $items;
 });
 
