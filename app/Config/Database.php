@@ -27,7 +27,7 @@ return array(
             'hostname'  => 'localhost',
             'database'  => 'novacms',
             'username'  => 'root',
-            'password'  => 'root',
+            'password'  => '',
             'prefix'    => PREFIX,
             'charset'   => 'utf8',
             'collation' => 'utf8_general_ci',

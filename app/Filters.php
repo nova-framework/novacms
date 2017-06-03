@@ -28,66 +28,75 @@ App::after(function($request, $response)
     //
 });
 
+
 /** Define Route Filters. */
 
 // The CSRF Filter.
-Route::filter('csrf', function($route, $request) {
-    $session = $request->session();
+Route::filter('csrf', function($route, $request)
+{
+    // Retrieve the CSRF token from Request instance.
+    $token = $request->ajax() ? $request->header('X-CSRF-Token') : $request->input('csrfToken');
 
-    $ajaxRequest = $request->ajax();
-
-    $token = $ajaxRequest ? $request->header('X-CSRF-Token') : $request->input('csrfToken');
-
-    if ($session->token() == $token) {
-        //
-    }
-
-    // The CSRF Token is invalid, respond with Error 400 (Bad Request)
-    else if ($ajaxRequest) {
+    if ($token === Session::token()) {
+        // The CSRF token match.
+        return;
+    } else if ($request->ajax() || $request->wantsJson()) {
         return Response::make('Bad Request', 400);
-    } else {
-        App::abort(400, 'Bad Request');
     }
-});
 
-// Referer checking Filter.
-Route::filter('referer', function($route, $request) {
-    // Check if the visitor come to this Route from another site.
-    $referer = $request->header('referer');
+    // Redirect back with error message.
+    $status = __('Your session expired. Please try again!');
 
-    if (! starts_with($referer, Config::get('app.url'))) {
-        return Redirect::back();
-    }
+    return Redirect::back()->withStatus($status, 'danger');
 });
 
 // Authentication Filters.
-Route::filter('auth', function($route, $request) {
-    if (Auth::check()) {
-        //
+Route::filter('auth', function($route, $request, $guard = null)
+{
+    $guard = $guard ?: Config::get('auth.defaults.guard', 'web');
+
+    if (Auth::guard($guard)->check()) {
+        // The User is authenticated.
+        return;
+    } else if ($request->ajax() || $request->wantsJson()) {
+        return Response::make('Unauthorized Access', 401);
     }
 
-    // User is not authenticated.
-    else if (! $request->ajax()) {
-        return Redirect::guest('admin/login');
-    } else {
-        return Response::make('Unauthorized Access', 403);
+    // Get the Guard's paths from configuration.
+    $paths = Config::get("auth.guards.{$guard}.paths", array(
+        'authorize' => 'admin/login',
+        'nonintend' => array(
+            'logout',
+        ),
+    ));
+
+    if (in_array($request->path(), $paths['nonintend'])) {
+        return Redirect::to($paths['authorize']);
     }
+
+    return Redirect::guest($paths['authorize']);
 });
 
-Route::filter('auth.basic', function()
+Route::filter('auth.basic', function($route, $request)
 {
     return Auth::basic();
 });
 
-Route::filter('guest', function($route, $request) {
-    if (Auth::guest()) {
-        //
+Route::filter('guest', function($route, $request, $guard = null)
+{
+    $guard = $guard ?: Config::get('auth.defaults.guard', 'web');
+
+    if (Auth::guard($guard)->guest()) {
+        // The User is not authenticated.
+        return;
+    } else if ($request->ajax() || $request->wantsJson()) {
+        return Response::make('Unauthorized Access', 401);
     }
 
-    // User is authenticated.
-    else if (! $request->ajax()) {
-        return Redirect::to('admin/dashboard');
-    } else {
-        return Response::make('Unauthorized Access', 403);
-    }
+    // Get the Guard's paths from configuration.
+    $paths = Config::get("auth.guards.{$guard}.paths", array(
+        'dashboard' => 'admin/dashboard'
+    ));
+
+    return Redirect::to($paths['dashboard']);
 });

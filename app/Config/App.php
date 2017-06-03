@@ -59,7 +59,7 @@ return array(
      * The Encryption Key.
      * This page can be used to generate key - http://novaframework.com/token-generator
      */
-    'key' => 'PfbZHyQaTlQbmJpME8gDAiUNudhBYnvp',
+    'key' => 'tcuzkIwOqSTPCAo08n1lGUy9vaH803Zg',
 
     /**
      *  Prevents the website from CSRF attacks.
@@ -102,9 +102,11 @@ return array(
 
         // The Application Providers.
         'App\Providers\AppServiceProvider',
+        'App\Providers\AuthServiceProvider',
+        'App\Providers\ConsoleServiceProvider',
         'App\Providers\EventServiceProvider',
         'App\Providers\RouteServiceProvider',
-        'App\Providers\ConsoleServiceProvider',
+        'App\Providers\ThemeServiceProvider',
     ),
 
     /**

@@ -118,7 +118,7 @@ class Users extends BackendController
         // Validate the Input data.
         $input = Input::all();
 
-        $validator = $this->validate($input);
+        $validator = $this->validator($input);
 
         if ($validator->passes()) {
 
@@ -248,7 +248,7 @@ class Users extends BackendController
             unset($input['password_confirmation']);
         }
 
-        $validator = $this->validate($input, $id);
+        $validator = $this->validator($input, $id);
 
         if($validator->passes()) {
 
@@ -342,7 +342,7 @@ class Users extends BackendController
         return Redirect::to('users')->withStatus("The User <b>$user->username</b> was successfully updated.");
     }
 
-    protected function validate(array $data, $id = null)
+    protected function validator(array $data, $id = null)
     {
         if (! is_null($id)) {
             $ignore = ',' .intval($id);

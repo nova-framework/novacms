@@ -12,11 +12,6 @@
             "role": "Co-author"
         },
         {
-            "name": "Taylor Otwell",
-            "email": "taylor@laravel.com",
-            "role": "Co-author"
-        },
-        {
             "name": "Virgil-Adrian Teaca",
             "email": "virgil@giulianaeassociati.com",
             "homepage": "http://giulianaeassociati.com",
@@ -31,7 +26,7 @@
     ],
     "require": {
         "php": ">=5.6.0",
-        "nova-framework/system": "3.77.13",
+        "nova-framework/system": "^3.0",
         "almasaeed2010/adminlte": "~2.0",
         "twbs/bootstrap": "^3.3",
         "mpdf/mpdf": "^6.1"
@@ -44,10 +39,12 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "php forge optimize"
+            "php forge optimize",
+            "php forge module:optimize"
         ],
         "post-update-cmd": [
-            "php forge optimize"
+            "php forge optimize",
+            "php forge module:optimize"
         ],
         "post-create-project-cmd": [
             "php forge key:generate"

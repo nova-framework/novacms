@@ -75,7 +75,7 @@ class Roles extends BackendController
         // Validate the Input data.
         $input = Input::only('name', 'description');
 
-        $validator = $this->validate($input);
+        $validator = $this->validator($input);
 
         if ($validator->passes()) {
             $role              = new Role();
@@ -123,7 +123,7 @@ class Roles extends BackendController
         // Validate the Input data.
         $input = Input::only('name', 'description');
 
-        $validator = $this->validate($input, $id);
+        $validator = $this->validator($input, $id);
 
         if($validator->passes()) {
 
@@ -168,7 +168,7 @@ class Roles extends BackendController
         return Redirect::to('admin/roles')->withStatus("Role deleted.");
     }
 
-    protected function validate(array $data, $id = null)
+    protected function validator(array $data, $id = null)
     {
         // The Validation rules.
         $rules = array('name' => 'required|min:3|alpha_dash');

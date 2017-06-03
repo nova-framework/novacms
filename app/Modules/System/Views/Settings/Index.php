@@ -33,6 +33,30 @@
             </div>
 
             <div class="form-group">
+                <label class="col-sm-4 control-label" for="site_skin"><?= __d('system', 'Backend Skin'); ?></label>
+                <div class="col-sm-8">
+                    <div class="col-sm-3" style="padding: 0;">
+                        <select name="siteSkin" id="siteSkin" class="form-control">
+                            <option value="blue"         <?php if ($options['siteSkin'] == 'blue')         { echo "selected='selected'"; } ?> ><?= __d('system', 'Blue'); ?></option>
+                            <option value="blue-light"   <?php if ($options['siteSkin'] == 'blue-light')   { echo "selected='selected'"; } ?> ><?= __d('system', 'Blue Light'); ?></option>
+                            <option value="black"        <?php if ($options['siteSkin'] == 'black')        { echo "selected='selected'"; } ?> ><?= __d('system', 'Black'); ?></option>
+                            <option value="black-light"  <?php if ($options['siteSkin'] == 'black-light')  { echo "selected='selected'"; } ?> ><?= __d('system', 'Black Light'); ?></option>
+                            <option value="purple"       <?php if ($options['siteSkin'] == 'purple')       { echo "selected='selected'"; } ?> ><?= __d('system', 'Purple'); ?></option>
+                            <option value="purple-light" <?php if ($options['siteSkin'] == 'purple-light') { echo "selected='selected'"; } ?> ><?= __d('system', 'Purple Light'); ?></option>
+                            <option value="yellow"       <?php if ($options['siteSkin'] == 'yellow')       { echo "selected='selected'"; } ?> ><?= __d('system', 'Yellow'); ?></option>
+                            <option value="yellow-light" <?php if ($options['siteSkin'] == 'yellow-light') { echo "selected='selected'"; } ?> ><?= __d('system', 'Yellow Light'); ?></option>
+                            <option value="red"          <?php if ($options['siteSkin'] == 'red')          { echo "selected='selected'"; } ?> ><?= __d('system', 'Red'); ?></option>
+                            <option value="red-light"    <?php if ($options['siteSkin'] == 'red-light')    { echo "selected='selected'"; } ?> ><?= __d('system', 'Red Light'); ?></option>
+                            <option value="green"        <?php if ($options['siteSkin'] == 'green')        { echo "selected='selected'"; } ?> ><?= __d('system', 'Green'); ?></option>
+                            <option value="green-light"  <?php if ($options['siteSkin'] == 'green-light')  { echo "selected='selected'"; } ?> ><?= __d('system', 'Green Light'); ?></option>
+                        </select>
+                    </div>
+                    <div class='clearfix'></div>
+                    <small><?= __d('system', 'The Skin used by the Site\'s Template.'); ?></small>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label class="col-sm-4 control-label" for="sitename">IP address access list</label>
                 <div class="col-sm-8">
                     <table class='table table-striped table-hover table-bordered sorted_table'>

@@ -73,7 +73,7 @@ class Depts extends BackendController
         // Validate the Input data.
         $input = Input::all();
 
-        $validator = $this->validate($input);
+        $validator = $this->validator($input);
 
         if ($validator->passes()) {
             $dept              = new Dept();
@@ -119,7 +119,7 @@ class Depts extends BackendController
         // Validate the Input data.
         $input = Input::all();
 
-        $validator = $this->validate($input, $id);
+        $validator = $this->validator($input, $id);
 
         if($validator->passes()) {
 
@@ -162,7 +162,7 @@ class Depts extends BackendController
         return Redirect::to('admin/depts')->withStatus("Dept deleted.");
     }
 
-    protected function validate(array $data, $id = null)
+    protected function validator(array $data, $id = null)
     {
         // The Validation rules.
         $rules = array('title' => 'required|min:3|alpha_dash');

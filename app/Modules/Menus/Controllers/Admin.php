@@ -29,7 +29,7 @@ class Admin extends BackendController
     {
         $input = Input::only('title', 'type');
 
-        $validate = $this->validate($input);
+        $validate = $this->validator($input);
 
         if ($validate->passes()) {
 
@@ -79,7 +79,7 @@ class Admin extends BackendController
 
         $input = Input::only('title', 'type');
 
-        $validate = $this->validate($input);
+        $validate = $this->validator($input);
 
         if ($validate->passes()) {
 
@@ -320,7 +320,7 @@ class Admin extends BackendController
         }
     }
 
-    protected function validate($data)
+    protected function validator($data)
     {
         $rules = [
             'title' => 'required|min:3',

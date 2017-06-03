@@ -20,21 +20,21 @@ Route::group(array('prefix' => 'admin'), function() {
     Route::get('/',                        array('before' => 'auth',            'uses' => 'Dashboard@index'));
     Route::get('dashboard',                array('before' => 'auth',            'uses' => 'Dashboard@index'));
 
-    Route::get('notifications', 'Notifications@index');
-    Route::get('notifications/getnotifications', 'Notifications@getNotifications');
-    Route::get('notifications/getnotificationscount', 'Notifications@getNotificationsCount');
-    Route::get('notifications/removenotificationscount', 'Notifications@removeNotificationsCount');
+    Route::get('notifications',                                                 'Notifications@index');
+    Route::get('notifications/getnotifications',                                'Notifications@getNotifications');
+    Route::get('notifications/getnotificationscount',                           'Notifications@getNotificationsCount');
+    Route::get('notifications/removenotificationscount',                        'Notifications@removeNotificationsCount');
 
     // The Users CRUD.
     Route::get( 'users',                   array('before' => 'auth',            'uses' => 'Users@index'));
-    Route::get( 'users/create',            array('before' => 'auth|admin',      'uses' => 'Users@create'));
-    Route::post('users',                   array('before' => 'auth|admin|csrf', 'uses' => 'Users@store'));
+    Route::get( 'users/create',            array('before' => 'auth',            'uses' => 'Users@create'));
+    Route::post('users',                   array('before' => 'auth|csrf',       'uses' => 'Users@store'));
     Route::get( 'users/profile',           array('before' => 'auth',            'uses' => 'Users@show'));
     Route::get( 'users/{id}',              array('before' => 'auth',            'uses' => 'Users@show'));
     Route::get( 'users/{id}/edit',         array('before' => 'auth',            'uses' => 'Users@edit'));
     Route::post('users/{id}',              array('before' => 'auth|csrf',       'uses' => 'Users@update'));
-    Route::post('users/{id}/destroy',      array('before' => 'auth|admin|csrf', 'uses' => 'Users@destroy'));
-    Route::get('users/export/{type}',      array('before' => 'auth|admin',      'uses' => 'Users@export'));
+    Route::post('users/{id}/destroy',      array('before' => 'auth|csrf',       'uses' => 'Users@destroy'));
+    Route::get('users/export/{type}',      array('before' => 'auth',            'uses' => 'Users@export'));
 
     //top level users only
 

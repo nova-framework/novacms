@@ -40,7 +40,7 @@ class Admin extends BackendController
 	{
 	    $input = Input::only('browserTitle', 'pageTitle', 'active', 'publishedDate', 'content', 'layout', 'sidebars');
 
-	    $validate = $this->validate($input);
+	    $validate = $this->validator($input);
 
 	    if ($validate->passes()) {
 
@@ -111,7 +111,7 @@ class Admin extends BackendController
 
 	    $input = Input::only('browserTitle', 'pageTitle', 'active', 'publishedDate', 'content', 'layout', 'sidebars');
 
-	    $validate = $this->validate($input);
+	    $validate = $this->validator($input);
 
 	    if ($validate->passes()) {
 
@@ -251,7 +251,7 @@ class Admin extends BackendController
 		return $layoutFiles;
 	}
 
-	protected function validate($data)
+	protected function validator($data)
 	{
 		$rules = [
 			'browserTitle' => 'required|min:3|string',

@@ -34,7 +34,7 @@ class Admin extends BackendController
     {
         $input = Input::only('title', 'content', 'position', 'class');
 
-        $validate = $this->validate($input);
+        $validate = $this->validator($input);
 
         if ($validate->passes()) {
 
@@ -87,7 +87,7 @@ class Admin extends BackendController
 
         $input = Input::only('title', 'content', 'position', 'class');
 
-        $validate = $this->validate($input);
+        $validate = $this->validator($input);
 
         if ($validate->passes()) {
 
@@ -137,7 +137,7 @@ class Admin extends BackendController
         return Redirect::to('admin/sidebars')->withStatus('Sidebar Deleted');
     }
 
-    protected function validate($data)
+    protected function validator($data)
     {
         $rules = [
             'title' => 'required|min:3',
@@ -147,6 +147,3 @@ class Admin extends BackendController
         return Validator::make($data, $rules);
     }
 }
-
-
-

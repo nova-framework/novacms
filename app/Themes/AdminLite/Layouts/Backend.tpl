@@ -148,56 +148,31 @@ $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'
 
             <li class="header">{{ __d('admin_lite', 'Menu') }}</li>
 
-            <li class="active treeview">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>{{ __d('admin_lite', 'Core Administration') }}</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    @if (isset($menuItems))
-                        @foreach ($menuItems as $item)
-                            <li {{ ($baseUri == 'admin/'.$item['uri']) ? 'class="active"' : '' }}><a href='{{ admin_url($item['uri']) }}'><i class='fa fa-{{ $item['icon'] }}'></i> <span> {{$item['title'] }}</span></a></li>
-                        @endforeach
-                    @endif
-                </ul>
-            </li>
+            @if (isset($menuItems))
+                @foreach ($menuItems as $item)
+                    <li {{ ($baseUri == 'admin/'.$item['uri']) ? 'class="active"' : '' }}><a href='{{ admin_url($item['uri']) }}'><i class='fa fa-{{ $item['icon'] }}'></i> <span> {{$item['title'] }}</span></a></li>
+                @endforeach
+            @endif
 
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>{{ __d('admin_lite', 'Modules Administration') }}</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    @if (isset($menuItemsModules))
-                    @if (count($menuItemsModules) == 0)
-                        <li><a href='#'>No Items</a></li>
-                    @endif
-                        @foreach ($menuItemsModules as $item)
-                            <li {{ ($baseUri == 'admin/'.$item['uri']) ? 'class="active"' : '' }}><a href='{{ admin_url($item['uri']) }}'><i class='fa fa-{{ $item['icon'] }}'></i> <span> {{$item['title'] }}</span></a></li>
-                        @endforeach
-                    @endif
-                </ul>
-            </li>
+            <li class="header">{{ __d('admin_lite', 'Modules Administration') }}</li>
 
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>{{ __d('admin_lite', 'System Administration') }}</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    @if (isset($menuItemsSystem))
-                        @foreach ($menuItemsSystem as $item)
-                            <li {{ ($baseUri == 'admin/'.$item['uri']) ? 'class="active"' : '' }}><a href='{{ admin_url($item['uri']) }}'><i class='fa fa-{{ $item['icon'] }}'></i> <span> {{$item['title'] }}</span></a></li>
-                        @endforeach
-                    @endif
-                </ul>
-            </li>
+            @if (isset($menuItemsModules))
+            @if (count($menuItemsModules) == 0)
+                <li><a href='#'><span>No Items</span></a></li>
+            @endif
+                @foreach ($menuItemsModules as $item)
+                    <li {{ ($baseUri == 'admin/'.$item['uri']) ? 'class="active"' : '' }}><a href='{{ admin_url($item['uri']) }}'><i class='fa fa-{{ $item['icon'] }}'></i> <span> {{$item['title'] }}</span></a></li>
+                @endforeach
+            @endif
+
+            <li class="header">{{ __d('admin_lite', 'System Administration') }}</li>
+
+            @if (isset($menuItemsSystem))
+                @foreach ($menuItemsSystem as $item)
+                    <li {{ ($baseUri == 'admin/'.$item['uri']) ? 'class="active"' : '' }}><a href='{{ admin_url($item['uri']) }}'><i class='fa fa-{{ $item['icon'] }}'></i> <span> {{$item['title'] }}</span></a></li>
+                @endforeach
+            @endif
+
 
         </ul>
         <!-- /.sidebar-menu -->
