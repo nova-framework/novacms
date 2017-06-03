@@ -1,11 +1,11 @@
 <?php
-Event::listen('eventModuleQuickCreateLinks', function($user) {
+Event::listen('backend.menu.quickcreate', function($user) {
     if ($user->hasRole('administrator')) {
         $items = array(
             array(
                 'uri'    => 'depts/create',
                 'title'  => 'Create Dept',
-                'icon'   => 'book',
+                'icon'   => 'archive',
                 'weight' => 1,
             ),
             array(
@@ -37,7 +37,7 @@ Event::listen('backend.menu', function($user) {
             'weight' => 0,
         )
     );
-    
+
     return $items;
 });
 
@@ -53,19 +53,19 @@ Event::listen('backend.menu.system', function($user) {
             array(
                 'uri'    => 'userlogs',
                 'title'  => __d('system', 'User Logs'),
-                'icon'   => 'cogs',
+                'icon'   => 'book',
                 'weight' => 999,
             ),
             array(
                 'uri'    => 'errorlog',
                 'title'  => __d('system', 'Error Logs'),
-                'icon'   => 'cogs',
+                'icon'   => 'book',
                 'weight' => 999,
             ),
             array(
                 'uri'    => 'depts',
                 'title'  => __d('system', 'Depts'),
-                'icon'   => 'book',
+                'icon'   => 'archive',
                 'weight' => 999,
             ),
             array(

@@ -66,6 +66,7 @@ abstract class BackendController extends BaseController
             View::share('menuItems', $this->getMenuItems($user, 'backend.menu'));
             View::share('menuItemsSystem', $this->getMenuItems($user, 'backend.menu.system'));
             View::share('menuItemsModules', $this->getMenuItems($user, 'backend.menu.modules'));
+            View::share('menuItemsQuickCreate', $this->getMenuItems($user, 'backend.menu.quickcreate'));
         }
     }
 

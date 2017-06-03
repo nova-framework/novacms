@@ -1,3 +1,7 @@
+.navbar-nav>.notifications-menu>.dropdown-menu>li .menu, .navbar-nav>.messages-menu>.dropdown-menu>li .menu, .navbar-nav>.tasks-menu>.dropdown-menu>li .menu {
+    max-height: auto; 
+}
+
 /* remove href links when printing */
 @media print {
   a[href]:after {

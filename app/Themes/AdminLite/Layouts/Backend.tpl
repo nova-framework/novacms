@@ -96,43 +96,61 @@ $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'
                 </div>
             </li>
 
+            <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-plus"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li class="header">Quick Create</li>
+                    <li>
+                        <ul class="menu">
+                            @if (isset($menuItemsQuickCreate))
+                                @foreach ($menuItemsQuickCreate as $item)
+                                    <li><a href='{{ admin_url($item['uri']) }}'><i class='fa fa-{{ $item['icon'] }}'></i> <span> {{$item['title'] }}</span></a></li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
             <li><a href='{{ site_url() }}'>{{ __d('admin_lite', 'View Site') }}</a></li>
 
-          <!-- User Account Menu -->
-          <li class="dropdown user user-menu">
-            <!-- Menu Toggle Button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- The user image in the navbar-->
-              <img src="{{ resource_url($user->imagePath) }}" class="user-image" alt="{{ __d('admin_lite', 'User Image') }}">
-              <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">{{ $user->username }}</span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- The user image in the menu -->
-                <li class="user-header">
-                    <img src="{{ resource_url($user->imagePath) }}" class="img-circle" alt="{{ __d('admin_lite', 'User Image') }}">
+            <!-- User Account Menu -->
+            <li class="dropdown user user-menu">
+                <!-- Menu Toggle Button -->
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <!-- The user image in the navbar-->
+                  <img src="{{ resource_url($user->imagePath) }}" class="user-image" alt="{{ __d('admin_lite', 'User Image') }}">
+                  <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                  <span class="hidden-xs">{{ $user->username }}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  <!-- The user image in the menu -->
+                    <li class="user-header">
+                        <img src="{{ resource_url($user->imagePath) }}" class="img-circle" alt="{{ __d('admin_lite', 'User Image') }}">
 
-                    <p>
-                        {{ $user->realname; }} - {{ $user->role->name; }}
-                        <small>{{ __d('admin_lite', 'Member since {0}', $sinceDate); }}</small>
-                    </p>
-                </li>
+                        <p>
+                            {{ $user->realname; }} - {{ $user->role->name; }}
+                            <small>{{ __d('admin_lite', 'Member since {0}', $sinceDate); }}</small>
+                        </p>
+                    </li>
 
-                <li class="user-footer">
+                    <li class="user-footer">
 
-                    <div class="pull-left">
+                        <div class="pull-left">
 
-                    <a href="{{ admin_url('users/profile') }}" class="btn btn-xs btn-default btn-flat"><i class="fa fa-user"></i> {{  __d('admin_lite', 'Profile') }}</a>
+                        <a href="{{ admin_url('users/profile') }}" class="btn btn-xs btn-default btn-flat"><i class="fa fa-user"></i> {{  __d('admin_lite', 'Profile') }}</a>
 
-                    <a href="{{ admin_url('users/'.$user->id.'/edit') }}" class="btn btn-xs btn-default btn-flat"><i class="fa fa-cog"></i> {{  __d('admin_lite', 'My Settings') }}</a>
+                        <a href="{{ admin_url('users/'.$user->id.'/edit') }}" class="btn btn-xs btn-default btn-flat"><i class="fa fa-cog"></i> {{  __d('admin_lite', 'My Settings') }}</a>
 
-                    <a class="btn btn-xs btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i> {{  __d('admin_lite', 'Sign out') }}</a>
-                    <form id="logout-form" action="{{ admin_url('logout') }}" method="post"></form>
+                        <a class="btn btn-xs btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i> {{  __d('admin_lite', 'Sign out') }}</a>
+                        <form id="logout-form" action="{{ admin_url('logout') }}" method="post"></form>
 
-                    </div>
-                </li>
-            </ul>
-          </li>
+                        </div>
+                    </li>
+                </ul>
+            </li>
         </ul>
       </div>
     </nav>
