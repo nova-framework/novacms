@@ -3,12 +3,6 @@ Event::listen('backend.menu.quickcreate', function($user) {
     if ($user->hasRole('administrator')) {
         $items = array(
             array(
-                'uri'    => 'depts/create',
-                'title'  => 'Create Dept',
-                'icon'   => 'archive',
-                'weight' => 1,
-            ),
-            array(
                 'uri'    => 'users/create',
                 'title'  => 'Create User',
                 'icon'   => 'user',
@@ -22,7 +16,14 @@ Event::listen('backend.menu.quickcreate', function($user) {
             ),
         );
     } else {
-        $items = array();
+        $items = array(
+            array(
+                'uri'    => 'depts/create',
+                'title'  => 'Create Dept',
+                'icon'   => 'archive',
+                'weight' => 1,
+            ),
+        );
     }
     return $items;
 });
@@ -35,7 +36,19 @@ Event::listen('backend.menu', function($user) {
             'title'  => __d('system', 'Dashboard'),
             'icon'   => 'dashboard',
             'weight' => 0,
-        )
+        ),
+        array(
+            'uri'    => 'users',
+            'title'  => __d('system', 'Users'),
+            'icon'   => 'users',
+            'weight' => 999,
+        ),
+        array(
+            'uri'    => 'depts',
+            'title'  => __d('system', 'Depts'),
+            'icon'   => 'archive',
+            'weight' => 999,
+        ),
     );
 
     return $items;
@@ -60,18 +73,6 @@ Event::listen('backend.menu.system', function($user) {
                 'uri'    => 'errorlog',
                 'title'  => __d('system', 'Error Logs'),
                 'icon'   => 'book',
-                'weight' => 999,
-            ),
-            array(
-                'uri'    => 'depts',
-                'title'  => __d('system', 'Depts'),
-                'icon'   => 'archive',
-                'weight' => 999,
-            ),
-            array(
-                'uri'    => 'users',
-                'title'  => __d('system', 'Users'),
-                'icon'   => 'users',
                 'weight' => 999,
             ),
             array(
