@@ -137,14 +137,6 @@ class Users extends BackendController
             $user->nextOfKinName             = $input['nextOfKinName'];
             $user->nextOfKinRelationship     = $input['nextOfKinRelationship'];
             $user->nextOfKinNumber           = $input['nextOfKinNumber'];
-            $user->office365Email            = $input['office365Email'];
-
-            if (isset($input['office365Password'])) {
-                $user->office365Password         = Crypt::encrypt($input['office365Password']);
-            }
-
-            $user->backgroundColour          = $input['backgroundColour'];
-            $user->textColor                 = $input['textColor'];
 
             //if administrator
             if (Member::get('role_id') == 1) {
@@ -265,10 +257,6 @@ class Users extends BackendController
             $user->nextOfKinName             = $input['nextOfKinName'];
             $user->nextOfKinRelationship     = $input['nextOfKinRelationship'];
             $user->nextOfKinNumber           = $input['nextOfKinNumber'];
-            $user->office365Email            = $input['office365Email'];
-            $user->office365Password         = $input['office365Password'];
-            $user->backgroundColour          = $input['backgroundColour'];
-            $user->textColor                 = $input['textColor'];
 
             //administrator
             if (Member::get('role_id') == 1) {
@@ -279,7 +267,6 @@ class Users extends BackendController
                 $user->target                    = $input['target'];
                 $user->role_id                   = $input['role_id'];
             }
-
 
             if(isset($input['password'])) {
                 $user->password = Hash::make($input['password']);

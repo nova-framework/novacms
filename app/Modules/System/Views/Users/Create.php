@@ -1,5 +1,5 @@
 <div class="content-header">
-    <h2>Edit User</h2>
+    <h2>Add User</h2>
     <ol class="breadcrumb">
         <li><a href='<?= admin_url('dashboard'); ?>'><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href='<?= admin_url('users'); ?>'><i class="fa fa-users"></i> Users</a></li>
@@ -129,81 +129,6 @@
                             </div>
 
                         </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title">Integrate with Office 365</h3>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-        </div>
-        <div class="box-body">
-
-            <h5>Link your Office 365 account to the CRM, this will allow modules to add events to your calendar, integrate your emails and contacts.</h5>
-
-            <div class="row">
-
-                <div class="col-md-6">
-
-                    <div class="control-group">
-                        <label class="control-label" for='office365Email'> Email</label>
-                        <input class="form-control" id='office365Email' type="text" name="office365Email" value="<?=Input::old('office365Email');?>" />
-                    </div>
-
-                </div>
-
-                <div class="col-md-6">
-
-                    <div class="control-group">
-                        <label class="control-label" for='office365Password'> Password</label>
-                        <small>Enter password to change.</small>
-                        <input class="form-control" id='office365Password' type="password" name="office365Password" />
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-
-    <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title">Set background and text colour for modules to use such as calendars.</h3>
-            <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-            </div>
-        </div>
-        <div class="box-body">
-
-            <div class="row">
-
-                <div class="col-md-6">
-
-                    <div class="control-group colorpicker">
-                        <label class="control-label" for='backgroundColour'>Background Colour:</label>
-                        <input class="form-control" id='backgroundColour' type="text" name="backgroundColour" value="<?=Input::old('backgroundColour');?>" />
-                        <span class="input-group-addon"></span>
-                    </div>
-
-                </div>
-
-                <div class="col-md-6">
-
-                    <div class="control-group colorpicker">
-                        <label class="control-label" for='textColor'>Text Colour:</label>
-                        <input class="form-control" id='textColor' type="text" name="textColor" value="<?=Input::old('textColor');?>" />
-                        <span class="input-group-addon"></span>
                     </div>
 
                 </div>
