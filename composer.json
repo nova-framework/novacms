@@ -29,7 +29,8 @@
         "nova-framework/system": "^3.0",
         "almasaeed2010/adminlte": "~2.0",
         "twbs/bootstrap": "^3.3",
-        "mpdf/mpdf": "^6.1"
+        "mpdf/mpdf": "^6.1",
+        "johnnyfreeman/coseva": "*"
     },
     "autoload": {
         "psr-4": {
