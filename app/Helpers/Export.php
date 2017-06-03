@@ -35,14 +35,14 @@ class Export {
         $mpdf = new mPDF('utf-8', 'A4', '', '', 5, 5, 5, 5, 0, 0);
         $mpdf->setAutoTopMargin = 'stretch'; // Set pdf top margin to stretch to avoid content overlapping
         $mpdf->setAutoBottomMargin = 'stretch';
-        //$mpdf->SetHTMLHeader('<p><img class="left" src="'.theme_url('images/logo.png', 'Bootstrap').'"/></p>');
+        $mpdf->SetHTMLHeader('<p><img class="left" src="'.theme_url('img/logo.png', 'CRM').'"/></p>');
         $mpdf->SetHTMLFooter('<p>&copy; - '.Config::get('app.name').' '.date('Y').' - Private & Confidential. Page {PAGENO} of {nb}</p>');
         $mpdf->WriteHTML($data);
 
         if ($outputType == 'P') {
             $mpdf->Output();
         } else {
-            $mpdf->Output($filename.'-'.$timestamp.'.pdf', 'D');
+            $mpdf->Output($filename.'-'.$timestamp.'.pdf', $outputType);
         }
     }
 }
