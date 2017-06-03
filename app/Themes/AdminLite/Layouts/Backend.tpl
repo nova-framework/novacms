@@ -165,12 +165,13 @@ $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'
                 @endforeach
             @endif
 
-            <li class="header">{{ __d('admin_lite', 'System Administration') }}</li>
-
-            @if (isset($menuItemsSystem))
-                @foreach ($menuItemsSystem as $item)
-                    <li {{ ($baseUri == 'admin/'.$item['uri']) ? 'class="active"' : '' }}><a href='{{ admin_url($item['uri']) }}'><i class='fa fa-{{ $item['icon'] }}'></i> <span> {{$item['title'] }}</span></a></li>
-                @endforeach
+            @if ($user->hasRole('administrator'))
+                <li class="header">{{ __d('admin_lite', 'System Administration') }}</li>
+                @if (isset($menuItemsSystem))
+                    @foreach ($menuItemsSystem as $item)
+                        <li {{ ($baseUri == 'admin/'.$item['uri']) ? 'class="active"' : '' }}><a href='{{ admin_url($item['uri']) }}'><i class='fa fa-{{ $item['icon'] }}'></i> <span> {{$item['title'] }}</span></a></li>
+                    @endforeach
+                @endif
             @endif
 
 
