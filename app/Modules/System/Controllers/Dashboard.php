@@ -12,11 +12,23 @@ use App\Core\BackendController;
 use App\Modules\System\Models\UserLog;
 
 use Auth;
+use Session;
 
 class Dashboard extends BackendController
 {
     public function index()
     {
         return $this->getView()->shares('title', 'Dashboard');
+    }
+
+    public function saveState()
+    {
+        //if no session then save as colaped
+        if (Session::has('sidebarState')) {
+            Session::remove('sidebarState');
+        } else {
+            //colapse sidebar
+            Session::put('sidebarState', 'sidebar-collapse');
+        }
     }
 }

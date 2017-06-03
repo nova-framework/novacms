@@ -19,6 +19,7 @@ Route::group(array('prefix' => 'admin'), function() {
 
     Route::get('/',                        array('before' => 'auth',            'uses' => 'Dashboard@index'));
     Route::get('dashboard',                array('before' => 'auth',            'uses' => 'Dashboard@index'));
+    Route::post('dashboard/savestate',     array('before' => 'auth',            'uses' => 'Dashboard@saveState'));
 
     Route::get('notifications',                                                 'Notifications@index');
     Route::get('notifications/getnotifications',                                'Notifications@getNotifications');

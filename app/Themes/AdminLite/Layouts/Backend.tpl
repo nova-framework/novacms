@@ -61,7 +61,7 @@ $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'
 
 </head>
 
-<body class="hold-transition skin-{{ Config::get('app.color_scheme', 'blue'); }} sidebar-mini">
+<body class="hold-transition skin-{{ Config::get('app.color_scheme', 'blue'); }} sidebar-mini {{{ Session::get('sidebarState') }}}">
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -78,7 +78,7 @@ $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <a href="#" id='sidebarToggle' class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">{{ __d('admin_lite', 'Toggle navigation') }}</span>
       </a>
       <!-- Navbar Right Menu -->
@@ -270,9 +270,9 @@ $(function () {
     }
 
     loadlinks(); // This will run on page load
-    /*setInterval(function(){
+    setInterval(function(){
         loadlinks() // this will run after every 5 seconds
-    }, 5000);*/
+    }, 5000);
 
     $("#notificationLink").click(function(){
         //show window
@@ -295,6 +295,13 @@ $(function () {
     //Document Click hiding the popup
     $(document).click(function(){
       $("#notificationContainer").hide();
+    });
+
+    $('#sidebarToggle').on('click', function(e) {
+        $.ajax({
+            type: "POST",
+            url: "{{ admin_url('dashboard/savestate') }}"
+        });
     });
 });
 

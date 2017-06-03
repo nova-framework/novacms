@@ -3,6 +3,12 @@ Event::listen('backend.menu.quickcreate', function($user) {
     if ($user->hasRole('administrator')) {
         $items = array(
             array(
+                'uri'    => 'depts/create',
+                'title'  => 'Create Dept',
+                'icon'   => 'archive',
+                'weight' => 1,
+            ),
+            array(
                 'uri'    => 'users/create',
                 'title'  => 'Create User',
                 'icon'   => 'user',
