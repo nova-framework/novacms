@@ -85,6 +85,7 @@ $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'
         theme_url('plugins/toastr/toastr.min.js', 'AdminLite'),
         theme_url('plugins/dropzone/dropzone.js', 'AdminLite'),
         theme_url('plugins/jasny/jasny-bootstrap.min.js', 'AdminLite'),
+        theme_url('plugins/nestable/nestable.js', 'AdminLite'),
         // AdminLTE App
         vendor_url('dist/js/app.min.js', 'almasaeed2010/adminlte'),
         theme_url('js/scripts.js', 'AdminLite'),
