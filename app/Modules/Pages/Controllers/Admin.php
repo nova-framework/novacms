@@ -49,7 +49,7 @@ class Admin extends BackendController
 	    	//save
 	    	$page = new Page();
 
-	    	if (is_array($input['sidebars'])) {
+	    	if (isset($input['sidebars'])) {
 	    		$page->sidebars = implode(',', $input['sidebars']);
 	    	}
 
@@ -58,7 +58,7 @@ class Admin extends BackendController
 	    	$page->pageTitle 	   = $input['pageTitle'];
 	    	$page->slug 		   = $slug;
 	    	$page->active          = $input['active'];
-	    	$page->publishedDate   = $input['publishedDate'];
+	    	$page->publishedDate   = date('Y-m-d H:i:s', strtotime($input['publishedDate']));
 	    	$page->content         = $input['content'];
 	    	$page->layout          = $input['layout'];
 	    	$page->save();
@@ -118,7 +118,7 @@ class Admin extends BackendController
 
 	    	$slug = Str::slug($input['pageTitle']);
 
-	    	if (is_array($input['sidebars'])) {
+	    	if (isset($input['sidebars'])) {
 	    		$page->sidebars = implode(',', $input['sidebars']);
 	    	} else {
 	    		$page->sidebars = null;
@@ -146,7 +146,7 @@ class Admin extends BackendController
 	    	$page->pageTitle       = $input['pageTitle'];
 	    	$page->slug            = $slug;
 	    	$page->active          = $input['active'];
-	    	$page->publishedDate   = $input['publishedDate'];
+	    	$page->publishedDate   = date('Y-m-d H:i:s', strtotime($input['publishedDate']));
 	    	$page->content         = $input['content'];
 	    	$page->layout          = $input['layout'];
 	    	$page->save();
