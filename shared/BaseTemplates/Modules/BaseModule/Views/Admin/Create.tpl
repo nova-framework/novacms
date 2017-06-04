@@ -1,9 +1,9 @@
 <section class="content-header">
-    <h1>Create BaseModuleModalTitle</h1>
+    <h1>{{ __d('BaseModuleSlug', 'Create BaseModuleModalTitle') }}</h1>
     <ol class="breadcrumb">
-        <li><a href='{{ site_url('admin/dashboard') }}'><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href='{{ site_url('admin/BaseModuleSlug') }}'><i class="fa fa-link"></i> BaseModuleTitle</a></li>
-		<li>Create BaseModuleModalTitle</li>
+        <li><a href='{{ site_url('admin/dashboard') }}'><i class="fa fa-dashboard"></i> {{ __d('BaseModuleSlug', 'Dashboard') }}</a></li>
+        <li><a href='{{ site_url('admin/BaseModuleSlug') }}'><i class="fa fa-link"></i> {{ __d('BaseModuleSlug', 'BaseModuleTitle') }}</a></li>
+		<li>{{ __d('BaseModuleSlug', 'Create BaseModuleModalTitle') }}</li>
     </ol>
 </section>
 
@@ -13,15 +13,11 @@
 
 	<div class="box box-primary">
     <div class="box-header with-border">
-        <h3 class="box-title">Create BaseModuleModalTitle</h3>
-        <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-        </div>
+        <h3 class="box-title">{{ __d('BaseModuleSlug', 'Create BaseModuleModalTitle') }}</h3>
     </div>
     <div class="box-body">
 
-		<form class="form-horizontal" action='{{ site_url('admin/BaseModuleSlug') }}' method='post'>
+		<form class="form-horizontal" action='{{ admin_url('BaseModuleSlug') }}' method='post'>
 		<input type='hidden' name='csrfToken' value='{{{ $csrfToken }}}'>
 
 		<div class="row">
@@ -29,7 +25,7 @@
 			<div class="col-md-6">
 
 				<div class="control-group">
-                    <label class="control-label" for='title'> Title</label>
+                    <label class="control-label" for='title'> {{ __d('BaseModuleSlug', 'Title') }}</label>
                     <input class="form-control" id='title' type="text" name="title" value="{{{ Input::old('title') }}}" />
                 </div>
 
@@ -42,7 +38,7 @@
 
 		</div>
 
-		<p><br><button type="submit" class="btn btn-success" name="submit"><i class="fa fa-check"></i> Create</button></p>
+		<p><br><button type="submit" class="btn btn-success" name="submit"><i class="fa fa-check"></i> {{ __d('BaseModuleSlug', 'Create') }}</button></p>
 
 		</form>
 

@@ -1,4 +1,4 @@
-id, Title, Date Created
+{{ __d('BaseModuleSlug', 'id') }}, {{ __d('BaseModuleSlug', 'Title') }}, {{ __d('BaseModuleSlug', 'Date Created') }}
 
 @if ($records)
     @foreach ($records as $row)
