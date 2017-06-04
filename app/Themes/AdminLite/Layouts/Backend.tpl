@@ -3,15 +3,15 @@
 $user = Auth::user();
 $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'));
 @endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ $title }} | {{ Config::get('app.name', SITETITLE) }}</title>
-    {{ isset($meta) ? $meta : '' }}
-    <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {{ isset($meta) ? $meta : '' }}
+    <title>{{ $title }} | {{ Config::get('app.name', SITETITLE) }}</title>
     {{
     Assets::css(array(
         // Bootstrap 3.3.5
@@ -26,31 +26,24 @@ $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'
         vendor_url('dist/css/skins/_all-skins.min.css', 'almasaeed2010/adminlte'),
         // Select2
         vendor_url('plugins/select2/select2.min.css', 'almasaeed2010/adminlte'),
+        // daterangepicker
+        vendor_url('plugins/daterangepicker/daterangepicker.css', 'almasaeed2010/adminlte'),
+        // datepicker
+        vendor_url('plugins/datepicker/datepicker3.css', 'almasaeed2010/adminlte'),
+        // iCheck
+        vendor_url('plugins/iCheck/all.css', 'almasaeed2010/adminlte'),
+        // colorpicker
+        vendor_url('plugins/colorpicker/bootstrap-colorpicker.min.css', 'almasaeed2010/adminlte'),
+        // timepicker
+        vendor_url('plugins/timepicker/bootstrap-timepicker.min.css', 'almasaeed2010/adminlte'),
+
         // Custom CSS
         theme_url('css/style.css', 'AdminLite'),
         theme_url('css/custom.css', 'AdminLite'),
         theme_url('nestable/nestable.css', 'AdminLite'),
     ));
-
     echo isset($css) ? $css : '';
     }}
-
-<style>
-.pagination {
-    margin: 0;
-}
-
-.pagination > li > a, .pagination > li > span {
-  padding: 5px 10px;
-}
-</style>
-
-{{
-    //Add Controller specific JS files.
-    Assets::js(array(
-        vendor_url('plugins/jQuery/jquery-2.2.3.min.js', 'almasaeed2010/adminlte'),
-    ));
-}}
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -58,6 +51,120 @@ $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <!-- REQUIRED JS SCRIPTS -->
+    {{
+    Assets::js(array(
+        vendor_url('plugins/jQuery/jquery-2.2.3.min.js', 'almasaeed2010/adminlte'),
+        // Bootstrap 3.3.5
+        vendor_url('bootstrap/js/bootstrap.min.js', 'almasaeed2010/adminlte'),
+        // iCheck
+        vendor_url('plugins/iCheck/icheck.min.js', 'almasaeed2010/adminlte'),
+        // InputMask
+        vendor_url('plugins/input-mask/jquery.inputmask.js', 'almasaeed2010/adminlte'),
+        vendor_url('plugins/input-mask/jquery.inputmask.date.extensions.js', 'almasaeed2010/adminlte'),
+        vendor_url('plugins/input-mask/jquery.inputmask.extensions.js', 'almasaeed2010/adminlte'),
+        '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js',
+        // daterangepicker
+        vendor_url('plugins/daterangepicker/daterangepicker.js', 'almasaeed2010/adminlte'),
+        // datepicker
+        vendor_url('plugins/datepicker/bootstrap-datepicker.js', 'almasaeed2010/adminlte'),
+        // colorpicker
+        vendor_url('plugins/colorpicker/bootstrap-colorpicker.min.js', 'almasaeed2010/adminlte'),
+        // timepicker
+        vendor_url('plugins/timepicker/bootstrap-timepicker.min.js', 'almasaeed2010/adminlte'),
+        // slimScroll
+        vendor_url('plugins/slimScroll/jquery.slimscroll.min.js', 'almasaeed2010/adminlte'),
+        // fastclick
+        vendor_url('plugins/fastclick/fastclick.js', 'almasaeed2010/adminlte'),
+        // select2
+        vendor_url('plugins/select2/select2.full.min.js', 'almasaeed2010/adminlte'),
+        // AdminLTE App
+        vendor_url('dist/js/app.min.js', 'almasaeed2010/adminlte'),
+
+        //theme assets
+        theme_url('nestable/nestable.js', 'AdminLite'),
+        theme_url('js/scripts.js', 'AdminLite'),
+        site_url('ckeditor/ckeditor.js')
+    ));
+    echo isset($js) ? $js : '';
+    }}
+
+    <script>
+    //print function
+    function printDiv(divName) {
+        var data=document.getElementById(divName).innerHTML;
+        var myWindow = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
+        myWindow.document.write('<link href="<?=Config::get('app.url');?>templates/crm/assets/plugins/bootstrap/js/bootstrap.min.css" rel="stylesheet" type="text/css">');
+        myWindow.document.write(data);
+        myWindow.document.close(); // necessary for IE >= 10
+        myWindow.onload=function(){ // necessary if the div contain images
+            myWindow.focus(); // necessary for IE >= 10
+            myWindow.print();
+            myWindow.close();
+        };
+    }
+
+    $(function () {
+        {{ isset($jq) ? $jq : '' }}
+
+        //notifications menu
+        function loadlinks(){
+            //load count
+            $("#notificationcount").load("{{ admin_url('notifications/getnotificationscount') }}");
+        }
+
+        loadlinks(); // This will run on page load
+        setInterval(function(){
+            loadlinks() // this will run after every 5 seconds
+        }, 5000);
+
+        $("#notificationLink").click(function(){
+            //show window
+            $("#notificationContainer").fadeToggle(300);
+            //load notifications into the body
+            $("#notificationsBody").load("{{ admin_url('notifications/getnotifications') }}");
+
+            //update database
+            $.ajax({url: "{{ admin_url('notifications/removenotificationscount') }}"});
+            //remove from view
+            $("#notification_count").fadeOut("slow");
+            return false;
+        });
+
+        //make sure links are clickable.
+        $("#notificationContainer").click(function(){
+            //e.stopPropagation();
+        });
+
+        //Document Click hiding the popup
+        $(document).click(function(){
+          $("#notificationContainer").hide();
+        });
+
+        $('#sidebarToggle').on('click', function(e) {
+            $.ajax({
+                type: "POST",
+                url: "{{ admin_url('dashboard/savestate') }}"
+            });
+        });
+    });
+
+    CKEDITOR.editorConfig = function( config ) {
+        config.filebrowserBrowseUrl = '{{ admin_url('files/plain') }}';
+        config.baseHref = '{{ site_url() }}';
+
+        if (
+            this.name == 'image1' ||
+            this.name == 'image2' ||
+            this.name == 'image3'
+        ) {
+            config.toolbar = [
+                { name: 'insert', items: [ 'Source', 'Sourcedialog','Image' ] }
+            ];
+        }
+    };
+    </script>
 
 </head>
 
@@ -223,110 +330,6 @@ $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'
 </div>
 <!-- ./wrapper -->
 
-<!-- REQUIRED JS SCRIPTS -->
-{{
-Assets::js(array(
-    // Bootstrap 3.3.5
-    vendor_url('bootstrap/js/bootstrap.min.js', 'almasaeed2010/adminlte'),
-    // AdminLTE App
-    vendor_url('dist/js/app.min.js', 'almasaeed2010/adminlte'),
-    // iCheck
-    vendor_url('plugins/iCheck/icheck.min.js', 'almasaeed2010/adminlte'),
-    vendor_url('plugins/select2/select2.full.min.js', 'almasaeed2010/adminlte'),
-    theme_url('nestable/nestable.js', 'AdminLite'),
-    site_url('ckeditor/ckeditor.js')
-));
-
-echo isset($js) ? $js : '';
-
-echo isset($footer) ? $footer : '';
-}}
-
-<script>
-//print function
-function printDiv(divName) {
-    var data=document.getElementById(divName).innerHTML;
-    var myWindow = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0');
-    myWindow.document.write('<link href="<?=Config::get('app.url');?>templates/crm/assets/plugins/bootstrap/js/bootstrap.min.css" rel="stylesheet" type="text/css">');
-    myWindow.document.write(data);
-    myWindow.document.close(); // necessary for IE >= 10
-    myWindow.onload=function(){ // necessary if the div contain images
-        myWindow.focus(); // necessary for IE >= 10
-        myWindow.print();
-        myWindow.close();
-    };
-}
-
-$(function () {
-    {{ isset($jq) ? $jq : '' }}
-
-    //Initialize Select2 Elements
-    $(".select2").select2();
-
-    //notifications menu
-    function loadlinks(){
-        //load count
-        $("#notificationcount").load("{{ admin_url('notifications/getnotificationscount') }}");
-    }
-
-    loadlinks(); // This will run on page load
-    setInterval(function(){
-        loadlinks() // this will run after every 5 seconds
-    }, 5000);
-
-    $("#notificationLink").click(function(){
-        //show window
-        $("#notificationContainer").fadeToggle(300);
-        //load notifications into the body
-        $("#notificationsBody").load("{{ admin_url('notifications/getnotifications') }}");
-
-        //update database
-        $.ajax({url: "{{ admin_url('notifications/removenotificationscount') }}"});
-        //remove from view
-        $("#notification_count").fadeOut("slow");
-        return false;
-    });
-
-    //make sure links are clickable.
-    $("#notificationContainer").click(function(){
-        //e.stopPropagation();
-    });
-
-    //Document Click hiding the popup
-    $(document).click(function(){
-      $("#notificationContainer").hide();
-    });
-
-    $('#sidebarToggle').on('click', function(e) {
-        $.ajax({
-            type: "POST",
-            url: "{{ admin_url('dashboard/savestate') }}"
-        });
-    });
-});
-
-CKEDITOR.editorConfig = function( config ) {
-    config.filebrowserBrowseUrl = '{{ admin_url('files/plain') }}';
-    config.baseHref = '{{ site_url() }}';
-
-    if (
-        this.name == 'image1' ||
-        this.name == 'image2' ||
-        this.name == 'image3'
-    ) {
-        config.toolbar = [
-            { name: 'insert', items: [ 'Source', 'Sourcedialog','Image' ] }
-        ];
-    }
-};
-</script>
-
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. Slimscroll is required when using the
-     fixed layout. -->
-
 <!-- DO NOT DELETE! - Forensics Profiler -->
-
 </body>
 </html>

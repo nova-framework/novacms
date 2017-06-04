@@ -62,7 +62,7 @@ use App\Modules\System\Models\User;
 
 				<div class="control-group">
 				    <label class="control-label" for='publishedDate'> Published Date</label>
-				    <input class="form-control" id='publishedDate' type="text" name="publishedDate" value="<?=Input::old('publishedDate', $page->publishedDate);?>" />
+				    <input class="form-control datepicker" id='publishedDate' type="text" name="publishedDate" value="<?=Input::old('publishedDate', $page->publishedDate);?>" />
 				</div>
 
 				<div class="control-group">
