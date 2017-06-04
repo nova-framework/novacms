@@ -2,7 +2,26 @@
 // Prepare the current User Info.
 $user = Auth::user();
 $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'));
+
+// Generate the Language Changer menu.
+$langCode = Language::code();
+$langName = Language::name();
+
+$languages = Config::get('languages');
+
 @endphp
+
+<?php
+ob_start();
+foreach ($languages as $code => $info) {
+?>
+<li class="header <?php if ($code == $langCode) { echo 'active'; } ?>">
+    <a href='<?= admin_url('language/' .$code); ?>' title='<?= $info['info']; ?>'><?= $info['name']; ?></a>
+</li>
+<?php
+}
+$langMenuLinks = ob_get_clean();
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -224,6 +243,15 @@ $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'
                     </li>
                 </ul>
             </li>
+
+            <li class="dropdown language-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class='fa fa-language'></i> <?= $langName; ?>
+            </a>
+            <ul class="dropdown-menu">
+              <?= $langMenuLinks; ?>
+            </ul>
+          </li>
 
             <li><a href='{{ site_url() }}'>{{ __d('admin_lite', 'View Site') }}</a></li>
 

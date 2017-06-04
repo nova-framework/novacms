@@ -17,6 +17,10 @@ Route::group(array('prefix' => 'admin'), function() {
     Route::get('password/reset/{token}',   array('before' => 'guest',           'uses' => 'Authorise@reset'));
     Route::post('password/reset',          array('before' => 'guest|csrf',      'uses' => 'Authorise@postReset'));
 
+
+    // The Framework's Language Changer.
+    Route::get('language/{code}',          array('before' => 'referer',         'uses' => 'Language@change'));
+
     Route::get('/',                        array('before' => 'auth',            'uses' => 'Dashboard@index'));
     Route::get('dashboard',                array('before' => 'auth',            'uses' => 'Dashboard@index'));
     Route::post('dashboard/savestate',     array('before' => 'auth',            'uses' => 'Dashboard@saveState'));
