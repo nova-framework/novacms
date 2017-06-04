@@ -1,9 +1,9 @@
 <section class="content-header">
     <h1>Manage Menu Links</h1>
     <ol class="breadcrumb">
-        <li><a href='<?= admin_url('dashboard'); ?>'><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href='<?= admin_url('menus'); ?>'><i class="fa fa-book"></i> Menus</a></li>
-        <li>Manage Menu: <?php echo $menu->title; ?></li>
+        <li><a href='{{ admin_url('dashboard') }}'><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href='{{ admin_url('menus') }}'><i class="fa fa-book"></i> Menus</a></li>
+        <li>Manage Menu: {{{ $menu->title }}}</li>
     </ol>
 </section>
 
@@ -32,7 +32,7 @@
             </div>
         </div>
 
-		<?=Session::getMessages();?>
+		{{ Session::getMessages() }}
 
         <div class='row'>
 
@@ -60,11 +60,10 @@
 
                                 <div class="multiselect">
                                 <input type="checkbox" id="selectpages"/> Select All<br>
-                                <?php
-                                    foreach($pages as $page){
-                                        echo "<label><input type='checkbox' name='page[]' value='".Config::get('app.path').$page->slug."' data-title='$page->pageTitle' data-id='$page->id' class='checkbox1' /> $page->pageTitle</label><br>";
-                                    }
-                                ?>
+                                @foreach($pages as $page)
+                                    <label><input type='checkbox' name='page[]' value='{{{ Config::get('app.path').$page->slug }}}' data-title='{{{ $page->pageTitle }}}' data-id='{{{ $page->id }}}' class='checkbox1' /> {{{ $page->pageTitle }}}</label><br>
+                                @endforeach
+
                                 </div>
 
                                 <button type="submit" class="btn btn-success" name="submit"><i class="fa fa-check"></i> Add to Menu</button>
