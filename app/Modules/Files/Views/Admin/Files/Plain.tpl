@@ -4,22 +4,20 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>File Manager</title>
 
-<?php
+@php
 Assets::css(array(
     'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css',
     site_url('modules/files/assets/css/elfinder.min.css'),
     site_url('modules/files/assets/css/theme.css')
 ));
-?>
 
-<?php
 Assets::js(array(
     site_url('vendor/almasaeed2010/adminlte/plugins/jQuery/jquery-2.2.3.min.js'),
     'https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js',
     // site_url('modules/files/assets/js/elfinder.min.js'),
     site_url('modules/files/assets/js/elfinder.full.js')
 ));
-?>
+@endphp
 
     <!-- elFinder initialization (REQUIRED) -->
     <script type="text/javascript" charset="utf-8">
@@ -27,7 +25,7 @@ Assets::js(array(
         function getUrlParam(paramName) {
             var reParam = new RegExp('(?:[\?&]|&amp;)' + paramName + '=([^&]+)', 'i') ;
             var match = window.location.search.match(reParam) ;
-            
+
             return (match && match.length > 1) ? match[1] : '' ;
         }
 
@@ -35,7 +33,7 @@ Assets::js(array(
             var funcNum = getUrlParam('CKEditorFuncNum');
 
             var elf = $('#elfinder').elfinder({
-                url : '<?= site_url('admin/files/connector'); ?>',
+                url : '{{{ admin_url('files/connector') }}}',
                 getFileCallback : function(file) {
                     window.opener.CKEDITOR.tools.callFunction(funcNum, file.url);
                     window.close();
