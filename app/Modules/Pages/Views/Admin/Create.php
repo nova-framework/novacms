@@ -57,7 +57,7 @@
 
 				<div class="control-group">
 				    <label class="control-label" for='publishedDate'> Published Date</label>
-				    <input class="form-control" id='publishedDate' type="text" name="publishedDate" value="<?=Input::old('publishedDate', date('Y-m-d H:i:s'));?>" />
+				    <input class="form-control datetimepicker" id='publishedDate' type="text" name="publishedDate" value="<?=Input::old('publishedDate', date('d-m-Y H:i:s'));?>" />
 				</div>
 
 				<div class="control-group">

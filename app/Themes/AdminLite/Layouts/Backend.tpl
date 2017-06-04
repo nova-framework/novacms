@@ -14,33 +14,33 @@ $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'
     <title>{{ $title }} | {{ Config::get('app.name', SITETITLE) }}</title>
     {{
     Assets::css(array(
-        // Bootstrap 3.3.5
-        vendor_url('bootstrap/css/bootstrap.min.css', 'almasaeed2010/adminlte'),
         // Font Awesome
         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css',
         // Ionicons
         'https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css',
+        theme_url('plugins/bootstrap/css/bootstrap.min.css', 'AdminLite'),
+        theme_url('plugins/toastr/toastr.css', 'AdminLite'),
+        theme_url('plugins/bootstrap-switch/bootstrap-switch.min.css', 'AdminLite'),
+        theme_url('plugins/bootstrap-tags/bootstrap-tagsinput.css', 'AdminLite'),
+        theme_url('plugins/bootstrap-editable/editable.css', 'AdminLite'),
+        theme_url('plugins/daterangepicker/daterangepicker-bs3.css', 'AdminLite'),
+        theme_url('plugins/timepicker/bootstrap-timepicker.min.css', 'AdminLite'),
+        theme_url('plugins/select2/select2.min.css', 'AdminLite'),
+        theme_url('plugins/colorpicker/bootstrap-colorpicker.min.css', 'AdminLite'),
+        theme_url('plugins/tablesorter/tablesorter.css', 'AdminLite'),
+        theme_url('plugins/sweetalerts/sweetalert.css', 'AdminLite'),
+        theme_url('plugins/fullcalendar/fullcalendar.css', 'AdminLite'),
+        theme_url('plugins/conditionize/conditionize.css', 'AdminLite'),
+        theme_url('plugins/dropzone/dropzone.css', 'AdminLite'),
+        theme_url('plugins/jqueryui/custom-theme/jquery-ui-1.10.4.custom.min.css', 'AdminLite'),
         // Theme style
         vendor_url('dist/css/AdminLTE.min.css', 'almasaeed2010/adminlte'),
         // AdminLTE Skins
         vendor_url('dist/css/skins/_all-skins.min.css', 'almasaeed2010/adminlte'),
-        // Select2
-        vendor_url('plugins/select2/select2.min.css', 'almasaeed2010/adminlte'),
-        // daterangepicker
-        vendor_url('plugins/daterangepicker/daterangepicker.css', 'almasaeed2010/adminlte'),
-        // datepicker
-        vendor_url('plugins/datepicker/datepicker3.css', 'almasaeed2010/adminlte'),
-        // iCheck
-        vendor_url('plugins/iCheck/all.css', 'almasaeed2010/adminlte'),
-        // colorpicker
-        vendor_url('plugins/colorpicker/bootstrap-colorpicker.min.css', 'almasaeed2010/adminlte'),
-        // timepicker
-        vendor_url('plugins/timepicker/bootstrap-timepicker.min.css', 'almasaeed2010/adminlte'),
-
         // Custom CSS
         theme_url('css/style.css', 'AdminLite'),
         theme_url('css/custom.css', 'AdminLite'),
-        theme_url('nestable/nestable.css', 'AdminLite'),
+        theme_url('plugins/nestable/nestable.css', 'AdminLite'),
     ));
     echo isset($css) ? $css : '';
     }}
@@ -55,37 +55,40 @@ $sinceDate = $user->created_at->formatLocalized(__d('admin_lite', '%d %b %Y, %R'
     <!-- REQUIRED JS SCRIPTS -->
     {{
     Assets::js(array(
-        vendor_url('plugins/jQuery/jquery-2.2.3.min.js', 'almasaeed2010/adminlte'),
-        // Bootstrap 3.3.5
-        vendor_url('bootstrap/js/bootstrap.min.js', 'almasaeed2010/adminlte'),
-        // iCheck
-        vendor_url('plugins/iCheck/icheck.min.js', 'almasaeed2010/adminlte'),
-        // InputMask
-        vendor_url('plugins/input-mask/jquery.inputmask.js', 'almasaeed2010/adminlte'),
-        vendor_url('plugins/input-mask/jquery.inputmask.date.extensions.js', 'almasaeed2010/adminlte'),
-        vendor_url('plugins/input-mask/jquery.inputmask.extensions.js', 'almasaeed2010/adminlte'),
-        '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js',
-        // daterangepicker
-        vendor_url('plugins/daterangepicker/daterangepicker.js', 'almasaeed2010/adminlte'),
-        // datepicker
-        vendor_url('plugins/datepicker/bootstrap-datepicker.js', 'almasaeed2010/adminlte'),
-        // colorpicker
-        vendor_url('plugins/colorpicker/bootstrap-colorpicker.min.js', 'almasaeed2010/adminlte'),
-        // timepicker
-        vendor_url('plugins/timepicker/bootstrap-timepicker.min.js', 'almasaeed2010/adminlte'),
-        // slimScroll
-        vendor_url('plugins/slimScroll/jquery.slimscroll.min.js', 'almasaeed2010/adminlte'),
-        // fastclick
-        vendor_url('plugins/fastclick/fastclick.js', 'almasaeed2010/adminlte'),
-        // select2
-        vendor_url('plugins/select2/select2.full.min.js', 'almasaeed2010/adminlte'),
+        theme_url('plugins/jquery/jquery.min.js', 'AdminLite'),
+        theme_url('plugins/jqueryui/jqueryui.min.js', 'AdminLite'),
+        theme_url('plugins/ejs/ejs.js', 'AdminLite'),
+        theme_url('plugins/sweetalerts/sweetalert.min.js', 'AdminLite'),
+        theme_url('plugins/bootstrap/js/bootstrap.min.js', 'AdminLite'),
+        theme_url('plugins/bootstrap-switch/bootstrap-switch.min.js', 'AdminLite'),
+        theme_url('plugins/bootstrap-editable/editable.min.js', 'AdminLite'),
+        theme_url('plugins/bootstrap-hover/bootstrap-hover-dropdown.js', 'AdminLite'),
+        theme_url('plugins/bootstrap-typehead/typehead.js', 'AdminLite'),
+        theme_url('plugins/bootstrap-tags/bootstrap-tagsinput.min.js', 'AdminLite'),
+        theme_url('plugins/tablednd/jquery.tablednd_0_5.js', 'AdminLite'),
+        theme_url('plugins/slimScroll/jquery.slimscroll.min.js', 'AdminLite'),
+        theme_url('plugins/fastclick/fastclick.min.js', 'AdminLite'),
+        theme_url('plugins/prism/prism.js', 'AdminLite'),
+        theme_url('plugins/moment/moment.min.js', 'AdminLite'),
+        theme_url('plugins/datepicker/datepicker.js', 'AdminLite'),
+        theme_url('plugins/daterangepicker/daterangepicker.js', 'AdminLite'),
+        theme_url('plugins/select2/select2.full.min.js', 'AdminLite'),
+        theme_url('plugins/colorpicker/bootstrap-colorpicker.min.js', 'AdminLite'),
+        theme_url('plugins/tablesorter/jquery.tablesorter.js', 'AdminLite'),
+        theme_url('plugins/justgage/justgage.1.0.1.min.js', 'AdminLite'),
+        theme_url('plugins/conditionize/conditionize.js', 'AdminLite'),
+        theme_url('plugins/ckeditor/ckeditor.js', 'AdminLite'),
+        theme_url('plugins/ckeditor/adapters/jquery.js', 'AdminLite'),
+        theme_url('plugins/fullcalendar/fullcalendar.min.js', 'AdminLite'),
+        theme_url('plugins/pace/pace.min.js', 'AdminLite'),
+        theme_url('plugins/slimScroll/jquery.slimscroll.min.js', 'AdminLite'),
+        theme_url('plugins/toastr/toastr.min.js', 'AdminLite'),
+        theme_url('plugins/dropzone/dropzone.js', 'AdminLite'),
+        theme_url('plugins/jasny/jasny-bootstrap.min.js', 'AdminLite'),
         // AdminLTE App
         vendor_url('dist/js/app.min.js', 'almasaeed2010/adminlte'),
-
-        //theme assets
-        theme_url('nestable/nestable.js', 'AdminLite'),
         theme_url('js/scripts.js', 'AdminLite'),
-        site_url('ckeditor/ckeditor.js')
+        site_url('ckeditor/ckeditor.js'),
     ));
     echo isset($js) ? $js : '';
     }}
