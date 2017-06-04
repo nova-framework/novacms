@@ -1,8 +1,8 @@
 <section class="content-header">
     <h1>Create Page</h1>
     <ol class="breadcrumb">
-        <li><a href='<?= admin_url('dashboard'); ?>'><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href='<?= admin_url('pages'); ?>'><i class="fa fa-book"></i> Pages</a></li>
+        <li><a href='{{ admin_url('dashboard') }}'><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href='{{ admin_url('pages') }}'><i class="fa fa-book"></i> Pages</a></li>
         <li>Create Page</li>
     </ol>
 </section>
@@ -15,10 +15,10 @@
     </div>
     <div class="box-body">
 
-		<form action='<?=admin_url('pages');?>' method='post'>
-		<input type='hidden' name='csrfToken' value='<?=$csrfToken;?>'>
+		<form action='{{ admin_url('pages') }}' method='post'>
+		<input type='hidden' name='csrfToken' value='{{{ $csrfToken }}}'>
 
-		<?=Session::getMessages();?>
+		{{ Session::getMessages() }}
 
 		<div class='row'>
 
@@ -26,18 +26,18 @@
 
 				<div class="control-group">
 				    <label class="control-label" for='browserTitle'> Browser Title</label>
-				    <input class="form-control" id='browserTitle' type="text" name="browserTitle" value="<?=Input::old('browserTitle');?>" />
+				    <input class="form-control" id='browserTitle' type="text" name="browserTitle" value="{{{ Input::old('browserTitle') }}}" />
 				</div>
 
 				<div class="control-group">
 				    <label class="control-label" for='pageTitle'> Page Title</label>
-				    <input class="form-control" id='pageTitle' type="text" name="pageTitle" value="<?=Input::old('pageTitle');?>" />
+				    <input class="form-control" id='pageTitle' type="text" name="pageTitle" value="{{{ Input::old('pageTitle') }}}" />
 				</div>
 
 				<div class="control-group">
 				    <label class="control-label" for='active'> Active</label>
 				    <select name='active' id='active' class='select2 form-control'>
-				    <?php
+				    @php
 				    $options = ['Yes', 'No'];
 				    foreach ($options as $option) {
 				    	if (Input::old('active') == $option) {
@@ -47,19 +47,19 @@
 				    	}
 				    	echo "<option value='$option' $sel>$option</option>";
 				    }
-				    ?>
+				    @endphp
 				    </select>
 				</div>
 
 				<div class="control-group">
 				    <label class="control-label" for='publishedDate'> Published Date</label>
-				    <input class="form-control datetimepicker" required id='publishedDate' type="text" name="publishedDate" value="<?=Input::old('publishedDate', date('d-m-Y H:i:s'));?>" />
+				    <input class="form-control datetimepicker" required id='publishedDate' type="text" name="publishedDate" value="{{{ Input::old('publishedDate', date('d-m-Y H:i:s')) }}}" />
 				</div>
 
 				<div class="control-group">
 				    <label class="control-label" for='layout'> Layout File</label>
 				    <select name='layout' id='layout' class='select2 form-control'>
-				    <?php
+				    @php
 				    foreach ($layouts as $option) {
 				    	if (Input::old('layout') == $option) {
 				    		$sel = 'selected=selected';
@@ -68,7 +68,7 @@
 				    	}
 				    	echo "<option value='$option' $sel>$option</option>";
 				    }
-				    ?>
+				    @endphp
 				    </select>
 				</div>
 
@@ -78,7 +78,7 @@
 
 				<div class="control-group">
 				    <label class="control-label" for='metaDescription'> Meta Descroption</label>
-				    <textarea class="form-control" id='metaDescription' name="metaDescription" rows='10'><?=Input::old('metaDescription');?></textarea>
+				    <textarea class="form-control" id='metaDescription' name="metaDescription" rows='10'>{{{ Input::old('metaDescription') }}}</textarea>
 				</div>
 
 			</div>
@@ -94,7 +94,7 @@
 				<div class="control-group">
 				    <label class="control-label" for='sidebars'> Left Sidebars</label><br>
 
-				    <?php
+				    @php
 				    $sidebars = Input::old('sidebars');
 
 				    if (is_array($sidebars)) {
@@ -109,7 +109,7 @@
 				    	}
 				    	echo "<input type='checkbox' name='sidebars[]' value='$sidebar->id' $check> $sidebar->title<br>";
 				    }
-				    ?>
+				    @endphp
 				</div>
 
 			</div>
@@ -119,7 +119,7 @@
 				<div class="control-group">
 				    <label class="control-label" for='sidebars'> Right Sidebars</label><br>
 
-				    <?php
+				    @php
 				    $sidebars = Input::old('sidebars');
 
 				    if (is_array($sidebars)) {
@@ -134,7 +134,7 @@
 				    	}
 				    	echo "<input type='checkbox' name='sidebars[]' value='$sidebar->id' $check> $sidebar->title<br>";
 				    }
-				    ?>
+				    @endphp
 				</div>
 
 			</div>
@@ -145,7 +145,7 @@
 
 		<div class="control-group">
 		    <label class="control-label" for='content'> Content</label>
-		    <textarea class="form-control ckeditor" id='content' name="content" rows='10'><?=Input::old('content');?></textarea>
+		    <textarea class="form-control ckeditor" id='content' name="content" rows='10'>{{ Input::old('content') }}</textarea>
 		</div>
 
 		<p><br>

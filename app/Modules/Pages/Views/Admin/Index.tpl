@@ -1,7 +1,7 @@
 <section class="content-header">
     <h1>Pages</h1>
     <ol class="breadcrumb">
-        <li><a href='<?= admin_url('dashboard'); ?>'><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href='{{ admin_url('dashboard') }}'><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li>Pages</li>
     </ol>
 </section>
@@ -14,9 +14,9 @@
     </div>
     <div class="box-body">
 
-		<?=Session::getMessages();?>
+		{{ Session::getMessages() }}
 
-		<p><a href='<?=admin_url('pages/create');?>' class='btn btn-info btn-xs'><i class='fa fa-plus'></i> Create Page</a></p>
+		<p><a href='{{ admin_url('pages/create') }}' class='btn btn-info btn-xs'><i class='fa fa-plus'></i> Create Page</a></p>
 
 		<div class='table-responsive'>
         <table class='table table-striped table-hover table-bordered'>
@@ -24,28 +24,21 @@
         	<th>Title</th>
         	<th>Action</th>
         </tr>
-        <?php
-        if (! $pages->isEmpty()) {
-        	foreach($pages as $row) {
-        		echo "<tr>";
-        			echo "<td>$row->pageTitle</td>";
-        			echo "<td>
-
-        			<a href='".admin_url('pages/'.$row->id.'/edit')."' class='btn btn-warning btn-xs'><i class='fa fa-edit'></i> Edit</a>
-
-        			<a class='btn btn-xs btn-danger' href='#' data-toggle='modal' data-target='#confirm_" .$row->id ."'><i class='fa fa-remove'></i> Delete</a>
-
-        			</td>";
-        		echo "</tr>";
-        	}
-        }
-        ?>
+        @if (! $pages->isEmpty())
+        	@foreach($pages as $row)
+        		<tr>
+        			<td>$row->pageTitle</td>
+        			<td>
+        			    <a href='{{{ admin_url("pages/$row->id/edit") }}}' class='btn btn-warning btn-xs'><i class='fa fa-edit'></i> Edit</a>
+        			    <a class='btn btn-xs btn-danger' href='#' data-toggle='modal' data-target='#confirm_{{{ $row->id }}}'><i class='fa fa-remove'></i> Delete</a>
+        			</td>
+        		</tr>
+        	@endforeach
+        @endif
         </table>
         </div>
 
-        <p><?=$pages->links();?></p>
-
-
+        <p>{{ $pages->links() }}</p>
 
     </div>
 </div>
@@ -53,17 +46,16 @@
 </section>
 
 
-<?php
-if (! $pages->isEmpty()) {
-    foreach ($pages->getItems() as $page) {
-?>
-<div class="modal modal-default" id="confirm_<?= $page->id ?>">
+@if (! $pages->isEmpty())
+    @foreach ($pages->getItems() as $page)
+
+<div class="modal modal-default" id="confirm_{{{ $page->id }}}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button aria-label="Close" data-dismiss="modal" class="close" type="button">
                 <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Select Page: <?=$page->pageTitle;?></h4>
+                <h4 class="modal-title">Select Page: {{{ $page->pageTitle }}}</h4>
             </div>
             <div class="modal-body">
                 <p>Are you sure you want to delete this page?</p>
@@ -71,8 +63,8 @@ if (! $pages->isEmpty()) {
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-primary pull-left col-md-3" type="button">Cancel</button>
-                <form action="<?= admin_url('pages/' .$page->id .'/destroy'); ?>" method="POST">
-                    <input type="hidden" name="csrfToken" value="<?= $csrfToken; ?>" />
+                <form action="{{{ admin_url("pages/$page->id/destroy") }}}" method="POST">
+                    <input type="hidden" name="csrfToken" value="{{{ $csrfToken }}}" />
                     <input type="submit" name="button" class="btn btn btn-danger pull-right" value="Delete">
                 </form>
             </div>
@@ -80,6 +72,5 @@ if (! $pages->isEmpty()) {
         <!-- /.modal-content -->
     </div>
 </div>
-<?php
-    }
-}
+    @endforeach
+@endif

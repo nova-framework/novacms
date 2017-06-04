@@ -6,8 +6,8 @@ use App\Modules\System\Models\User;
 <section class="content-header">
     <h1>Edit Page</h1>
     <ol class="breadcrumb">
-        <li><a href='<?= admin_url('dashboard'); ?>'><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href='<?= admin_url('pages'); ?>'><i class="fa fa-book"></i> Pages</a></li>
+        <li><a href='{{ admin_url('dashboard') }}'><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href='{{ admin_url('pages') }}'><i class="fa fa-book"></i> Pages</a></li>
         <li>Edit Page</li>
     </ol>
 </section>
@@ -23,7 +23,7 @@ use App\Modules\System\Models\User;
 		<form action='<?=admin_url('pages/'.$page->id);?>' method='post'>
 		<input type='hidden' name='csrfToken' value='<?=$csrfToken;?>'>
 
-		<?=Session::getMessages();?>
+		{{ Session::getMessages() }}
 
 		<div class='row'>
 
@@ -31,18 +31,18 @@ use App\Modules\System\Models\User;
 
 				<div class="control-group">
 				    <label class="control-label" for='browserTitle'> Browser Title</label>
-				    <input class="form-control" id='browserTitle' type="text" name="browserTitle" value="<?=Input::old('browserTitle', $page->browserTitle);?>" />
+				    <input class="form-control" id='browserTitle' type="text" name="browserTitle" value="{{{ Input::old('browserTitle', $page->browserTitle) }}}" />
 				</div>
 
 				<div class="control-group">
 				    <label class="control-label" for='pageTitle'> Page Title</label>
-				    <input class="form-control" id='pageTitle' type="text" name="pageTitle" value="<?=Input::old('pageTitle', $page->pageTitle);?>" />
+				    <input class="form-control" id='pageTitle' type="text" name="pageTitle" value="{{{ Input::old('pageTitle', $page->pageTitle) }}}" />
 				</div>
 
 				<div class="control-group">
 				    <label class="control-label" for='active'> Active</label>
 				    <select name='active' id='active' class='select2 form-control'>
-				    <?php
+				    @php
 				    $options = ['Yes', 'No'];
 				    foreach ($options as $option) {
 				    	if (Input::old('active', $page->active) == $option) {
@@ -52,19 +52,19 @@ use App\Modules\System\Models\User;
 				    	}
 				    	echo "<option value='$option' $sel>$option</option>";
 				    }
-				    ?>
+				    @endphp
 				    </select>
 				</div>
 
 				<div class="control-group">
 				    <label class="control-label" for='publishedDate'> Published Date</label>
-				    <input class="form-control datetimepicker" required id='publishedDate' type="text" name="publishedDate" value="<?=Input::old('publishedDate', date('d-m-Y H:i:s', strtotime($page->publishedDate)));?>" />
+				    <input class="form-control datetimepicker" required id='publishedDate' type="text" name="publishedDate" value="{{{ Input::old('publishedDate', date('d-m-Y H:i:s', strtotime($page->publishedDate))) }}}" />
 				</div>
 
 				<div class="control-group">
 				    <label class="control-label" for='layout'> Layout File</label>
 				    <select name='layout' id='layout' class='select2 form-control'>
-				    <?php
+				    @php
 				    foreach ($layouts as $option) {
 				    	if (Input::old('layout', $page->layout) == $option) {
 				    		$sel = 'selected=selected';
@@ -73,7 +73,7 @@ use App\Modules\System\Models\User;
 				    	}
 				    	echo "<option value='$option' $sel>$option</option>";
 				    }
-				    ?>
+				    @endphp
 				    </select>
 				</div>
 
@@ -83,7 +83,7 @@ use App\Modules\System\Models\User;
 
 				<div class="control-group">
 				    <label class="control-label" for='metaDescription'> Meta Descroption</label>
-				    <textarea class="form-control" id='metaDescription' name="metaDescription" rows='10'><?=Input::old('metaDescription', $page->metaDescription);?></textarea>
+				    <textarea class="form-control" id='metaDescription' name="metaDescription" rows='10'>{{{ Input::old('metaDescription', $page->metaDescription) }}}</textarea>
 				</div>
 
 			</div>
@@ -99,7 +99,7 @@ use App\Modules\System\Models\User;
 				<div class="control-group">
 				    <label class="control-label" for='sidebars'> Left Sidebars</label><br>
 
-				    <?php
+				    @php
 				    $sidebars = Input::old('sidebars', $page->sidebars);
 				    if (is_string($sidebars)) {
 				    	$sidebars = explode(',', $sidebars);
@@ -117,7 +117,7 @@ use App\Modules\System\Models\User;
 
 				    	echo "<input type='checkbox' name='sidebars[]' value='$sidebar->id' $check> $sidebar->title<br>";
 				    }
-				    ?>
+				    @endphp
 				</div>
 
 			</div>
@@ -127,7 +127,7 @@ use App\Modules\System\Models\User;
 				<div class="control-group">
 				    <label class="control-label" for='sidebars'> Right Sidebars</label><br>
 
-				    <?php
+				    @php
 				    $sidebars = Input::old('sidebars', $page->sidebars);
 				    if (is_string($sidebars)) {
 				    	$sidebars = explode(',', $sidebars);
@@ -145,7 +145,7 @@ use App\Modules\System\Models\User;
 
 				    	echo "<input type='checkbox' name='sidebars[]' value='$sidebar->id' $check> $sidebar->title<br>";
 				    }
-				    ?>
+				    @endphp
 				</div>
 
 			</div>
@@ -156,7 +156,7 @@ use App\Modules\System\Models\User;
 
 		<div class="control-group">
 		    <label class="control-label" for='content'> Content</label>
-		    <textarea class="form-control ckeditor" id='content' name="content" rows='10'><?=Input::old('content', $page->content);?></textarea>
+		    <textarea class="form-control ckeditor" id='content' name="content" rows='10'>{{{ Input::old('content', $page->content) }}}</textarea>
 		</div>
 
 		<p><br>
@@ -174,7 +174,7 @@ use App\Modules\System\Models\User;
     </div>
     <div class="box-body">
 
-	<?php
+	@php
 	if($revisions){
 
 		$i = 0;
@@ -211,7 +211,7 @@ use App\Modules\System\Models\User;
 			</div>";
 		$i++;}
 	}
-	?>
+	@endphp
 
 
     </div>
@@ -239,7 +239,7 @@ use App\Modules\System\Models\User;
 	<form action='<?=admin_url('pages/updatepageblocks');?>' method='post'>
 	<input type='hidden' name='csrfToken' value='<?=$csrfToken;?>'>
 
-	<?php
+	@php
 	if($pageBlocks){
 
 		$x = 0;
@@ -278,11 +278,11 @@ use App\Modules\System\Models\User;
 			</div>";
 		$x++;}
 	}
-	?>
+	@endphp
 
-	<?php if (count($pageBlocks) > 0 ) { ?>
-	<p><button type="submit" class="btn btn-success" name="updatepageblocks"><i class="fa fa-check"></i> Update Page Blocks</button></p>
-	<?php } ?>
+	@if (count($pageBlocks) > 0 )
+		<p><button type="submit" class="btn btn-success" name="updatepageblocks"><i class="fa fa-check"></i> Update Page Blocks</button></p>
+	@endif
 
 	</form>
 
@@ -290,9 +290,8 @@ use App\Modules\System\Models\User;
     </div>
 </div>
 
-<?php
-if ($pageBlocks) {
-    foreach ($pageBlocks as $block) {
+@if ($pageBlocks)
+    @foreach ($pageBlocks as $block)
 ?>
 <div class="modal modal-default" id="confirm_<?= $block->id ?>">
     <div class="modal-dialog">
@@ -300,7 +299,7 @@ if ($pageBlocks) {
             <div class="modal-header">
                 <button aria-label="Close" data-dismiss="modal" class="close" type="button">
                 <span aria-hidden="true">×</span></button>
-                <h4 class="modal-title">Select Page Block: <?=$block->title;?></h4>
+                <h4 class="modal-title">Select Page Block: {{{ $block->title }}}</h4>
             </div>
             <div class="modal-body">
                 <p>Are you sure you want to delete this page block?</p>
@@ -308,8 +307,8 @@ if ($pageBlocks) {
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-primary pull-left col-md-3" type="button">Cancel</button>
-                <form action="<?= admin_url('pages/pageblocks/' .$block->id .'/destroy'); ?>" method="POST">
-                    <input type="hidden" name="csrfToken" value="<?= $csrfToken; ?>" />
+                <form action="{{{ admin_url("pages/pageblocks/$block->id/destroy") }}}" method="POST">
+                    <input type="hidden" name="csrfToken" value="{{{ $csrfToken }}}" />
                     <input type="submit" name="button" class="btn btn btn-danger pull-right" value="Delete">
                 </form>
             </div>
@@ -317,9 +316,7 @@ if ($pageBlocks) {
         <!-- /.modal-content -->
     </div>
 </div>
-<?php
-    }
-}
-?>
+	@endforeach
+@endif
 
 </section>
