@@ -51,10 +51,6 @@
 				    </select>
 				</div>
 
-			</div>
-
-			<div class='col-md-6'>
-
 				<div class="control-group">
 				    <label class="control-label" for='publishedDate'> Published Date</label>
 				    <input class="form-control datetimepicker" id='publishedDate' type="text" name="publishedDate" value="<?=Input::old('publishedDate', date('d-m-Y H:i:s'));?>" />
@@ -74,6 +70,15 @@
 				    }
 				    ?>
 				    </select>
+				</div>
+
+			</div>
+
+			<div class='col-md-6'>
+
+				<div class="control-group">
+				    <label class="control-label" for='metaDescription'> Meta Descroption</label>
+				    <textarea class="form-control" id='metaDescription' name="metaDescription" rows='10'><?=Input::old('metaDescription');?></textarea>
 				</div>
 
 			</div>

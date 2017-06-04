@@ -46,9 +46,17 @@ class Pages extends Controller
 		$leftSidebars  = Sidebar::whereIn('id', $ids)->where('position', 'LIKE', '%Left%')->get();
 		$rightSidebars = Sidebar::whereIn('id', $ids)->where('position', 'LIKE', '%Right%')->get();
 
+		$meta = "<meta name='description' content='$page->metaDescription' />
+	<meta property='og:title' content='$page->pageTitle' />
+	<meta property='og:type' content='article' />
+	<meta property='og:url' content='".site_url($page->slug)."' />
+	<meta property='og:image' content='".theme_url('images/nova.png', 'Bootstrap')."' />
+	<meta property='og:description' content='$page->metaDescription' />";
+
 		//load a view using the app/Views/Default file
 		return View::make('Default')
 		->shares('title', $page->browserTitle)
+		->shares('meta', $meta)
 		->shares('browserTitle', $page->pageTitle)
 		->shares('leftSidebars', $leftSidebars)
 		->shares('rightSidebars', $rightSidebars)

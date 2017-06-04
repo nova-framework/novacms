@@ -38,7 +38,7 @@ class Admin extends BackendController
 
 	public function store()
 	{
-	    $input = Input::only('browserTitle', 'pageTitle', 'active', 'publishedDate', 'content', 'layout', 'sidebars');
+	    $input = Input::all();
 
 	    $validate = $this->validator($input);
 
@@ -53,13 +53,14 @@ class Admin extends BackendController
 	    		$page->sidebars = implode(',', $input['sidebars']);
 	    	}
 
-	    	$page->browserTitle = $input['browserTitle'];
-	    	$page->pageTitle = $input['pageTitle'];
-	    	$page->slug = $slug;
-	    	$page->active = $input['active'];
-	    	$page->publishedDate = $input['publishedDate'];
-	    	$page->content = $input['content'];
-	    	$page->layout = $input['layout'];
+	    	$page->metaDescription = $input['metaDescription'];
+	    	$page->browserTitle    = $input['browserTitle'];
+	    	$page->pageTitle 	   = $input['pageTitle'];
+	    	$page->slug 		   = $slug;
+	    	$page->active          = $input['active'];
+	    	$page->publishedDate   = $input['publishedDate'];
+	    	$page->content         = $input['content'];
+	    	$page->layout          = $input['layout'];
 	    	$page->save();
 
 	    	$log          = new UserLog();
@@ -109,7 +110,7 @@ class Admin extends BackendController
 			return Redirect::to('admin/pages')->withStatus('Page not found', 'danger');
 		}
 
-	    $input = Input::only('browserTitle', 'pageTitle', 'active', 'publishedDate', 'content', 'layout', 'sidebars');
+	    $input = Input::all();
 
 	    $validate = $this->validator($input);
 
@@ -140,13 +141,14 @@ class Admin extends BackendController
 	    	}
 
 	    	//save
-	    	$page->browserTitle = $input['browserTitle'];
-	    	$page->pageTitle = $input['pageTitle'];
-	    	$page->slug = $slug;
-	    	$page->active = $input['active'];
-	    	$page->publishedDate = $input['publishedDate'];
-	    	$page->content = $input['content'];
-	    	$page->layout = $input['layout'];
+	    	$page->metaDescription = $input['metaDescription'];
+	    	$page->browserTitle    = $input['browserTitle'];
+	    	$page->pageTitle       = $input['pageTitle'];
+	    	$page->slug            = $slug;
+	    	$page->active          = $input['active'];
+	    	$page->publishedDate   = $input['publishedDate'];
+	    	$page->content         = $input['content'];
+	    	$page->layout          = $input['layout'];
 	    	$page->save();
 
 	    	$log          = new UserLog();

@@ -2,9 +2,9 @@
 <html lang="{{ Language::code() }}">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ $meta or '' }}
     <title>{{ $title }} - {{ Config::get('app.name', SITETITLE) }}</title>
-
-{{ $meta or '' }}
 
 {{
 Assets::css([

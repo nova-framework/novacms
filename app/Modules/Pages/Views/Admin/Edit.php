@@ -56,10 +56,6 @@ use App\Modules\System\Models\User;
 				    </select>
 				</div>
 
-			</div>
-
-			<div class='col-md-6'>
-
 				<div class="control-group">
 				    <label class="control-label" for='publishedDate'> Published Date</label>
 				    <input class="form-control datetimepicker" id='publishedDate' type="text" name="publishedDate" value="<?=Input::old('publishedDate', $page->publishedDate);?>" />
@@ -79,6 +75,15 @@ use App\Modules\System\Models\User;
 				    }
 				    ?>
 				    </select>
+				</div>
+
+			</div>
+
+			<div class='col-md-6'>
+
+				<div class="control-group">
+				    <label class="control-label" for='metaDescription'> Meta Descroption</label>
+				    <textarea class="form-control" id='metaDescription' name="metaDescription" rows='10'><?=Input::old('metaDescription', $page->metaDescription);?></textarea>
 				</div>
 
 			</div>
