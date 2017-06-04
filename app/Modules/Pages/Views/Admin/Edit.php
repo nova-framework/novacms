@@ -171,10 +171,6 @@ use App\Modules\System\Models\User;
 <div class="box box-primary">
 	<div class="box-header with-border">
         <h3 class="box-title">Revisions</h3>
-        <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-        </div>
     </div>
     <div class="box-body">
 
@@ -225,12 +221,20 @@ use App\Modules\System\Models\User;
 <div class="box box-primary">
     <div class="box-header with-border">
         <h3 class="box-title">Page Blocks</h3>
-        <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-        </div>
     </div>
     <div class="box-body">
+
+	<div class="alert alert-success alert-dismissable">
+        <h4>Page Content Blocks</h4>
+        <p>These blocks allow you to place extra information. The PageBlocks call goes inside the view or theme layout file.</p>
+        <p>The function needs 3 parameters </p>
+        <ol>
+        <li>The page id</li>
+        <li>A title</li>
+        <li>textarea or input</li>
+        </ol>
+        <p> <code>PageBlocks::get($pageID, 'Social Media Info', 'textarea')</code></p>
+    </div>
 
 	<form action='<?=admin_url('pages/updatepageblocks');?>' method='post'>
 	<input type='hidden' name='csrfToken' value='<?=$csrfToken;?>'>
