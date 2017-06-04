@@ -61,7 +61,9 @@ Assets::css([
             @if (isset($leftSidebars))
                 @foreach ($leftSidebars as $row)
                     <div class='widget {{ $row->class }}'>
-                        <div class='widgetTitle page-header'><h1>{{{ $row->title }}}</h1></div>
+                        @if ($row->displayTitle == 'on')
+                            <div class='widgetTitle page-header'><h1>{{{ $row->title }}}</h1></div>
+                        @endif
                         <div class='widgetBody'>{{ $row->content }}</div>
                     </div>
                 @endforeach
@@ -82,7 +84,9 @@ Assets::css([
             @if (isset($rightSidebars))
                 @foreach ($rightSidebars as $row)
                     <div class='widget {{ $row->class }}'>
-                        <div class='widgetTitle page-header'><h1>{{ $row->title }}</h1></div>
+                        @if ($row->displayTitle == 'on')
+                            <div class='widgetTitle page-header'><h1>{{{ $row->title }}}</h1></div>
+                        @endif
                         <div class='widgetBody'>{{ $row->content }}</div>
                     </div>
                 @endforeach

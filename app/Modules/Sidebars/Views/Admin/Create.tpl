@@ -1,8 +1,8 @@
 <section class="content-header">
     <h1>Create Sidebar</h1>
     <ol class="breadcrumb">
-        <li><a href='<?= admin_url('dashboard'); ?>'><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href='<?= admin_url('sidebars'); ?>'><i class="fa fa-cubes"></i> Sidebars</a></li>
+        <li><a href='{{{  admin_url('dashboard') }}}'><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href='{{{  admin_url('sidebars') }}}'><i class="fa fa-cubes"></i> Sidebars</a></li>
         <li>Create Sidebar</li>
     </ol>
 </section>
@@ -15,10 +15,10 @@
     </div>
     <div class="box-body">
 
-		<form action='<?=admin_url('sidebars');?>' method='post'>
-		<input type='hidden' name='csrfToken' value='<?=$csrfToken;?>'>
+		<form action='{{{ admin_url('sidebars') }}}' method='post'>
+		<input type='hidden' name='csrfToken' value='{{{ $csrfToken }}}'>
 
-		<?=Session::getMessages();?>
+		{{ Session::getMessages() }}
 
 		<div class='row'>
 
@@ -26,12 +26,17 @@
 
 				<div class="control-group">
 				    <label class="control-label" for='title'> Title</label>
-				    <input class="form-control" id='title' type="text" name="title" value="<?=Input::old('title');?>" />
+				    <input class="form-control" id='title' type="text" name="title" value="{{{ Input::old('title') }}}" />
+				</div>
+
+				<div class="control-group">
+				    <label class="control-label" for='displayTitle'> Display Title</label>
+				    <input id='displayTitle' type="checkbox" name="displayTitle" {{ (Input::old('displayTitle') == 'on' ? 'checked=checked' : '') }}" />
 				</div>
 
 				<div class="control-group">
 				    <label class="control-label" for='class'> Class (optional classes comma seperated)</label>
-				    <input class="form-control" id='class' type="text" name="class" value="<?=Input::old('class');?>" />
+				    <input class="form-control" id='class' type="text" name="class" value="{{{ Input::old('class') }}}" />
 				</div>
 
 			</div>
@@ -41,7 +46,7 @@
 				<div class="control-group">
 				    <label class="control-label" for='position'> Position</label><br>
 
-				    <?php
+				    @php
 				    $options = ['Left', 'Right'];
 				    $position = Input::old('position');
 
@@ -57,7 +62,7 @@
 				    	}
 				    	echo "<input type='checkbox' name='position[]' value='$option' $check> $option<br>";
 				    }
-				    ?>
+				    @endphp
 				</div>
 
 			</div>
@@ -66,7 +71,7 @@
 
 		<div class="control-group">
 		    <label class="control-label" for='content'> Content</label>
-		    <textarea class="form-control ckeditor" id='content' name="content" rows='10'><?=Input::old('content');?></textarea>
+		    <textarea class="form-control ckeditor" id='content' name="content" rows='10'>{{ Input::old('content') }}</textarea>
 		</div>
 
 		<p><br>

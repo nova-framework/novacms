@@ -32,7 +32,7 @@ class Admin extends BackendController
 
     public function store()
     {
-        $input = Input::only('title', 'content', 'position', 'class');
+        $input = Input::all();
 
         $validate = $this->validator($input);
 
@@ -45,9 +45,10 @@ class Admin extends BackendController
                 $sidebar->position = implode(',', $input['position']);
             }
 
-            $sidebar->title = $input['title'];
-            $sidebar->content = $input['content'];
-            $sidebar->class = $input['class'];
+            $sidebar->title        = $input['title'];
+            $sidebar->displayTitle = (isset($input['displayTitle'])) ? $input['displayTitle'] : '';
+            $sidebar->content      = $input['content'];
+            $sidebar->class        = $input['class'];
             $sidebar->save();
 
             $log          = new UserLog();
@@ -85,7 +86,7 @@ class Admin extends BackendController
             return Redirect::to('admin/sidebars')->withStatus('sidebar not found', 'danger');
         }
 
-        $input = Input::only('title', 'content', 'position', 'class');
+        $input = Input::all();
 
         $validate = $this->validator($input);
 
@@ -96,9 +97,10 @@ class Admin extends BackendController
             }
 
             //save
-            $sidebar->title = $input['title'];
-            $sidebar->content = $input['content'];
-            $sidebar->class = $input['class'];
+            $sidebar->title        = $input['title'];
+            $sidebar->displayTitle = (isset($input['displayTitle'])) ? $input['displayTitle'] : '';
+            $sidebar->content      = $input['content'];
+            $sidebar->class        = $input['class'];
             $sidebar->save();
 
             $log          = new UserLog();
