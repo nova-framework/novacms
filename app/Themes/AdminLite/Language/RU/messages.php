@@ -2,13 +2,17 @@
 
 return array (
   '%d %b %Y, %R' => '',
-  'ADMINISTRATION' => 'Управление',
   'Control Panel' => 'Панель управления',
-  'Forgot Password?' => 'Забыли пароль?',
-  'Logout' => 'Выйти',
   'Member since {0}' => 'Участник с {0}',
+  'Menu' => '',
+  'Modules Administration' => '',
+  'My Settings' => '',
+  'Notifications' => '',
   'Profile' => 'Профиль',
-  'Sign In' => 'Вход',
-  'Sign Up' => 'Регистрация',
+  'See All' => '',
   'Sign out' => 'Выход',
+  'System Administration' => '',
+  'Toggle navigation' => '',
+  'User Image' => '',
+  'View Site' => '',
 );

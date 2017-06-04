@@ -2,13 +2,17 @@
 
 return array (
   '%d %b %Y, %R' => '',
-  'ADMINISTRATION' => '',
   'Control Panel' => 'Kontorlpanel',
-  'Forgot Password?' => 'Glemt kodeord?',
-  'Logout' => 'Log ud',
   'Member since {0}' => 'Medlem siden {0}',
+  'Menu' => '',
+  'Modules Administration' => '',
+  'My Settings' => '',
+  'Notifications' => '',
   'Profile' => 'Brugerkonto',
-  'Sign In' => 'Log ind',
-  'Sign Up' => 'Tilmeld',
+  'See All' => '',
   'Sign out' => 'Log ud',
+  'System Administration' => '',
+  'Toggle navigation' => '',
+  'User Image' => '',
+  'View Site' => '',
 );

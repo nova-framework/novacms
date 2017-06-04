@@ -1,9 +1,9 @@
 <div class="content-header">
-    <h2>Add User</h2>
+    <h2>{{ __d('system', 'Create User') }}</h2>
     <ol class="breadcrumb">
-        <li><a href='<?= admin_url('dashboard'); ?>'><i class="fa fa-dashboard"></i> Dashboard</a></li>
-        <li><a href='<?= admin_url('users'); ?>'><i class="fa fa-users"></i> Users</a></li>
-        <li><strong>Add User</strong></li>
+        <li><a href='<?= admin_url('dashboard'); ?>'><i class="fa fa-dashboard"></i> {{ __d('system', 'Dashboard') }}</a></li>
+        <li><a href='<?= admin_url('users'); ?>'><i class="fa fa-users"></i> {{ __d('system', 'Users') }}</a></li>
+        <li><strong>{{ __d('system', 'Create User') }}</strong></li>
     </ol>
 </div>
 
@@ -13,7 +13,7 @@
 
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">Create User</h3>
+            <h3 class="box-title">{{ __d('system', 'Create User') }}</h3>
         </div>
         <div class="box-body">
 

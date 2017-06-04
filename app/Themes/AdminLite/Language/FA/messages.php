@@ -2,13 +2,17 @@
 
 return array (
   '%d %b %Y, %R' => '',
-  'ADMINISTRATION' => 'مدیریت کل',
   'Control Panel' => 'پنل کنترل',
-  'Forgot Password?' => 'فراموشی رمزعبور؟',
-  'Logout' => 'خروج',
   'Member since {0}' => 'عضو از {0}',
+  'Menu' => '',
+  'Modules Administration' => '',
+  'My Settings' => '',
+  'Notifications' => '',
   'Profile' => 'پروفایل',
-  'Sign In' => 'ورود',
-  'Sign Up' => 'عضویت',
+  'See All' => '',
   'Sign out' => 'خروج',
+  'System Administration' => '',
+  'Toggle navigation' => '',
+  'User Image' => '',
+  'View Site' => '',
 );
