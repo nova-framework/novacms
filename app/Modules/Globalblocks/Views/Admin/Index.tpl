@@ -16,6 +16,17 @@
     </div>
     <div class="box-body">
 
+    <div class="alert alert-success alert-dismissable">
+        <h4>Global Content Blocks</h4>
+        <p>These blocks allow you to place extra information. The global_block call goes inside the view or theme layout file.</p>
+        <p>The function needs 2 parameters </p>
+        <ol>
+        <li>A title</li>
+        <li>textarea or input</li>
+        </ol>
+        <p> <code>GlobalBlocks::get('Phone Number', 'input')</code></p>
+    </div>
+
     <form action='{{ admin_url('globalblocks/update') }}' method='post'>
     <input type='hidden' name='csrfToken' value='{{ $csrfToken }}'>
 
