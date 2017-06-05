@@ -27,7 +27,7 @@
         @if (! $pages->isEmpty())
         	@foreach($pages as $row)
         		<tr>
-        			<td>$row->pageTitle</td>
+        			<td>{{{ $row->pageTitle }}}</td>
         			<td>
         			    <a href='{{{ admin_url("pages/$row->id/edit") }}}' class='btn btn-warning btn-xs'><i class='fa fa-edit'></i> Edit</a>
         			    <a class='btn btn-xs btn-danger' href='#' data-toggle='modal' data-target='#confirm_{{{ $row->id }}}'><i class='fa fa-remove'></i> Delete</a>
