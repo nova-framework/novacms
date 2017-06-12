@@ -64,7 +64,7 @@ Assets::css([
                         @if ($row->displayTitle == 'on')
                             <div class='widgetTitle page-header'><h1>{{{ $row->title }}}</h1></div>
                         @endif
-                        <div class='widgetBody'>{{ $row->content }}</div>
+                        <div class='widgetBody'>{{ Sidebar::display($row->content) }}</div>
                     </div>
                 @endforeach
             @endif
@@ -87,7 +87,7 @@ Assets::css([
                         @if ($row->displayTitle == 'on')
                             <div class='widgetTitle page-header'><h1>{{{ $row->title }}}</h1></div>
                         @endif
-                        <div class='widgetBody'>{{ $row->content }}</div>
+                        <div class='widgetBody'>{{ Sidebar::display($row->content) }}</div>
                     </div>
                 @endforeach
             @endif
