@@ -96,8 +96,6 @@ $langMenuLinks = ob_get_clean();
         theme_url('plugins/tablesorter/jquery.tablesorter.js', 'AdminLite'),
         theme_url('plugins/justgage/justgage.1.0.1.min.js', 'AdminLite'),
         theme_url('plugins/conditionize/conditionize.js', 'AdminLite'),
-        theme_url('plugins/ckeditor/ckeditor.js', 'AdminLite'),
-        theme_url('plugins/ckeditor/adapters/jquery.js', 'AdminLite'),
         theme_url('plugins/fullcalendar/fullcalendar.min.js', 'AdminLite'),
         theme_url('plugins/pace/pace.min.js', 'AdminLite'),
         theme_url('plugins/slimScroll/jquery.slimscroll.min.js', 'AdminLite'),
