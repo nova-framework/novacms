@@ -81,7 +81,7 @@ class Files extends BackendController
 
     public function plain()
     {
-        $this->layout = 'plain';
+        $this->layout = 'Plain';
         return $this->getView()
             ->shares('title', __d('plain', 'Plain'));
     }
