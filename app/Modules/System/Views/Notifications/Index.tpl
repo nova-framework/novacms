@@ -26,22 +26,19 @@
             <tbody>
             @foreach ($notifications as $row)
 
-                @php
-                if ($row->link !='') {
-                    $link = "<a href='".site_url($row->link)."' class='btn btn-small btn-success'><i class='fa fa-share-alt'></i> {{ __d('system', 'View') }}</a>
-                } else {
-                    $link = null;
-                }
-                @endphp
-
                 <tr>
                     <td>{{{ $row->title }}}</td>
                     <td>{{{ date('jS M Y H:i:s', strtotime($row->created_at)) }}}</td>
                     <td>{{{ $row->assignedFromUser->username }}}</td>
-                    <td>{{{ $link }}}</td>
+                    <td>
+                        @if ($row->link !='')
+                            <a href='{{{ site_url($row->link) }}}' class='btn btn-small btn-success'><i class='fa fa-share-alt'></i> {{ __d('system', 'View') }}</a>
+                        @endif
+                    </td>
                 </tr>
 
             @endforeach
+
             </tbody>
             </table>
             {{ $notifications->links() }}
