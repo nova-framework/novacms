@@ -17,7 +17,7 @@ return array(
     /**
      * The Website URL.
      */
-    'url' => 'http://easybuy.theonecrm.co.uk/website/',
+    'url' => 'http://novaframework.dev/',
 
     /**
     * The Administrator's E-mail Address.
