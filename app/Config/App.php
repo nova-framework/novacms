@@ -17,7 +17,7 @@ return array(
     /**
      * The Website URL.
      */
-    'url' => 'http://novaframework.dev',
+    'url' => 'http://easybuy.theonecrm.co.uk/website/',
 
     /**
     * The Administrator's E-mail Address.
@@ -59,7 +59,7 @@ return array(
      * The Encryption Key.
      * This page can be used to generate key - http://novaframework.com/token-generator
      */
-    'key' => 'tcuzkIwOqSTPCAo08n1lGUy9vaH803Zg',
+    'key' => 'SM7OfMWcqQvNxspvghhIM9PfJXUJ2avB',
 
     /**
      *  Prevents the website from CSRF attacks.
@@ -137,6 +137,7 @@ return array(
         'GlobalBlocks'  => 'App\Helpers\GlobalBlocks',
         'Menu'          => 'App\Helpers\Menu',
         'Member'        => 'App\Helpers\Member',
+        'Sidebar'       => 'App\Helpers\Sidebar',
 
         // The Forensics Console.
         'Console'       => 'Nova\Forensics\Console',
