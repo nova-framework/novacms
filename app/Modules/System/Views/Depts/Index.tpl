@@ -63,7 +63,7 @@
                             <tr>
                                 <td>{{{ $row->title }}}</td>
                                 <td>
-                                    <a class='btn btn-xs btn-success' href='{{{ admin_url("depts/$row->id/edit") }}}"' role='button'><i class='fa fa-pencil'></i> {{ __d('system', 'Edit') }}</a>
+                                    <a class='btn btn-xs btn-success' href='{{{ admin_url("depts/$row->id/edit") }}}' role='button'><i class='fa fa-pencil'></i> {{ __d('system', 'Edit') }}</a>
                                     <a class='btn btn-xs btn-danger' href='#' data-toggle='modal' data-target='#confirm_{{{ $row->id }}}' role='button'><i class='fa fa-remove'></i> {{ __d('system', 'Delete') }}</a>
                                 </td>
                             </tr>
