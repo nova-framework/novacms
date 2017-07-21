@@ -40,6 +40,7 @@ function postTime($time) {
             <td><a href='{{{ site_url($row->link) }}}'><img src='{{{ $pic }}}' width='40' alt='{{{ $name }}}'></a></td>
             <td><a href='{{{ site_url($row->link) }}}'>{{{ $row->title }}}<small class='pull-right'><i class='fa fa-clock-o'></i>{{{ $date }}}</small></a></td>
         </tr>
+    @endforeach
 @else
     <tr><td>{{ __d('system', 'No Notifications') }}</td></tr>
 @endif
