@@ -213,17 +213,6 @@ $langMenuLinks = ob_get_clean();
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav" style="margin-right: 10px;">
 
-            <li id="notification_li">
-                <span id="notificationcount"></span>
-                <a href="#" id="notificationLink"><i class="fa fa-bullhorn"></i></a>
-
-                <div id="notificationContainer">
-                    <div id="notificationTitle">{{ __d('admin_lite', 'Notifications') }}</div>
-                    <div id="notificationsBody" class="notifications"></div>
-                    <div id="notificationFooter"><a href="{{ admin_url('notifications') }}">{{ __d('admin_lite', 'See All') }}</a></div>
-                </div>
-            </li>
-
             <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-plus"></i>
@@ -243,13 +232,13 @@ $langMenuLinks = ob_get_clean();
             </li>
 
             <li class="dropdown language-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class='fa fa-language'></i> <?= $langName; ?>
-            </a>
-            <ul class="dropdown-menu">
-              <?= $langMenuLinks; ?>
-            </ul>
-          </li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class='fa fa-language'></i> <?= $langName; ?>
+                </a>
+                <ul class="dropdown-menu">
+                  <?= $langMenuLinks; ?>
+                </ul>
+            </li>
 
             <li><a href='{{ site_url() }}'>{{ __d('admin_lite', 'View Site') }}</a></li>
 
@@ -288,6 +277,18 @@ $langMenuLinks = ob_get_clean();
                     </li>
                 </ul>
             </li>
+
+            <li id="notification_li">
+                <span id="notificationcount"></span>
+                <a href="#" id="notificationLink"><i class="fa fa-bullhorn"></i></a>
+
+                <div id="notificationContainer">
+                    <div id="notificationTitle">{{ __d('admin_lite', 'Notifications') }}</div>
+                    <div id="notificationsBody" class="notifications"></div>
+                    <div id="notificationFooter"><a href="{{ admin_url('notifications') }}">{{ __d('admin_lite', 'See All') }}</a></div>
+                </div>
+            </li>
+            
         </ul>
       </div>
     </nav>
