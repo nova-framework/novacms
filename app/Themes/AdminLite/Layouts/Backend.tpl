@@ -233,10 +233,10 @@ $langMenuLinks = ob_get_clean();
 
             <li class="dropdown language-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class='fa fa-language'></i> <?= $langName; ?>
+                  <i class='fa fa-language'></i> {{ $langName }}
                 </a>
                 <ul class="dropdown-menu">
-                  <?= $langMenuLinks; ?>
+                  {{ $langMenuLinks }}
                 </ul>
             </li>
 
@@ -288,7 +288,6 @@ $langMenuLinks = ob_get_clean();
                     <div id="notificationFooter"><a href="{{ admin_url('notifications') }}">{{ __d('admin_lite', 'See All') }}</a></div>
                 </div>
             </li>
-            
         </ul>
       </div>
     </nav>
