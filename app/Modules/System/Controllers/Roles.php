@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\System\Controllers;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 use App\Modules\System\Models\Role;
 use App\Modules\System\Models\UserLog;
 use App\Helpers\Export;
@@ -13,8 +13,13 @@ use Redirect;
 use View;
 use Validator;
 
-class Roles extends BackendController
+class Roles extends Controller
 {
+    public function __construct()
+    {
+        $this->beforeFilter('role:administrator');
+    }
+
     public function index()
     {
         $roles = $this->getLogs()->paginate();

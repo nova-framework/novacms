@@ -74,7 +74,7 @@ return array(
         'Nova\Cache\CacheServiceProvider',
         'Nova\Routing\RoutingServiceProvider',
         'Nova\Cookie\CookieServiceProvider',
-        'Nova\Module\ModuleServiceProvider',
+        'Nova\Modules\ModuleServiceProvider',
         'Nova\Database\DatabaseServiceProvider',
         'Nova\Encryption\EncryptionServiceProvider',
         'Nova\Filesystem\FilesystemServiceProvider',
@@ -89,16 +89,22 @@ return array(
         'Nova\Validation\ValidationServiceProvider',
         'Nova\Html\HtmlServiceProvider',
         'Nova\View\ViewServiceProvider',
-        'Nova\Cron\CronServiceProvider',
 
         // The Forge Providers.
         'Nova\Auth\Reminders\ConsoleServiceProvider',
         'Nova\Cache\ConsoleServiceProvider',
         'Nova\Foundation\Providers\ConsoleSupportServiceProvider',
         'Nova\Foundation\Providers\ForgeServiceProvider',
-        'Nova\Module\Providers\ConsoleServiceProvider',
-        'Nova\Module\Providers\GeneratorServiceProvider',
-        'Nova\Routing\Providers\ConsoleServiceProvider',
+        'Nova\Database\MigrationServiceProvider',
+        'Nova\Database\SeedServiceProvider',
+        'Nova\Modules\Providers\ConsoleServiceProvider',
+        'Nova\Modules\Providers\GeneratorServiceProvider',
+        'Nova\Routing\ConsoleServiceProvider',
+        'Nova\Session\ConsoleServiceProvider',
+
+        // The Shared Providers.
+        'Shared\Database\Backup\ConsoleServiceProvider',
+        'Shared\Routing\RoutingServiceProvider',
 
         // The Application Providers.
         'App\Providers\AppServiceProvider',
@@ -168,6 +174,8 @@ return array(
         'Request'       => 'Nova\Support\Facades\Request',
         'Response'      => 'Nova\Support\Facades\Response',
         'Route'         => 'Nova\Support\Facades\Route',
+        'Schedule'      => 'Nova\Support\Facades\Schedule',
+        'Schema'        => 'Nova\Support\Facades\Schema',
         'Session'       => 'Nova\Support\Facades\Session',
         'Validator'     => 'Nova\Support\Facades\Validator',
         'Log'           => 'Nova\Support\Facades\Log',

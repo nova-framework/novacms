@@ -8,7 +8,7 @@
 
 namespace App\Modules\System\Controllers;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 use App\Modules\System\Models\UserLog;
 use App\Models\Option;
 
@@ -20,14 +20,11 @@ use Redirect;
 use Validator;
 use View;
 
-class Settings extends BackendController
+class Settings extends Controller
 {
     public function __construct()
     {
-        parent::__construct();
-
-        //
-        $this->beforeFilter('@adminUsersFilter');
+        $this->beforeFilter('role:administrator');
     }
 
     public function index()

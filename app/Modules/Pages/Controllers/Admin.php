@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\Pages\Controllers;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 use App\Modules\Pages\Models\Page;
 use App\Modules\Sidebars\Models\Sidebar;
 use App\Modules\System\Models\UserLog;
@@ -15,7 +15,7 @@ use Redirect;
 use Str;
 use Validator;
 
-class Admin extends BackendController
+class Admin extends Controller
 {
 	public function index()
 	{
@@ -82,7 +82,7 @@ class Admin extends BackendController
 	public function edit($id)
 	{
 		$page = Page::find($id);
-		$revisions = DB::table('page_revisions')->where('pageID', $id)->get();
+		$revisions = DB::table('page_revisions')->where('pageID', $id)->orderBy('id', 'desc')->get();
 		$pageblocks = DB::table('page_blocks')->where('pageID', $id)->get();
 
 		if ($page === null) {

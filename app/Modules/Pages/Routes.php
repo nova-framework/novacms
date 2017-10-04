@@ -11,4 +11,5 @@ Route::group(array('prefix' => 'admin'), function() {
     Route::post('pages/{id}',                    array('before' => 'auth|csrf', 'uses' => 'Admin@update'));
 });
 
+Route::post('page',  array('before' => 'auth|csrf', 'uses' => 'Pages@updateAjax'));
 Route::get('{slug}', 'Pages@fetch')->where('slug', '(.*)');

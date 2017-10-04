@@ -1,14 +1,19 @@
 <?php
 namespace App\Modules\System\Controllers;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 use App\Modules\System\Models\UserLog;
 
 use Auth;
 use Redirect;
 
-class Errors extends BackendController
+class Errors extends Controller
 {
+    public function __construct()
+    {
+        $this->beforeFilter('role:administrator');
+    }
+
     public function errorLog()
     {
         $logs = file_get_contents(ROOTDIR.'storage/logs/error.log');

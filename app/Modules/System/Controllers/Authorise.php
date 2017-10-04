@@ -8,7 +8,7 @@
 
 namespace App\Modules\System\Controllers;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 use App\Modules\System\Models\UserLog;
 use App\Modules\System\Models\User;
 
@@ -26,7 +26,7 @@ use Str;
 use Validator;
 
 
-class Authorise extends BackendController
+class Authorise extends Controller
 {
     protected $layout = 'Default';
 

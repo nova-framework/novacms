@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\System\Controllers;
 
-use App\Core\Controller;
+use App\Modules\System\Controllers\BaseController as Controller;
 
 use Config;
 use Cookie;

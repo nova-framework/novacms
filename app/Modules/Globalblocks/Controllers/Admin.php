@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\Globalblocks\Controllers;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 use App\Modules\System\Models\UserLog;
 
 use Auth;
@@ -9,7 +9,7 @@ use DB;
 use Input;
 use Redirect;
 
-class Admin extends BackendController
+class Admin extends Controller
 {
     public function index()
     {

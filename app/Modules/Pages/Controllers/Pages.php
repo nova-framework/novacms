@@ -1,11 +1,15 @@
 <?php
 namespace App\Modules\Pages\Controllers;
 
-use App\Core\Controller;
+use App\Controllers\BaseController as Controller;
 
 use App\Modules\Pages\Models\Page;
 use App\Modules\Sidebars\Models\Sidebar;
 
+use Auth;
+use App;
+use DB;
+use Input;
 use View;
 use Request;
 
@@ -29,7 +33,7 @@ class Pages extends Controller
 
 		//if no record has been found, load a 404 page
 		if (empty($page)) {
-			return View::make('Error/404')->shares('title', 'Page not found!');
+			App::abort(404);
 		}
 
 		//if the layout files does not exists fallback to the Default layout file.
@@ -43,9 +47,11 @@ class Pages extends Controller
 		//get the ids of the sidebars
 		$ids = explode(',', $page->sidebars);
 
+		//get sidebars
 		$leftSidebars  = Sidebar::whereIn('id', $ids)->where('position', 'LIKE', '%Left%')->get();
 		$rightSidebars = Sidebar::whereIn('id', $ids)->where('position', 'LIKE', '%Right%')->get();
 
+		//set page meta info
 		$meta = "<meta name='description' content='$page->metaDescription' />
 	<meta property='og:title' content='$page->pageTitle' />
 	<meta property='og:type' content='article' />
@@ -53,15 +59,51 @@ class Pages extends Controller
 	<meta property='og:image' content='".theme_url('images/nova.png', 'Bootstrap')."' />
 	<meta property='og:description' content='$page->metaDescription' />";
 
-		//load a view using the app/Views/Default file
-		return View::make('Default')
+		//load a view from app/Modules/Pages/Views/Pages/Fetch.tpl file
+		return $this->createView()
 		->shares('title', $page->browserTitle)
 		->shares('meta', $meta)
-		->shares('browserTitle', $page->pageTitle)
-		->shares('leftSidebars', $leftSidebars)
-		->shares('rightSidebars', $rightSidebars)
-		->shares('pageID', $page->id)
-		->with('content', $page->content);
+		->with(compact('content', 'leftSidebars', 'rightSidebars', 'page'));
 
+	}
+
+	public function updateAjax()
+	{
+		if (Auth::check()) {
+
+			$input   = Input::all();
+
+			//assign post data
+			$id      = $input['id'];
+			$col     = $input['col'];
+			$content = $input['content'];
+
+			if ($col == 'pageTitle') {
+				$content = strip_tags($content);
+				$content = trim($content);
+			}
+
+			//get page record
+			$page    = Page::find($id);
+
+			if ($col == 'content') {
+
+				//if page content has been changed
+		    	if ($page->content != $content) {
+
+		    		DB::table('page_revisions')->insert([
+		    			'pageID' => $page->id,
+		    			'content' => $page->content,
+		    			'addedBy' => Auth::id()
+		    		]);
+		    	}
+		    }
+
+			//update if not empty
+			if ($page != null) {
+				$page->{$col} = $content;
+				$page->save();
+			}
+		}
 	}
 }

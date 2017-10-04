@@ -7,3 +7,5 @@ Route::group(array('prefix' => 'admin'), function() {
     Route::post('sidebars/{id}/destroy',            array('before' => 'auth|csrf', 'uses' => 'Admin@destroy'));
     Route::post('sidebars/{id}',                    array('before' => 'auth|csrf', 'uses' => 'Admin@update'));
 });
+
+Route::post('sidebar',  array('before' => 'auth|csrf', 'uses' => 'Sidebar@updateAjax'));

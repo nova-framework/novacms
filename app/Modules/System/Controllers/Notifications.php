@@ -1,11 +1,11 @@
 <?php
 namespace App\Modules\System\Controllers;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 use App\Modules\System\Models\Notification;
 use Auth;
 
-class Notifications extends BackendController
+class Notifications extends Controller
 {
     public function index()
     {

@@ -8,13 +8,13 @@
 
 namespace App\Modules\System\Controllers;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 use App\Modules\System\Models\UserLog;
 
 use Auth;
 use Session;
 
-class Dashboard extends BackendController
+class Dashboard extends Controller
 {
     public function index()
     {

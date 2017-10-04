@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\System\Controllers;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 use App\Modules\System\Models\Dept;
 use App\Modules\System\Models\UserLog;use App\Helpers\Member;
 use App\Helpers\Export;
@@ -12,7 +12,7 @@ use Redirect;
 use View;
 use Validator;
 
-class Depts extends BackendController
+class Depts extends Controller
 {
     public function index()
     {

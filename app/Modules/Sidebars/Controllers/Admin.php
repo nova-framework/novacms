@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\Sidebars\Controllers;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 use App\Modules\Sidebars\Models\Sidebar;
 use App\Modules\System\Models\UserLog;
 
@@ -11,7 +11,7 @@ use Input;
 use Redirect;
 use Validator;
 
-class Admin extends BackendController
+class Admin extends Controller
 {
     public function index()
     {

@@ -2,7 +2,7 @@
 
 namespace App\Modules\Files\Controllers\Admin;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 
 use Nova\Http\Request;
 use Nova\Routing\Route;
@@ -13,7 +13,7 @@ use Response;
 use View;
 
 
-class Files extends BackendController
+class Files extends Controller
 {
     /**
      * The IoC container instance.
@@ -39,13 +39,8 @@ class Files extends BackendController
 
     public function __construct()
     {
-        parent::__construct();
-
         // Setup the IoC Container instance.
         $this->container = App::instance();
-
-        // Setup the Middleware.
-        $this->beforeFilter('@filterRequests');
     }
 
     /**

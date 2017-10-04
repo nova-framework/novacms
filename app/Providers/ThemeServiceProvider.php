@@ -43,7 +43,7 @@ class ThemeServiceProvider extends ServiceProvider
         $themes->each(function ($theme)
         {
             $provider = sprintf('%s\\%s\\Providers\\ThemeServiceProvider', $this->namespace, $theme);
-            
+
             if (class_exists($provider)) {
                 $this->app->register($provider);
             }

@@ -1,7 +1,7 @@
 <?php
 namespace App\Modules\Menus\Controllers;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 use App\Modules\Menus\Models\Menu;
 use App\Modules\Pages\Models\Page;
 use App\Modules\System\Models\UserLog;
@@ -12,7 +12,7 @@ use Redirect;
 use Validator;
 use Str;
 
-class Admin extends BackendController
+class Admin extends Controller
 {
     public function index()
     {

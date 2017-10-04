@@ -1,5 +1,10 @@
 <?php
 
+use App\Models\Option;
+
+use Symfony\Component\HttpKernel\Exception\HttpException;
+
+
 //--------------------------------------------------------------------------
 // Application Error Logger
 //--------------------------------------------------------------------------
@@ -10,41 +15,33 @@ Log::useFiles(STORAGE_PATH .'logs' .DS .'error.log');
 // Application Error Handler
 //--------------------------------------------------------------------------
 
-// The standard handling of the Exceptions.
-App::error(function(Exception $exception, $code)
+App::error(function (Exception $e, $code)
 {
-    Log::error($exception);
+    Log::error($e);
 });
 
-// Special handling for the HTTP Exceptions.
-use Symfony\Component\HttpKernel\Exception\HttpException;
-
-App::error(function(HttpException $exception)
+App::error(function (HttpException $e, $code)
 {
-    $code = $exception->getStatusCode();
+    $code = $e->getStatusCode();
 
-    $headers = $exception->getHeaders();
-
-    if (Request::ajax() || Request::wantsJson()) {
-        // An AJAX request; we'll create a JSON Response.
-        $content = array('status' => $code);
-
-        return Response::json($content, $code, $headers);
+    if (Request::ajax() || Request::wantsJson() || Request::is('api/*')) {
+        // An AJAX request; we'll create and return a JSON Response.
+        return Response::json(array('error' => $e->getMessage()), $code, $e->getHeaders());
     }
 
-    // We'll create the templated Error Page Response.
-    $content = View::makeLayout('Default', 'Bootstrap')
+    // We'll create and return a themed Error Page as response.
+    $view = View::makeLayout('Default', 'Bootstrap')
         ->shares('title', 'Error ' .$code)
-        ->nest('content', 'Error/' .$code);
+        ->nest('content', 'Errors/' .$code, array('exception' => $e));
 
-    return Response::make($content, $code, $headers);
+    return Response::make($view->render(), $code, $e->getHeaders());
 });
 
 //--------------------------------------------------------------------------
 // Maintenance Mode Handler
 //--------------------------------------------------------------------------
 
-App::down(function()
+App::down(function ()
 {
     return Response::make("Be right back!", 503);
 });
@@ -53,27 +50,24 @@ App::down(function()
 // Load The Options
 //--------------------------------------------------------------------------
 
-use App\Models\Option;
-
 if (CONFIG_STORE === 'database') {
     // Retrieve the Option items, caching them for 24 hours.
-    $options = Cache::remember('system_options', 1440, function()
+    $options = Cache::remember('system_options', 1440, function ()
     {
-        return Option::all();
+        return Option::getResults();
     });
 
     // Setup the information stored on the Option instances into Configuration.
     foreach ($options as $option) {
-        $key = $option->group;
+        list ($key, $value) = $option->getConfigItem();
 
-        if (! empty($option->item)) {
-            $key .= '.' .$option->item;
-        }
-
-        Config::set($key, $option->value);
+        Config::set($key, $value);
     }
-} else if(CONFIG_STORE !== 'files') {
-    throw new \InvalidArgumentException('Invalid Config Store type.');
+}
+
+// If the CONFIG_STORE is not in 'files' mode, go Exception.
+else if(CONFIG_STORE !== 'files') {
+    throw new InvalidArgumentException('Invalid Config Store type.');
 }
 
 //--------------------------------------------------------------------------
@@ -117,3 +111,4 @@ define('SITEEMAIL', $app['config']['app.email']);
 use Shared\Log\Mailer as LogMailer;
 
 LogMailer::initHandler($app);
+

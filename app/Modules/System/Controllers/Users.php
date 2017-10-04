@@ -8,7 +8,7 @@
 
 namespace App\Modules\System\Controllers;
 
-use App\Core\BackendController;
+use App\Modules\System\Controllers\BaseController as Controller;
 use App\Modules\System\Models\UserLog;
 use App\Modules\System\Models\Dept;
 use App\Modules\System\Models\Role;
@@ -26,7 +26,7 @@ use Session;
 use View;
 use Validator;
 
-class Users extends BackendController
+class Users extends Controller
 {
     public function index()
     {

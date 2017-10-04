@@ -4,7 +4,7 @@ namespace App\Modules\Sidebars\Providers;
 
 use Modules\Sidebars\Models\Option;
 
-use Nova\Module\Support\Providers\ModuleServiceProvider as ServiceProvider;
+use Nova\Modules\Support\Providers\ModuleServiceProvider as ServiceProvider;
 
 
 class ModuleServiceProvider extends ServiceProvider
